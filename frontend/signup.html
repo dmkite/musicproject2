@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Signup page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script defer src="bundle.js"></script>
+</head>
+<body>
+    <form id="signup">
+        <label for="f_name">first name:</label>
+        <input id="f_name" type="text" maxlength="50" required>
+        <label for="l_name">last name:</label>
+        <input id="l_name" type="text" maxlength="50" required>
+        <label for="username">username:</label>
+        <input id="username" type="text" required>
+        <label for="password">password:</label>
+        <input id="password" type="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+        <label for="passwordMatch">retype password:</label>
+        <input id="passwordMatch" type="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            required>
+        <button id="submit" type="submit" disabled>submit</button>
+    </form>
+</body>
+</html>
