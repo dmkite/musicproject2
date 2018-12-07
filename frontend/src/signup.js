@@ -15,14 +15,13 @@ function activateBtn() {
 
 function checkInputs() {
     const inputs = document.querySelectorAll('.modal input')
-    result = {}
+    body = {}
     for (let input of inputs) {
         if (!input.value) return false
-        result[input.id] = input.value
+        body[input.id] = input.value
     }
-    if (result.passwordMatch !== result.password) return false
-    delete result.passwordMatch
-    return result
+    if (body.passwordMatch !== body.password) return false
+    return body
 }
 
 function checkPasswords() {
@@ -33,7 +32,8 @@ function checkPasswords() {
 function isEqual() {
     const passwordMatch = document.querySelector('#passwordMatch').value
     const password = document.querySelector('#password').value
-    if (passwordMatch !== password && !document.querySelector('.passwordWarning')) document.querySelector('form').innerHTML += '<span class="passwordWarning">Passwords do not match</span>'
+    if (passwordMatch !== password) 
+        document.querySelector('.passwordWarning').classList.remove('hidden')
     else document.querySelector('.passwordWarning').classList.add('hidden')
 }
 
@@ -41,7 +41,6 @@ function submit(e){
     e.preventDefault()
     const body = login.getBody()
     axios.post(`${baseURL}/users/signup`, body)
-
 }
 
 

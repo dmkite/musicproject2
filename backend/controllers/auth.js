@@ -1,11 +1,11 @@
-const authModel = require('../models/auth-models')
+const model = require('../models/auth')
 const jwt = require('jsonwebtoken')
 
 function login(req, res, next) {
     const { email, password } = req.body
 
     if (!email || !password) return next({ status: 400, message: 'Error with email or password' })
-    return authModel.login(email, password)
+    return model.login(email, password)
         .then(result => {
             const payload = {
                 exp: (Date.now() / 1000) + 7200,
