@@ -1,3 +1,4 @@
+const axios = require('axios')
 const login = require('./login')
 const baseURL = 'http://localhost:3000'
 
@@ -6,11 +7,15 @@ function init() {
 }
 
 function activateBtn() {
+    const submitBtn = document.querySelector('#submit')
     checkPasswords()
     let result = checkInputs()
-    if (!result) return false
-    document.querySelector('#submit').classList.remove('disabled')
-    document.querySelector('#submit').addEventListener('click', function (e) { submit(e) })
+    if (!result){
+        submitBtn.setAttribute('disabled', 'disabled')
+        return false
+    } 
+    submitBtn.removeAttribute('disabled')
+    document.querySelector('#signup').onsubmit = function (e) { submit(e) }
 }
 
 function checkInputs() {
@@ -40,7 +45,12 @@ function isEqual() {
 function submit(e){
     e.preventDefault()
     const body = login.getBody()
+    console.log(body)
     axios.post(`${baseURL}/users/signup`, body)
+    .then(result => {
+        document.location.href = '/index.html'
+    })
+    .catch(err => console.error(err))
 }
 
 

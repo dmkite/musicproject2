@@ -28,7 +28,7 @@ function submit(e){
 }
 
 function getBody(){
-    const inputs = document.querySelectorAll('#login input')
+    const inputs = document.querySelectorAll('form input')
     const body = {}
     for(let input of inputs){
         body[input.id] = input.value    
