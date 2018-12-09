@@ -45,7 +45,6 @@ function isEqual() {
 function submit(e){
     e.preventDefault()
     const body = login.getBody()
-    console.log(body)
     axios.post(`${baseURL}/users/signup`, body)
     .then(result => {
         document.location.href = '/index.html'
