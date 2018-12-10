@@ -11,7 +11,8 @@ function isFilled(){
         if (input.value === '') return button.setAttribute('disabled', 'disabled')
     }
     button.removeAttribute('disabled')
-    button.addEventListener('click', function(e){submit(e)})
+    // button.addEventListener('click', function(e){submit(e)})
+    document.querySelector('form').addEventListener('submit', function(e){submit(e)})
 }
 
 function submit(e){
@@ -23,7 +24,7 @@ function submit(e){
         document.location.href = 'protected-page.html'
     })
     .catch(err => {
-        if(err.response.data) surfaceError(err.response.data)
+        if(err.response.data) surfaceError(err.response.data.message)
     })
 }
 
@@ -37,6 +38,11 @@ function getBody(){
 }
 
 function surfaceError(err){
-    document.querySelector('body').innerHTML += `<div class="error">${err}</div>`
+    const warning = document.querySelector('.warning')
+    console.error(err)
+    if (err.response) warning.innerHTML = `${err.response.data.message}`
+    else warning.innerHTML = `${err}`
+    
+    warning.classList.remove('hidden')
 }
 module.exports = {init, getBody, surfaceError}

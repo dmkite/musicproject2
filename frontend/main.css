@@ -24,3 +24,13 @@ input, button[type="submit"]{
 .actions{
 margin-top:20px;
 }
+
+.warning{
+    border:1px solid #dd2956;
+    width:50%;
+    margin:20px auto;
+    padding:20px;
+    border-radius:5px;
+    color: #dd2956;
+    background-color: #dd295650;
+}

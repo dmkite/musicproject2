@@ -2,9 +2,9 @@ const model = require('../models/auth')
 const jwt = require('jsonwebtoken')
 
 function login(req, res, next) {
-    const { username, password } = req.body
+    let { username, password } = req.body
 
-    if (!username || !password) return next({ status: 400, message: 'Error with email or password' })
+    if (!username || !password) return next({ status: 400, message: 'Error with username or password' })
     username = username.toLowerCase()
     return model.login(username, password)
         .then(result => {

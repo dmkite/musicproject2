@@ -49,7 +49,14 @@ function submit(e){
     .then(result => {
         document.location.href = '/index.html'
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+        const warning = document.querySelector('.warning')
+        console.error(err)
+        if (err.response) warning.innerHTML = `${err.response.data.message}`
+        else warning.innerHTML = `${err}`
+
+        warning.classList.remove('hidden')
+    })
 }
 
 
