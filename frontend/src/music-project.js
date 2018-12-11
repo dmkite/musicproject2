@@ -1,5 +1,6 @@
 const axios = require('axios')
 const baseURL = 'http://localhost:3000'
+
 function init(){
     const [url, queryParam] = document.location.href.split('?')
     const splitQueries = queryParam.split('&')
@@ -17,15 +18,29 @@ function init(){
     })
     .then(result => {
         console.log(result)
+        localStorage.setItem('access_token', result.data.access_token)
+        localStorage.setItem('refresh_token', result.data.refresh_token)
+        return axios('https://api.spotify.com/v1/me', {
+            method: 'get',
+            headers:{
+                Authorization: `Bearer ${result.data.access_token}`
+            }
+        })
+
+    })
+    .then(result => {
+        console.log(result)
+        personalize(result.data)
     })
     .catch(err => {
         console.log(err)
     })
 }
 
-/*
-Left off with an error sending Authorization Code in exchange for a token. Issues: 'Authorization code expired',  TypeError: converting circular structure to JSON', 'invalid_grant invalid authorization code'
+function personalize(userObj){
+    document.querySelector('.welcome').textContent += `, ${userObj.display_name}!`
+    if(userObj.images[0]) document.querySelector('header').innerHTML += `<div id="profPic" style="background-image: url('${userObj.images[0]}';")></div>`
+}
 
-*/
 
 module.exports = {init}

@@ -39,10 +39,12 @@ function checkRequest(req, res, next) {
 }   
 
 function spotify(req, res, next){
-    console.log(req.body)
+    console.log(req.body.code, '--------------------------------------')
     return model.spotify(req.body)
     .then(result => {
-        res.status(200).send({data:result})
+        console.log(result.data)
+        // let response = result.data
+        res.status(200).send(result.data)
     })
     .catch(err => next(err))
 }

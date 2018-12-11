@@ -21,10 +21,10 @@ function login(username, password) {
 
 function spotify(body){
     const auth = clientId + ':' + clientSecret 
-    
     return axios('https://accounts.spotify.com/api/token', {
         method: 'post',
         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Basic ${base64.encode(auth)}`
         },
         params: body
