@@ -17,13 +17,13 @@ function init(){
         redirect_uri: `http://127.0.0.1:8080/music-project.html`
     })
     .then(result => {
-        console.log(result)
         localStorage.setItem('access_token', result.data.access_token)
         localStorage.setItem('refresh_token', result.data.refresh_token)
+        
         return axios('https://api.spotify.com/v1/me', {
             method: 'get',
             headers:{
-                Authorization: `Bearer ${result.data.access_token}`
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`
             }
         })
 

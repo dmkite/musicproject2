@@ -3,7 +3,7 @@
 }
 
 /*===========Form============*/
-form, .actions{
+#signup, #login, .actions{
     border:1px solid #ccc;
     border-radius:5px;
     width:50%;

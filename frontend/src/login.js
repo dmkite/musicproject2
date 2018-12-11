@@ -21,7 +21,8 @@ function submit(e){
     .then(token => {
         console.log(token)
         localStorage.setItem('token', token.data.token)
-        document.location.href = 'music-project.html'
+        // document.location.href = 'music-project.html'
+        document.location.href = 'http://localhost:8888'
     })
     .catch(err => {
         if(err.response.data) surfaceError(err.response.data.message)
