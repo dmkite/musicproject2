@@ -38,4 +38,13 @@ function checkRequest(req, res, next) {
     next()
 }   
 
-module.exports = {login, authenticate}
+function spotify(req, res, next){
+    console.log(req.body)
+    return model.spotify(req.body)
+    .then(result => {
+        res.status(200).send({data:result})
+    })
+    .catch(err => next(err))
+}
+
+module.exports = {login, authenticate, spotify}

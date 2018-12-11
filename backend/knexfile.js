@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const dbName = 'exampledb'
+const dbName = 'music_project'
 
 module.exports = {
     development: {

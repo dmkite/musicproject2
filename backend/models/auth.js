@@ -1,5 +1,9 @@
 const knex = require('../db/knex')
 const bcrypt = require('bcrypt')
+const axios = require('axios')
+const clientId = 'f0c75fb80a7a43f2b207e62c4f609915'
+const clientSecret = '8ec87c8d02d64c0abb395e69c652db54'
+const base64  = require('js-base64').Base64
 
 function login(username, password) {
     return knex('users')
@@ -15,4 +19,20 @@ function login(username, password) {
         })
 }
 
-module.exports = { login }
+function spotify(body){
+    const auth = clientId + ':' + clientSecret 
+    
+    return axios('https://accounts.spotify.com/api/token', {
+        method: 'post',
+        headers: {
+            Authorization: `Basic ${base64.encode(auth)}`
+        },
+        params: body
+    })
+    .then(result => {
+        // console.log('result from model', result)
+        return result
+    })
+}
+
+module.exports = { login, spotify }

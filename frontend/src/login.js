@@ -11,8 +11,7 @@ function isFilled(){
         if (input.value === '') return button.setAttribute('disabled', 'disabled')
     }
     button.removeAttribute('disabled')
-    // button.addEventListener('click', function(e){submit(e)})
-    document.querySelector('form').addEventListener('submit', function(e){submit(e)})
+    document.querySelector('form').onsubmit = function(e){submit(e)}
 }
 
 function submit(e){
@@ -20,8 +19,9 @@ function submit(e){
     const body = getBody()
     axios.post(`${baseURL}/auth/token`, body)
     .then(token => {
-        localStorage.setItem('token', token)
-        document.location.href = 'protected-page.html'
+        console.log(token)
+        localStorage.setItem('token', token.data.token)
+        document.location.href = 'music-project.html'
     })
     .catch(err => {
         if(err.response.data) surfaceError(err.response.data.message)

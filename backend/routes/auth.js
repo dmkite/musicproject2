@@ -4,5 +4,6 @@ const ctrl = require('../controllers/auth')
 
 router.get('/token', ctrl.authenticate)
 router.post('/token', ctrl.login)
+router.use('/spotify', ctrl.spotify)
 
 module.exports = router
