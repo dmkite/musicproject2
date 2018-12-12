@@ -30,9 +30,9 @@ function spotify(body){
         params: body
     })
     .then(result => {
-        // console.log('result from model', result)
         return result
     })
 }
+
 
 module.exports = { login, spotify }

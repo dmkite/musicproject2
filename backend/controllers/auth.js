@@ -39,14 +39,22 @@ function checkRequest(req, res, next) {
 }   
 
 function spotify(req, res, next){
-    console.log(req.body.code, '--------------------------------------')
+    // console.log(req.body.code, '--------------------------------------')
     return model.spotify(req.body)
     .then(result => {
-        console.log(result.data)
+        // console.log(result.data)
         // let response = result.data
         res.status(200).send(result.data)
     })
     .catch(err => next(err))
 }
 
-module.exports = {login, authenticate, spotify}
+function refresh(req, res, next){
+    return model.spotify(req.body)
+    .then(result =>{
+        res.status(200).send(result.data)
+    })
+    .catch(err => next(err))
+}
+
+module.exports = {login, authenticate, spotify, refresh}

@@ -2,7 +2,7 @@
 const [path, query] = window.location.pathname.split('?')
 const login = require('./src/login')
 const signup = require('./src/signup')
-const musicProject = require('./src/music-project.js')
+const musicProject = require('./src/music-project/controller')
 
 const pageInitializer = {
     '/': login.init,
