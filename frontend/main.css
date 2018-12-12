@@ -52,3 +52,38 @@ section{
     width:90px;
     border-radius:50%;
 }
+
+/*====Auto complete======*/
+.autocomplete{
+    outline:1px solid black;
+}
+
+.entry{
+    display:flex;
+    margin-bottom:5px;
+    border-bottom:1px solid #ccc;
+    padding-bottom:5px;
+}
+.entry:hover{
+    cursor:pointer;
+    background-color:#efefef;
+}
+.entry img{
+    margin-left:5px;
+}
+.content{height:64px;}
+.content h3{
+    height:34x;
+    margin:0;
+    padding-left:10px;
+    font-size:18px;
+}
+.content p {
+
+    margin:0;
+    height:30px;
+    padding-left:10px;
+}
+
+
+
