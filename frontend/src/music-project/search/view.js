@@ -27,8 +27,8 @@ function albumTemplate(album, tracks){
                 ${tracks}
             </tbody>
         </table>
-        <button class="addToQueue">Add</button>
-        <button class="close">Close</button>
+        <button class="addToQueue" type="button">Add</button>
+        <button class="close" type="button">Close</button>
     </div>`
 }
 

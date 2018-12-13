@@ -108,4 +108,32 @@ tr:nth-of-type(even){
     background-color:#efefef;
 }
 
+/*=====upNext===============*/
+#upNext .albumCover{
+    width:150px;
+    height:150px;
+    float:left;
+}
 
+#upNext td:nth-of-type(3), #upNext td:nth-of-type(1){
+    display:none;   
+}
+
+#upNext button{ 
+    display:none;
+}
+
+#upNext h3, #upNext p{
+    display:inline;
+    outline:1px solid red
+}
+
+#upNext p{
+    margin-left:10px;
+}
+
+#upNext table{
+    height:100px;
+    border:3px dotted purple;
+    overflow-y: scroll;
+}

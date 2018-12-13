@@ -52,12 +52,10 @@ function select(e){
     const albumId = e.currentTarget.getAttribute('data-id')
     return model.getAlbum(albumId)
     .then(result => {
-        console.log(result.data.tracks.items)
         const tracks = result.data.tracks.items.map(item => {
             item.duration_ms = msToMins(item.duration_ms)
             return view.tracksTable(item)
         })
-        console.log(tracks)
         document.querySelector('.autocomplete').innerHTML = view.albumTemplate(result.data, tracks.join(''))
         return addButtonListeners()
     })
@@ -77,7 +75,29 @@ function msToMins(num){
 
 function addButtonListeners(){
     const buttons = document.querySelectorAll('.albumSelect button')
-    
+    buttons[0].onclick = function(e){addToQueue(e)}
+//  buttons[1].onclick = cancel
 }
 
+function addToQueue(e){
+    const albumId = e.currentTarget.parentElement.getAttribute('data-id')
+    const album = document.querySelector('.autocomplete').innerHTML
+    document.querySelector('.autocomplete').innerHTML = ''
+    if(document.querySelector('#upNext').children.length === 1){
+        document.querySelector('#upNext').innerHTML += album
+    }
+    return addToDbQueue(id)
+}
+
+function addToDbQueue(albumId){
+    const album = document.querySelector(`div[data-id="${albumId}"]`)
+    const body = {
+        user_id: '',
+        album: album.children[1].textContent,
+        artist: album.children[2].textContent,
+        img: album.children[0].getAttribtute('src'),
+        album_id: albumId
+    }
+    return model.addToDbQueue(body)
+}
 module.exports = {init, createQuery, msToMins}
