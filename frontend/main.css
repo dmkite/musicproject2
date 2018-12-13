@@ -85,5 +85,27 @@ section{
     padding-left:10px;
 }
 
+/*==========Album=============*/
+.albumSelect{
+    border:1px solid red
+}
+
+.albumCover{
+    outline:1px dotted blue;
+}
+
+.albumSelect table{
+    max-height:150px;
+    overflow-y:scroll;
+    outline:1px dotted green
+}
+
+thead{
+    font-weight:bold;
+}
+
+tr:nth-of-type(even){
+    background-color:#efefef;
+}
 
 
