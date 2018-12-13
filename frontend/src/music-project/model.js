@@ -1,6 +1,5 @@
 const axios = require('axios')
 const baseURL = 'http://localhost:3000'
-const ctrl = require('./controller')
 
 function getToken(body){
     return axios.post(`${baseURL}/auth/spotify`, {
@@ -42,19 +41,5 @@ function refreshToken(refreshToken){
         console.error(err)
     })
 }
-function searchForAlbum(query) {
-    return axios('https://api.spotify.com/v1/search' + query, {
-        method: 'get',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-        }
-    })
-        .then(result => {
-            autocomplete(result.data)
-        })
-        .catch(err => { console.log(err) })
-}
 
-module.exports = {getToken, getUserInfo, refreshToken, searchForAlbum}
+module.exports = {getToken, getUserInfo, refreshToken}

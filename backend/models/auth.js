@@ -6,16 +6,18 @@ const clientSecret = '8ec87c8d02d64c0abb395e69c652db54'
 const base64  = require('js-base64').Base64
 
 function login(username, password) {
+    let result
     return knex('users')
         .where('username', username)
         .then(([data]) => {
             if (!data) throw { status: 400, message: `No user registered for ${username}` }
+            result = data
             return bcrypt.compare(password, data.password)
-                .then(authStatus => {
-                    if (!authStatus) throw { status: 401, message: 'Invalid password' }
-                    delete data.password
-                    return data
-                })
+        })
+        .then(authStatus => {
+            if (!authStatus) throw { status: 401, message: 'Invalid password' }
+            delete result.password
+            return result
         })
 }
 

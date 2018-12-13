@@ -1,5 +1,5 @@
 const model = require('./model')
-
+const searchCtrl = require('./search/controller')
 function init() {
     if(!localStorage.getItem('access_token')){
         const body = createBodyFromCode()    
@@ -11,7 +11,7 @@ function init() {
         })
     }
     else getUserInfo()
-    
+    document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
 }
 
 function createBodyFromCode(){
@@ -26,18 +26,14 @@ function createBodyFromCode(){
 }
 
 function getUserInfo(accessToken){
-    console.log(accessToken)
     return model.getUserInfo(accessToken)
     .then(result => {
-        console.log(result, '************************************')
         personalize(result)
         })
     .catch(err => {
-        console.log(err, '-------------------')
         const refreshToken = localStorage.getItem('refresh_token')
         return model.refreshToken(refreshToken)
         .then(result => {
-            console.log(result)
             useNewToken(result)
         })
     })
@@ -55,19 +51,5 @@ function personalize(userObj) {
     document.querySelector('.welcome').textContent += `, ${userObj.display_name}!`
     if (userObj.images[0]) document.querySelector('header').innerHTML += `<div id="profPic" style="background-image: url('${userObj.images[0]}';")></div>`
 }
-
-function createQuery(){
-    const val = encode()
-    const query = `?q=${val}&type=album%2Cartist&limit=5`
-    return model.searchForAlbum(query)
-}
-
-function encode() {
-    let val = document.querySelector('#musicSearch input').value
-    val = val.split(' ')
-    val = val.join('%20')
-    return val
-}
-
 module.exports = {init, getUserInfo}
 
