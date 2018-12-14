@@ -7,8 +7,9 @@ class Model{
     }
 
     add(body){
-        return axios.post(baseURL + url, body)
+        return axios.post(baseURL + this.url, body)
         .then(result => console.log(result))
+        .catch(err => console.log(err))
     }
 }
 

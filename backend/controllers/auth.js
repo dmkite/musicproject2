@@ -33,17 +33,14 @@ function authStatus(req, res, next) {
 }
 
 function checkRequest(req, res, next) {
-    const id = req.params.id || req.params.userId
-    if (id != req.claim.sub.id) return next({ status: 401, message: 'Unauthorized, ids dont match' })
+    const userId = req.params.userId
+    if (userId != req.claim.sub.id) return next({ status: 401, message: 'Unauthorized, ids dont match' })
     next()
 }   
 
 function spotify(req, res, next){
-    // console.log(req.body.code, '--------------------------------------')
     return model.spotify(req.body)
     .then(result => {
-        // console.log(result.data)
-        // let response = result.data
         res.status(200).send(result.data)
     })
     .catch(err => next(err))
