@@ -15,7 +15,6 @@ function all(req, res, next){
     const userId = req.params.userId
     return model.all(userId)
     .then(result => {
-        console.log(result, '++++++++++++++++++++++++++++++++++++++++++++++++++++')
         res.status(200).send(result)
     })
 }

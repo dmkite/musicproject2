@@ -5,8 +5,12 @@ function init() {
     const userId = localStorage.getItem('userId')
     return model.all(`/users/${userId}/queues`)
     .then(result => {
-        console.log(result)
-        document.querySelector('#upNext').innerHTML += view.albumTemplate(result.data[0])
+        const upNext = document.querySelector('#upNext')
+        if (result.data[0]) upNext.innerHTML += view.albumTemplate(result.data[0])
+        else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
+    })
+    .catch(err => {
+        console.error(err)
     })
 }
 
@@ -23,7 +27,6 @@ function addToDbQueue(albumId) {
     document.querySelector('.autocomplete').innerHTML = ''
     return model.add(body)
     .then(([result]) => {
-        console.log(result)
         document.querySelector('body').innerHTML += `<div class="alert">${result.data.album} added to queue</div>`
     })
     .catch(next)

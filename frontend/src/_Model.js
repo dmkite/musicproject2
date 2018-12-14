@@ -15,7 +15,6 @@ class Model{
             data: body
         })
         .then(result => {
-            console.log(result, ' from model')
             return result
         })
         .catch(err => console.log(err))

@@ -5,10 +5,8 @@ class Model{
         this.table = table
     }
 
-    all(userId){
+    all(){
         return knex(this.table)
-        .where('id', userId)
-        .orderBy('created_at', 'desc')
     }
 
     one(id){
@@ -24,7 +22,6 @@ class Model{
     }
 
     add(body){
-        console.log(body)
         return knex(this.table)
         .insert(body)
         .returning('*')
