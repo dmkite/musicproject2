@@ -1,5 +1,8 @@
 const model = require('./model')
 const searchCtrl = require('./search/controller')
+const queueCtrl = require('./queue/controller')
+
+
 function init() {
     if(!localStorage.getItem('access_token')){
         const body = createBodyFromCode()    
@@ -7,7 +10,8 @@ function init() {
         .then(result => {
             localStorage.setItem('access_token', result.data.access_token)
             localStorage.setItem('refresh_token', result.data.refresh_token)
-            document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
+            prepDashboard()
+            
             return getUserInfo(result.data.access_token)
         })
         .then(() => {
@@ -20,7 +24,7 @@ function init() {
     }
     else {
         getUserInfo()
-        document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
+        prepDashboard()
         const token = `Bearer: ${localStorage.getItem('token')}`
         return model.authenticate(token)
         .then(result => {
@@ -65,6 +69,12 @@ function useNewToken(newToken){
 function personalize(userObj) {
     document.querySelector('.welcome').textContent += `, ${userObj.display_name}!`
     if (userObj.images[0]) document.querySelector('header').innerHTML += `<div id="profPic" style="background-image: url('${userObj.images[0]}';")></div>`
+}
+
+
+function prepDashboard(){
+    document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
+    queueCtrl.init()
 }
 module.exports = {init, getUserInfo}
 

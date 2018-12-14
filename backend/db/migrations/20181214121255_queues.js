@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
         table.string('artist').notNullable().defaultsTo('')
         table.text('img').notNullable().defaultsTo('')
         table.text('album_id').notNullable().defaultsTo('')
+        table.timestamps(true, true)
   })
   
 };

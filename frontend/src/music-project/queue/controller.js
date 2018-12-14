@@ -1,4 +1,14 @@
 const model = require('./model')
+const view = require('./view')
+
+function init() {
+    const userId = localStorage.getItem('userId')
+    return model.all(`/users/${userId}/queues`)
+    .then(result => {
+        console.log(result)
+        document.querySelector('#upNext').innerHTML += view.albumTemplate(result.data[0])
+    })
+}
 
 function addToDbQueue(albumId) {
     const album = document.querySelector(`div[data-id="${albumId}"]`)
@@ -10,7 +20,13 @@ function addToDbQueue(albumId) {
         img: album.children[0].getAttribute('src'),
         album_id: albumId
     }
+    document.querySelector('.autocomplete').innerHTML = ''
     return model.add(body)
+    .then(([result]) => {
+        console.log(result)
+        document.querySelector('body').innerHTML += `<div class="alert">${result.data.album} added to queue</div>`
+    })
+    .catch(next)
 }
 
-module.exports = {addToDbQueue}
+module.exports = {init, addToDbQueue}

@@ -7,9 +7,28 @@ class Model{
     }
 
     add(body){
-        return axios.post(baseURL + this.url, body)
-        .then(result => console.log(result))
+        return axios(baseURL + this.url, {
+            method: 'post',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            data: body
+        })
+        .then(result => {
+            console.log(result, ' from model')
+            return result
+        })
         .catch(err => console.log(err))
+    }
+
+    all(){
+        return axios(baseURL + this.url, {
+            method: 'get',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(result => result)
     }
 }
 

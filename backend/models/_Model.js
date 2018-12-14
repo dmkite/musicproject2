@@ -5,23 +5,26 @@ class Model{
         this.table = table
     }
 
-    static all(){
+    all(userId){
         return knex(this.table)
+        .where('id', userId)
+        .orderBy('created_at', 'desc')
     }
 
-    static one(id){
+    one(id){
         return knex(this.table)
         .where({id})
     }
 
-    static delete(id){
+    delete(id){
         return knex(this.table)
         .where({id})
         .del()
         .returning('*')
     }
 
-    static add(body){
+    add(body){
+        console.log(body)
         return knex(this.table)
         .insert(body)
         .returning('*')

@@ -6,8 +6,18 @@ function add(req, res, next){
         res.status(201).send(result)
     })
     .catch(err =>{
-        res.status(401).send(err)
+        console.log(err)
+        res.status(400).send(err)
     })
 }
 
-module.exports ={add}
+function all(req, res, next){
+    const userId = req.params.userId
+    return model.all(userId)
+    .then(result => {
+        console.log(result, '++++++++++++++++++++++++++++++++++++++++++++++++++++')
+        res.status(200).send(result)
+    })
+}
+
+module.exports ={add, all}
