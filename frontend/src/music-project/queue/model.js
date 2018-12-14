@@ -1,8 +1,7 @@
-const axios = require('./axios')
-const baseURL = 'http://localhost:3000'
+const Model = require('./_Model')
+const userId = localStorage.getItem('userId')
 
-function addToDbQueue() {
-    return axios(baseURL + `/users/${userId}/queues`)
-}
+const model = new Model(`/users/${userId}/queue`)
 
-module.exports = {addToDbQueue}
+
+module.exports = model

@@ -1,4 +1,4 @@
-const knex = require('../')
+const knex = require('../db/knex')
 
 class Model{
     constructor(table){

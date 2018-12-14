@@ -1,6 +1,6 @@
 const model = require('./model')
 const view = require('./view')
-const queue = require('../queue.controller')
+const queue = require('../queue/controller')
 
 function init(){
     const val = encodeInput()
@@ -87,7 +87,7 @@ function addToQueue(e){
     if(document.querySelector('#upNext').children.length === 1){
         document.querySelector('#upNext').innerHTML += album
     }
-    return queue.addToDbQueue(id)
+    return queue.addToDbQueue(albumId)
 }
 
 module.exports = {init, createQuery, msToMins}
