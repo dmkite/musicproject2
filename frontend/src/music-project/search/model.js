@@ -1,4 +1,5 @@
 const axios = require('axios')
+const baseURL = 'http://localhost:3000'
 
 function searchForAlbum(query) {
     return axios('https://api.spotify.com/v1/search' + query, {
@@ -25,5 +26,6 @@ function getAlbum(albumId){
     .then(result => result)
     .catch(err => {console.error(err)})
 }
+
 
 module.exports = {searchForAlbum, getAlbum}

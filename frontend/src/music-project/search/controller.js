@@ -1,5 +1,6 @@
 const model = require('./model')
 const view = require('./view')
+const queue = require('../queue/controller')
 
 function init(){
     const val = encodeInput()
@@ -52,12 +53,10 @@ function select(e){
     const albumId = e.currentTarget.getAttribute('data-id')
     return model.getAlbum(albumId)
     .then(result => {
-        console.log(result.data.tracks.items)
         const tracks = result.data.tracks.items.map(item => {
             item.duration_ms = msToMins(item.duration_ms)
             return view.tracksTable(item)
         })
-        console.log(tracks)
         document.querySelector('.autocomplete').innerHTML = view.albumTemplate(result.data, tracks.join(''))
         return addButtonListeners()
     })
@@ -77,7 +76,18 @@ function msToMins(num){
 
 function addButtonListeners(){
     const buttons = document.querySelectorAll('.albumSelect button')
-    
+    buttons[0].onclick = function(e){addToQueue(e)}
+//  buttons[1].onclick = cancel
+}
+
+function addToQueue(e){
+    const albumId = e.currentTarget.parentElement.getAttribute('data-id')
+    const album = document.querySelector('.autocomplete').innerHTML
+    document.querySelector('.autocomplete').innerHTML = ''
+    if(document.querySelector('#upNext').children.length === 1){
+        document.querySelector('#upNext').innerHTML += album
+    }
+    return queue.addToDbQueue(albumId)
 }
 
 module.exports = {init, createQuery, msToMins}

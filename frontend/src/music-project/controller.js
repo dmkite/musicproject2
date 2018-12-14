@@ -7,11 +7,26 @@ function init() {
         .then(result => {
             localStorage.setItem('access_token', result.data.access_token)
             localStorage.setItem('refresh_token', result.data.refresh_token)
+            document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
             return getUserInfo(result.data.access_token)
         })
+        .then(() => {
+            const token = `Bearer: ${localStorage.getItem('token')}`
+            return model.authenticate(token)
+        })
+        .then(result => {
+            localStorage.setItem('userId', result.data.id)
+        })
     }
-    else getUserInfo()
-    document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
+    else {
+        getUserInfo()
+        document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
+        const token = `Bearer: ${localStorage.getItem('token')}`
+        return model.authenticate(token)
+        .then(result => {
+            localStorage.setItem('userId', result.data.id)
+        })
+    }
 }
 
 function createBodyFromCode(){

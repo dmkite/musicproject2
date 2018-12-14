@@ -34,7 +34,6 @@ function refreshToken(refreshToken){
     })
     .then(result => {
         localStorage.setItem('access_token', result.data.access_token)
-        // return ctrl.getUserInfo(result.data.access_token)
         return result.data.access_token
     })
     .catch(err => {
@@ -42,4 +41,15 @@ function refreshToken(refreshToken){
     })
 }
 
-module.exports = {getToken, getUserInfo, refreshToken}
+function authenticate(token) {
+    return axios(`${baseURL}/auth/token`, {
+        method: 'get',
+        headers: {
+            Authorization: token
+        }
+    })
+    .then(result => result)
+}
+
+
+module.exports = {getToken, getUserInfo, refreshToken, authenticate}
