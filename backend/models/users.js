@@ -24,5 +24,11 @@ function signup(f_name, l_name, username, password) {
         })
 }
 
+function getOne(id){
+    return knex('users')
+    .where({id})
+    .first()
+}
+
 
 module.exports = {signup}

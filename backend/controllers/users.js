@@ -1,7 +1,6 @@
 const model = require('../models/users')
 
 function signup(req, res, next) {
-    console.log(req.body)
     const {f_name, l_name, username, password, passwordMatch } = req.body
 
     if (!username || !password || !f_name || !l_name || password !== passwordMatch) 
@@ -19,6 +18,12 @@ function signup(req, res, next) {
         })
         .catch(next)
 }
+
+function getUser(req, res, next){
+    return model.getUser(id)
+    .then(result => console.log(result))
+}
+
 
 
 module.exports = {signup}

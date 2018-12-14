@@ -1,5 +1,6 @@
 const model = require('./model')
 const view = require('./view')
+const queue = require('../queue.controller')
 
 function init(){
     const val = encodeInput()
@@ -86,18 +87,7 @@ function addToQueue(e){
     if(document.querySelector('#upNext').children.length === 1){
         document.querySelector('#upNext').innerHTML += album
     }
-    return addToDbQueue(id)
+    return queue.addToDbQueue(id)
 }
 
-function addToDbQueue(albumId){
-    const album = document.querySelector(`div[data-id="${albumId}"]`)
-    const body = {
-        user_id: '',
-        album: album.children[1].textContent,
-        artist: album.children[2].textContent,
-        img: album.children[0].getAttribtute('src'),
-        album_id: albumId
-    }
-    return model.addToDbQueue(body)
-}
 module.exports = {init, createQuery, msToMins}

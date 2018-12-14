@@ -23,7 +23,6 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     console.log(err)
-    // console.log(Object.keys(err), console.log(err.request))
     const status = err.status || 500
     res.status(status).send({message:err.message})
 })

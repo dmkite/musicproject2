@@ -27,8 +27,5 @@ function getAlbum(albumId){
     .catch(err => {console.error(err)})
 }
 
-function addToDbQueue(){
-    return axios(baseURL + `/users/${userId}/queues`)
-}
 
-module.exports = {searchForAlbum, getAlbum, addToDbQueue}
+module.exports = {searchForAlbum, getAlbum}

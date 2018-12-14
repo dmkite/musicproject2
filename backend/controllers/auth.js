@@ -57,4 +57,4 @@ function refresh(req, res, next){
     .catch(err => next(err))
 }
 
-module.exports = {login, authenticate, spotify, refresh}
+module.exports = {login, authenticate, authStatus, checkRequest, spotify, refresh}
