@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
       table.increments()
       table.string('name').notNullable().defaultsTo('')
       table.float('rating', 1, 1).notNullable().defaultsTo(0)
+      table.string('album_id').notNullable().defaultsTo('')
       table.timestamps(true, true)
   })
 };

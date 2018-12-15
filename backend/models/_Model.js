@@ -5,23 +5,23 @@ class Model{
         this.table = table
     }
 
-    static all(){
+    all(){
         return knex(this.table)
     }
 
-    static one(id){
+    one(id){
         return knex(this.table)
         .where({id})
     }
 
-    static delete(id){
+    delete(id){
         return knex(this.table)
         .where({id})
         .del()
         .returning('*')
     }
 
-    static add(body){
+    add(body){
         return knex(this.table)
         .insert(body)
         .returning('*')

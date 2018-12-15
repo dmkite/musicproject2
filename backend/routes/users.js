@@ -4,7 +4,7 @@ const ctrl = require('../controllers/users')
 
 router.post('/signup', ctrl.signup)
 
-router.post('/:userId/queue', require('./queue'))
+router.use('/:userId/queue', require('./queue'))
 
 module.exports = router
 

@@ -83,8 +83,9 @@ function addButtonListeners(){
 function addToQueue(e){
     const albumId = e.currentTarget.parentElement.getAttribute('data-id')
     const album = document.querySelector('.autocomplete').innerHTML
-    document.querySelector('.autocomplete').innerHTML = ''
+    document.querySelector('#musicSearch input').value = ''
     if(document.querySelector('#upNext').children.length === 1){
+        document.querySelector('.autocomplete').innerHTML = ''
         document.querySelector('#upNext').innerHTML += album
     }
     return queue.addToDbQueue(albumId)
