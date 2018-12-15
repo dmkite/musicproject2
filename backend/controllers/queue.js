@@ -20,4 +20,13 @@ function all(req, res, next){
     })
 }
 
-module.exports ={add, all}
+function current(req, res, next){
+    const userId = req.params.userId
+    return model.current(userId)
+    .then(result => {
+        res.status(200).send(result)
+    })
+    .catch(next)
+}
+
+module.exports ={add, all, current}

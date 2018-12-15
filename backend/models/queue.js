@@ -44,6 +44,15 @@ class QueueModel extends Model{
         })
 
     }
+
+    current(userId){
+        return knex(this.table)
+        .where({
+            user_id: userId,
+            is_current: true
+        })
+        .first()
+    }
 }
 
 const model = new QueueModel('queues')
