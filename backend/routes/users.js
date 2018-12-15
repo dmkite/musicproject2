@@ -6,5 +6,7 @@ router.post('/signup', ctrl.signup)
 
 router.use('/:userId/queue', require('./queue'))
 
+router.use('/:userId/albums', require('./albums'))
+
 module.exports = router
 

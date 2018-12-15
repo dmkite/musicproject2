@@ -137,3 +137,23 @@ tr:nth-of-type(even){
     border:3px dotted purple;
     overflow-y: scroll;
 }
+
+/*=====Current===========*/
+.tracks{
+    outline:1px dotted green;
+    width:100%;
+}
+.tracks input{
+    margin:0;
+    height:20px;
+    width:20px;
+}
+
+td:nth-of-type(1){
+    outline:1px dotted blue;
+
+}
+td:nth-of-type(2){
+    outline:1px solid red;
+    text-align:center;
+}

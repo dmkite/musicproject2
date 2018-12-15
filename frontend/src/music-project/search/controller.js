@@ -75,17 +75,17 @@ function msToMins(num){
 }
 
 function addButtonListeners(){
-    const buttons = document.querySelectorAll('.albumSelect button')
-    buttons[0].onclick = function(e){addToQueue(e)}
-//  buttons[1].onclick = cancel
+    document.querySelector('.albumSelect button').onclick = function(e){addToQueue(e)}
 }
 
 function addToQueue(e){
     const albumId = e.currentTarget.parentElement.getAttribute('data-id')
     const album = document.querySelector('.autocomplete').innerHTML
     document.querySelector('#musicSearch input').value = ''
-    if(document.querySelector('#upNext').children.length === 1){
+    if(document.querySelector('#upNext .emptyState')){
+        document.querySelector('#upNext .emptyState').remove()
         document.querySelector('.autocomplete').innerHTML = ''
+        // if(!document.querySelector('#current .emptyState')) 
         document.querySelector('#upNext').innerHTML += album
     }
     return queue.addToDbQueue(albumId)

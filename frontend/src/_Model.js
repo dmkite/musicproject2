@@ -29,6 +29,16 @@ class Model{
         })
         .then(result => result)
     }
+
+    one(){
+        return axios(baseURL + this.url, {
+            method: 'get',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(result => result)
+    }
 }
 
 module.exports = Model
