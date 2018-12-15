@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
         table.string('album').notNullable().defaultsTo('')
         table.string('artist').notNullable().defaultsTo('')
         table.text('img').notNullable().defaultsTo('')
-        table.text('album_id').notNullable().defaultsTo('').unique()
+        table.text('spotify_album_id').notNullable().defaultsTo('').unique()
         table.boolean('is_current').notNullable().defaultsTo(false)
         table.timestamps(true, true)
   })

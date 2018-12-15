@@ -34,11 +34,12 @@ function archive(e){
         body: {
             name: document.querySelector('#current h3').textContent,
             rating: document.querySelector('#rating').value,
-            album_id: document.querySelector('#current .queuedAlbum').getAttribute('data-id'),
+            spotify_album_id: document.querySelector('#current .queuedAlbum').getAttribute('data-id'),
         },
         songs: gatherSongs()
     }
     return model.add(data)
+    .then(result => console.log(result, '-----------------------------------------'))
 }
 
 function gatherSongs(){

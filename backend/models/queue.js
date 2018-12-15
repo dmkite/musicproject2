@@ -18,13 +18,13 @@ class QueueModel extends Model{
     add(body){
         return knex(this.table)
         .where({
-            album_id: body.album_id
+            spotify_album_id: body.spotify_album_id
         })
         .then(result => {
             if(result) return false
             return knex('albums')
             .where({
-                album_id: body.album_id
+                spotify_album_id: body.spotify_album_id
             })
         })
         .then(result =>{

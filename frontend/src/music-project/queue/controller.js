@@ -22,7 +22,7 @@ function addToDbQueue(albumId) {
         album: album.children[1].textContent,
         artist: album.children[2].textContent,
         img: album.children[0].getAttribute('src'),
-        album_id: albumId
+        spotify_album_id: albumId
     }
     document.querySelector('.autocomplete').innerHTML = ''
    

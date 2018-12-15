@@ -18,7 +18,7 @@ class CurrentModel extends Model{
         })
         .then(result => {
             if(songs.length > 0){
-                return axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/songs`, {
+                return axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/${albumId}/songs`, {
                     method: 'post',
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
