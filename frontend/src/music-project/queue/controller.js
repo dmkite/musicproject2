@@ -6,7 +6,7 @@ function init() {
     return model.all(`/users/${userId}/queues`)
     .then(result => {
         const upNext = document.querySelector('#upNext')
-        if (result.data[0]) upNext.innerHTML += view.albumTemplate(result.data[0])
+        if (result.data[0] && !result.data[0].is_current) upNext.innerHTML += view.albumTemplate(result.data[0])
         else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
     })
     .catch(err => {
@@ -25,11 +25,19 @@ function addToDbQueue(albumId) {
         album_id: albumId
     }
     document.querySelector('.autocomplete').innerHTML = ''
+   
     return model.add(body)
-    .then(([result]) => {
+    .then(result => {
+        console.log(result, '============================')
+        if(result.data[0].is_current) return addToCurrent(result.data)
         document.querySelector('body').innerHTML += `<div class="alert">${result.data.album} added to queue</div>`
     })
-    .catch(next)
+    .catch(err => console.error(err))
+}
+
+function addToCurrent(album){
+    document.querySelector('#current .emptyState').remove()
+    document.querySelector('#current').innerHTML += view.albumTemplate(album)
 }
 
 module.exports = {init, addToDbQueue}
