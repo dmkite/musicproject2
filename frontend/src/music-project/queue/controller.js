@@ -28,9 +28,11 @@ function addToDbQueue(albumId) {
    
     return model.add(body)
     .then(result => {
-        console.log(result, '============================')
         if(result.data[0].is_current) return addToCurrent(result.data[0])
-        document.querySelector('body').innerHTML += `<div class="alert">${result.data.album} added to queue</div>`
+        let div = document.createElement('div')
+        div.innerHTML = `<p class="alert">${result.data[0].album} added to queue</p>`
+        document.querySelector('body').appendChild(div)
+        // document.querySelector('body').innerHTML += `<div class="alert">${result.data.album} added to queue</div>`
     })
     .catch(err => console.error(err))
 }
