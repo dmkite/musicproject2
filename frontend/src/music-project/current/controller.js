@@ -7,7 +7,7 @@ const {msToMins} = require('../search/controller')
 function init(){
     return model.all()
     .then(result => {
-        if(!result) return
+        if(!result.data) return
         document.querySelector('#current').innerHTML += queueView.albumTemplate(result.data)
         document.querySelector('#current').innerHTML += view.actionBlock(result.data)
         document.querySelector('#current .emptyState').remove()
