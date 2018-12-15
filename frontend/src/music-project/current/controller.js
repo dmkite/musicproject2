@@ -35,7 +35,6 @@ function archive(e){
             name: document.querySelector('#current h3').textContent,
             rating: document.querySelector('#rating').value,
             album_id: document.querySelector('#current .queuedAlbum').getAttribute('data-id'),
-            user_id: localStorage.getItem('userId')
         },
         songs: gatherSongs()
     }

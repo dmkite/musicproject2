@@ -85,7 +85,7 @@ function addToQueue(e){
     if(document.querySelector('#upNext .emptyState')){
         document.querySelector('#upNext .emptyState').remove()
         document.querySelector('.autocomplete').innerHTML = ''
-        document.querySelector('#upNext').innerHTML += album
+        if(!document.querySelector('#current .emptyState')) document.querySelector('#upNext').innerHTML += album
     }
     return queue.addToDbQueue(albumId)
 }
