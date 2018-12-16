@@ -8,28 +8,29 @@ const {msToMins} = require('../search/controller')
 function init(){
     return model.all()
     .then(result => {
+        console.log(result, ' from init')
         if(!result.data) return
         document.querySelector('#current').innerHTML += queueView.albumTemplate(result.data)
         document.querySelector('#current').innerHTML += view.actionBlock(result.data)
         document.querySelector('#current .emptyState').remove()
-        document.querySelector('.archive').onclick = function(e){openRatingForm(e)}
+        document.querySelector('.archive').onclick = function(e){openRatingForm(e, result.data.id)}
     })
 }
 
-function openRatingForm(e){
-    const albumId = document.querySelector('.queuedAlbum').getAttribute('data-id')
-    return searchModel.getAlbum(albumId)
+function openRatingForm(e, albumId){
+    const spotifyAlbumId = document.querySelector('.queuedAlbum').getAttribute('data-id')
+    return searchModel.getAlbum(spotifyAlbumId)
     .then(result => {
         const trackForm = result.data.tracks.items.map(track => {
             track.duration_ms = msToMins(track.duration_ms)
             return view.trackFormField(track)
         })
         document.querySelector('#current').innerHTML += view.ratingForm(trackForm)
-        document.querySelector('#ratingForm').onsubmit = function(e){archive(e)}
+        document.querySelector('#ratingForm').onsubmit = function(e){archive(e, albumId)}
     })
 }
 
-function archive(e){
+function archive(e, albumId){
     e.preventDefault()
     const data = {
         body: {
@@ -41,7 +42,8 @@ function archive(e){
     }
     return model.add(data)
     .then(result => {
-        // shiftQueue(data.body.spotify_album_id)
+        console.log(result, 'RIGHT BEFORE SHIFT QUEUE IS CALLED')
+        shiftQueue(albumId)
     })
 }
 
@@ -61,8 +63,8 @@ function gatherSongs(){
 
 }
 
-function shiftQueue(spotify_album_id){
-    return queueModel.delete(spotify_album_id)
+function shiftQueue(albumId){
+    return queueModel.delete(albumId)
     .then(result => {
         document.querySelector('#current').innerHTML = '<h2>Currently Listening To</h2>'
     })

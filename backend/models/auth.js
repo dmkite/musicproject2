@@ -6,6 +6,7 @@ const clientSecret = '8ec87c8d02d64c0abb395e69c652db54'
 const base64  = require('js-base64').Base64
 
 function login(username, password) {
+    console.log('HITTING AUTH MODEL LOGIN')
     let result
     return knex('users')
         .where('username', username)
