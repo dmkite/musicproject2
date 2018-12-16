@@ -1,6 +1,7 @@
 const model = require('./model')
 const searchModel = require('../search/model')
 const queueView = require('../queue/view')
+const queueModel = require('../queue/model')
 const view = require('./view')
 const {msToMins} = require('../search/controller')
 
@@ -39,7 +40,9 @@ function archive(e){
         songs: gatherSongs()
     }
     return model.add(data)
-    .then(result => console.log(result, '-----------------------------------------'))
+    .then(result => {
+        // shiftQueue(data.body.spotify_album_id)
+    })
 }
 
 function gatherSongs(){
@@ -53,8 +56,21 @@ function gatherSongs(){
             result.push(song)
         }
     })
+    console.log(result, 'songs after gathering')
     return result
 
 }
 
+function shiftQueue(spotify_album_id){
+    return queueModel.delete(spotify_album_id)
+    .then(result => {
+        document.querySelector('#current').innerHTML = '<h2>Currently Listening To</h2>'
+    })
+    //shift queue needs to:
+    //1. delete current album from queue
+    //2. get latest album and change is_current to true
+    //3. display current album
+    //4. display next up
+
+}
 module.exports = {init}

@@ -39,6 +39,17 @@ class Model{
         })
         .then(result => result)
     }
+
+    delete(body){
+        return axios(baseURL + this.url, {
+            method: 'delete',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            body
+        })
+        .then(result => result)
+    }
 }
 
 module.exports = Model

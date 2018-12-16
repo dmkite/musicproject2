@@ -29,4 +29,9 @@ function current(req, res, next){
     .catch(next)
 }
 
-module.exports ={add, all, current}
+function del(){
+    const albumId = req.params.albumId
+    return model.delete(albumId)
+}
+
+module.exports ={add, all, current, del}
