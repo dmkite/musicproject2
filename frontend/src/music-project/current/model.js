@@ -17,21 +17,29 @@ class CurrentModel extends Model{
             data: body
         })
         .then(result => {
-            if(songs.length > 0){
-                return axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/${albumId}/songs`, {
+
+            console.log(result)
+            const promiseArray = songs.map(song => {
+                song.users_albums_id = result.data.id
+                console.log(song)
+                return axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/${result.data.album_id}/songs`, {
                     method: 'post',
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     },
-                    data: songs
+                    data: song
                 })
-            }
-            else{
-                return result
-            }
+            })
+            return Promise.all(promiseArray)
+            .then(result => {
+                console.log('promise.all resolves to : ', result)
+                return result})
+            
+
         })
         .catch(err => console.log(err))
     }
+
 }
 
 const model = new CurrentModel(`/users/${localStorage.getItem('userId')}/queue/current`)

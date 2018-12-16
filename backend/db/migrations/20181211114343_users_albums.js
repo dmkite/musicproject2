@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('album_id').notNullable().defaultsTo(0)
     table.foreign('album_id').references('albums.id').onDelete('CASCADE')
     table.float('rating', 1, 1).notNullable().defaultsTo(0)
-    table.unique(['user_id', 'album_id'])
+    table.unique(['user_id', 'album_id'])     
     table.timestamps(true, true)
   })
 };

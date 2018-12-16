@@ -14,7 +14,7 @@ class Model{
         .where({id})
     }
 
-    delete(id){
+    del(id){
         return knex(this.table)
         .where({id})
         .del()

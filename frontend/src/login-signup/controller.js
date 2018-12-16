@@ -1,7 +1,7 @@
 const model = require('./model')
 
 function init() {
-    if(window.location.pathname === '/index.html' || window.location.pathname === '/') document.addEventListener('keyup', isFilled)
+    if (window.location.pathname === '/index.html' || window.location.pathname === '/') document.addEventListener('keyup', isFilled)
     else document.addEventListener('keyup', activateBtn)
 }
 
@@ -19,13 +19,16 @@ function login(e) {
     e.preventDefault()
     const body = getBody()
     return model.login(body)
-    .then(token => {
-        localStorage.setItem('token', token.data.token)
-        document.location.href = 'http://localhost:8888'
-    })
-    .catch (err => {
-        if (err.response.data) surfaceError(err.response.data.message)
-    })
+        .then(token => {
+            localStorage.setItem('token', token.data.token)
+            return
+        })
+        .then(() => {
+            document.location.href = 'http://localhost:8888'
+        })
+        .catch(err => {
+            if (err.response.data) surfaceError(err.response.data.message)
+        })
 }
 
 function getBody() {
@@ -91,16 +94,16 @@ function signup(e) {
     e.preventDefault()
     const body = getBody()
     return model.signup(body)
-    .then( () => {
-        document.location.href = '/index.html'
-    })
-    .catch(err => {
-        const warning = document.querySelector('.warning')
-        console.error(err)
-        if (err.response) warning.innerHTML = `${err.response.data.message}`
-        else warning.innerHTML = `${err}`
-        warning.classList.remove('hidden')
-    })
+        .then(() => {
+            document.location.href = '/index.html'
+        })
+        .catch(err => {
+            const warning = document.querySelector('.warning')
+            console.error(err)
+            if (err.response) warning.innerHTML = `${err.response.data.message}`
+            else warning.innerHTML = `${err}`
+            warning.classList.remove('hidden')
+        })
 }
 
-module.exports = {init}
+module.exports = { init }
