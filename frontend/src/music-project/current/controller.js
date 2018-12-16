@@ -51,12 +51,12 @@ function gatherSongs(){
     checkboxes.forEach(input => {
         if(input.checked){ 
             let song = {}
-            song.id = input.id 
+            song.spotify_song_id = input.id 
             song.name = document.querySelectorAll(`label[for="${input.id}"]`)[1].textContent
             result.push(song)
         }
     })
-    console.log(result, 'songs after gathering')
+//result works
     return result
 
 }

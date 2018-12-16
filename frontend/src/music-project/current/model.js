@@ -17,19 +17,18 @@ class CurrentModel extends Model{
             data: body
         })
         .then(result => {
-            const promiseArray = []
-            console.log(songs, '==========================================')
-            songs.forEeach(song => {
+
+            console.log(result)
+            const promiseArray = songs.map(song => {
                 song.users_albums_id = result.data.id
-                promiseArray.push(
-                    axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/${albumId}/songs`, {
-                        method: 'post',
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem('token')}`
-                        },
-                        data: song
-                    })
-                )
+                console.log(song)
+                return axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/${result.data.album_id}/songs`, {
+                    method: 'post',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
+                    data: song
+                })
             })
             return Promise.all(promiseArray)
             .then(result => {

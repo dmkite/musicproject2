@@ -15,8 +15,13 @@ function add(req, res, next){
 }
 
 function addSong(req, res, next){
+    console.log('hitting add song with ', req.body)
     const song = req.body
     return songModel.add(song)
+    .then(result =>{
+        console.log('result after songModel', result)
+        res.status(201).send(result)
+    })
 }
 
 module.exports = {add, addSong}
