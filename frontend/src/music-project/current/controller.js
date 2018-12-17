@@ -68,7 +68,7 @@ function gatherSongs(){
             let song = {}
             song.spotify_song_id = input.id 
             song.name = document.querySelectorAll(`label[for="${input.id}"]`)[1].textContent
-            song.href = document.querySelectorAll(`label[for="${input.id}"]`)[1].getAttribute('href')
+            song.href = document.querySelectorAll(`label[for="${input.id}"]`)[1].children[0].getAttribute('href')
             result.push(song)
         }
     })
