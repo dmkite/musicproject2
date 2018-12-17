@@ -3,7 +3,7 @@ const searchModel = require('../search/model')
 const queueView = require('../queue/view')
 const queueModel = require('../queue/model')
 const view = require('./view')
-const {msToMins} = require('../search/controller')
+// const {msToMins} = require('../search/controller')
 
 function init(album){
     if(!album) return
@@ -29,6 +29,18 @@ function openRatingForm(e, albumId){
         document.querySelector('#current').innerHTML += view.ratingForm(trackForm)
         document.querySelector('#ratingForm').onsubmit = function(e){archive(e, albumId)}
     })
+}
+
+function msToMins(num){
+    let secs = Math.floor((num / 1000) % 60)
+    if(secs < 10){
+        secs = '0' + secs.toString()
+    }
+    if(secs > 10 && secs.toString().length === 1){
+        secs = secs.toString() + '0'
+    }
+    const mins = Math.floor((num / 1000) / 60)
+    return `${mins}:${secs}`
 }
 
 function archive(e, albumId){
@@ -71,7 +83,7 @@ function shiftQueue(albumId){
     })
     .then(result => {
         result.data[0].is_current = true
-        // window.location.reload()
+        window.location.reload()
     }
         )
 

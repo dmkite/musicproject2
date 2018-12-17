@@ -47,7 +47,7 @@ function addToDbQueue(albumId) {
 }
 
 function addToCurrent(album){
-    document.querySelector('#current .emptyState').remove()
+    if (document.querySelector('#current .emptyState')) document.querySelector('#current .emptyState').remove()
     document.querySelector('#current').innerHTML += view.albumTemplate(album)
 }
 
