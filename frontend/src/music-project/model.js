@@ -9,7 +9,7 @@ function getToken(body){
     })
     .then(result => result)
     .catch(err => {
-        console.log(err)
+        console.error(err)
         console.log(err.response.data)
     })
 }
@@ -23,7 +23,7 @@ function getUserInfo(accessToken) {
     })
     .then(result => result)
     .catch(err => {
-        console.log(err)
+        console.error(err)
     })
 }
 
