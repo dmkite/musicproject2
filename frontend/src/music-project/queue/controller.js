@@ -10,7 +10,8 @@ function init() {
         // if (result.data[0] && !result.data[0].is_current) upNext.innerHTML += view.albumTemplate(result.data[0])
         //if(result.data[0] && !result.data[0].is_current) result.data[0].is_current = true
         // else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
-        if(result.data[0]) return displayQueue(result.data)
+        console.log(result.data,'_________________')
+        if(result.data.length > 0) return displayQueue(result.data)
     })
     .catch(err => {
         console.error(err)
@@ -18,7 +19,10 @@ function init() {
 }
 
 function displayQueue(albums){
-    currentCtrl.init(albums[0])
+    for(let album of albums){
+        if (album.is_current) currentCtrl.init(albums[0])
+    }
+    
     if(albums[1]) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
     else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
 }
