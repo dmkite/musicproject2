@@ -2,6 +2,7 @@ const model = require('./model')
 const searchCtrl = require('./search/controller')
 const queueCtrl = require('./queue/controller')
 const currentCtrl = require('./current/controller')
+const hitsCtrl = require('./hits/controller')
 
 
 function init() {
@@ -77,7 +78,7 @@ function prepDashboard(){
     currentCtrl.init()
     document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
     queueCtrl.init()
-
+    hitsCtrl.init()
 }
 module.exports = {init, getUserInfo}
 

@@ -50,6 +50,7 @@ function archive(e, albumId){
             name: document.querySelector('#current h3').textContent,
             rating: document.querySelector('#rating').value,
             spotify_album_id: document.querySelector('#current .queuedAlbum').getAttribute('data-id'),
+            img: document.querySelector('#current img').getAttribute('src')
         },
         songs: gatherSongs()
     }
@@ -67,6 +68,7 @@ function gatherSongs(){
             let song = {}
             song.spotify_song_id = input.id 
             song.name = document.querySelectorAll(`label[for="${input.id}"]`)[1].textContent
+            song.href = document.querySelectorAll(`label[for="${input.id}"]`)[1].getAttribute('href')
             result.push(song)
         }
     })
