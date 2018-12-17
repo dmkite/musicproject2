@@ -157,3 +157,26 @@ td:nth-of-type(2){
     outline:1px solid red;
     text-align:center;
 }
+
+h2 a {
+    font-size:12px;
+    font-weight:normal;
+    float:right;
+}
+
+.songHolder{
+    max-height:200px;
+    overflow-y: scroll;
+}
+
+.hits{
+    display:flex;
+    outline:1px dotted red;
+    margin-bottom:10px;
+}
+
+.hits img{
+    height:50px; 
+    width:50px;
+    margin-right:10px;
+}

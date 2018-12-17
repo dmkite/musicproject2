@@ -76,6 +76,7 @@ function msToMins(num){
 
 function addButtonListeners(){
     document.querySelector('.albumSelect button').onclick = function(e){addToQueue(e)}
+    document.querySelector('.albumSelect .close').onclick = close
 }
 
 function addToQueue(e){
@@ -85,10 +86,13 @@ function addToQueue(e){
     if(document.querySelector('#upNext .emptyState')){
         document.querySelector('#upNext .emptyState').remove()
         document.querySelector('.autocomplete').innerHTML = ''
-        // if(!document.querySelector('#current .emptyState')) 
         document.querySelector('#upNext').innerHTML += album
     }
     return queue.addToDbQueue(albumId)
+}
+
+function close(){
+    document.querySelector('.albumSelect').remove()
 }
 
 module.exports = {init, createQuery, msToMins}

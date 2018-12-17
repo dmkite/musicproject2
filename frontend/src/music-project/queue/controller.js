@@ -1,18 +1,39 @@
 const model = require('./model')
 const view = require('./view')
+const currentCtrl = require('../current/controller')
 
 function init() {
     const userId = localStorage.getItem('userId')
     return model.all(`/users/${userId}/queues`)
     .then(result => {
-        const upNext = document.querySelector('#upNext')
-        if (result.data[0] && !result.data[0].is_current) upNext.innerHTML += view.albumTemplate(result.data[0])
-        else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
+        // const upNext = document.querySelector('#upNext')
+        // if (result.data[0] && !result.data[0].is_current) upNext.innerHTML += view.albumTemplate(result.data[0])
+        //if(result.data[0] && !result.data[0].is_current) result.data[0].is_current = true
+        // else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
+        if(result.data.length > 0) return displayQueue(result.data)
     })
     .catch(err => {
         console.error(err)
     })
 }
+
+function displayQueue(albums){
+    let currentFound = false
+    for(let album of albums){
+        if (album.is_current) {
+            currentCtrl.init(album)
+            currentFound = true
+        }
+    }
+    if(!currentFound){
+        albums[0].is_current = true
+        return displayQueue(albums)
+    }
+    if(!albums[0].is_current) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[0])
+    else if (albums[1]) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
+    else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
+}
+
 
 function addToDbQueue(albumId) {
     const album = document.querySelector(`div[data-id="${albumId}"]`)
@@ -32,13 +53,12 @@ function addToDbQueue(albumId) {
         let div = document.createElement('div')
         div.innerHTML = `<p class="alert">${result.data[0].album} added to queue</p>`
         document.querySelector('body').appendChild(div)
-        // document.querySelector('body').innerHTML += `<div class="alert">${result.data.album} added to queue</div>`
     })
     .catch(err => console.error(err))
 }
 
 function addToCurrent(album){
-    document.querySelector('#current .emptyState').remove()
+    if (document.querySelector('#current .emptyState')) document.querySelector('#current .emptyState').remove()
     document.querySelector('#current').innerHTML += view.albumTemplate(album)
 }
 

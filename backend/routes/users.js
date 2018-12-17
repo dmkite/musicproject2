@@ -8,5 +8,7 @@ router.use('/:userId/queue', require('./queue'))
 
 router.use('/:userId/albums', require('./albums'))
 
+router.use('/:userId/songs', require('./songs'))
+
 module.exports = router
 

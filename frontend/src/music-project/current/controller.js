@@ -3,18 +3,19 @@ const searchModel = require('../search/model')
 const queueView = require('../queue/view')
 const queueModel = require('../queue/model')
 const view = require('./view')
-const {msToMins} = require('../search/controller')
+// const {msToMins} = require('../search/controller')
 
-function init(){
-    return model.all()
-    .then(result => {
-        console.log(result, ' from init')
-        if(!result.data) return
-        document.querySelector('#current').innerHTML += queueView.albumTemplate(result.data)
-        document.querySelector('#current').innerHTML += view.actionBlock(result.data)
-        document.querySelector('#current .emptyState').remove()
-        document.querySelector('.archive').onclick = function(e){openRatingForm(e, result.data.id)}
-    })
+function init(album){
+    if(!album) return
+    document.querySelector('#current').innerHTML += queueView.albumTemplate(album)
+    document.querySelector('#current').innerHTML += view.actionBlock(album)
+    document.querySelector('#current .emptyState').remove()
+    document.querySelector('.archive').onclick = function(e){openRatingForm(e, album.id)}
+    
+    // const current = document.querySelector('#current')
+    // if (current.children.length > 1) current.innerHTML += view.actionBlock()
+
+    //issue: the above code relies on a model.all call to get the 'you have been listening to x album since y time'
 }
 
 function openRatingForm(e, albumId){
@@ -30,6 +31,18 @@ function openRatingForm(e, albumId){
     })
 }
 
+function msToMins(num){
+    let secs = Math.floor((num / 1000) % 60)
+    if(secs < 10){
+        secs = '0' + secs.toString()
+    }
+    if(secs > 10 && secs.toString().length === 1){
+        secs = secs.toString() + '0'
+    }
+    const mins = Math.floor((num / 1000) / 60)
+    return `${mins}:${secs}`
+}
+
 function archive(e, albumId){
     e.preventDefault()
     const data = {
@@ -37,12 +50,12 @@ function archive(e, albumId){
             name: document.querySelector('#current h3').textContent,
             rating: document.querySelector('#rating').value,
             spotify_album_id: document.querySelector('#current .queuedAlbum').getAttribute('data-id'),
+            img: document.querySelector('#current img').getAttribute('src')
         },
         songs: gatherSongs()
     }
     return model.add(data)
     .then(result => {
-        console.log(result, 'RIGHT BEFORE SHIFT QUEUE IS CALLED')
         shiftQueue(albumId)
     })
 }
@@ -55,6 +68,7 @@ function gatherSongs(){
             let song = {}
             song.spotify_song_id = input.id 
             song.name = document.querySelectorAll(`label[for="${input.id}"]`)[1].textContent
+            song.href = document.querySelectorAll(`label[for="${input.id}"]`)[1].children[0].getAttribute('href')
             result.push(song)
         }
     })
@@ -67,7 +81,14 @@ function shiftQueue(albumId){
     return queueModel.delete(albumId)
     .then(result => {
         document.querySelector('#current').innerHTML = '<h2>Currently Listening To</h2>'
+        return queueModel.all()
     })
+    .then(result => {
+        result.data[0].is_current = true
+        window.location.reload()
+    }
+        )
+
     //shift queue needs to:
     //1. delete current album from queue
     //2. get latest album and change is_current to true
