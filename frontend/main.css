@@ -180,3 +180,8 @@ h2 a {
     width:50px;
     margin-right:10px;
 }
+
+textarea{
+    resize:none;
+    width:100%;
+}

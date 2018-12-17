@@ -69,6 +69,7 @@ function useNewToken(newToken){
 }
 
 function personalize(userObj) {
+    localStorage.setItem('spotifyId', userObj.id)
     document.querySelector('.welcome').textContent += `, ${userObj.display_name}!`
     if (userObj.images[0]) document.querySelector('header').innerHTML += `<div id="profPic" style="background-image: url('${userObj.images[0]}';")></div>`
 }
