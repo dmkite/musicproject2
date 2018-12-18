@@ -15,7 +15,6 @@ function init() {
             localStorage.setItem('access_token', result.data.access_token)
             localStorage.setItem('refresh_token', result.data.refresh_token)
             prepDashboard()
-            
             return getUserInfo(result.data.access_token)
         })
         .then(() => {

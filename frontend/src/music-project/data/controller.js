@@ -11,6 +11,7 @@ function calendar(){
         addDates(result.data)
         let data = makeData(result.data)
         document.querySelector('.glance').innerHTML = view.addData(data)
+        
         return data.numberOfAlbums
     })
     .then(total => {
@@ -25,11 +26,43 @@ function calendar(){
     // addDates(weeks)
 }
 
-function addDates(dates){
-    const dateBars = document.querySelector('.dates')
-    // for(let i = 0; i < num; i++){
-    //     dateBars.innerHTML += view.emptyWeek()
-    // }
+function addDates(albums){
+    const dateHolder = document.querySelector('.dates')
+    const albumWithWeek = albums.map(album => {
+        album.week = timestampToWeek(album.created_at)
+        return album
+
+    })
+
+    for(let i = 1; i <= 52; i++){
+        const added = false
+        for(let album of albumWithWeek){
+            if(album.week === i){
+                dateHolder.innerHTML += view.activeWeek(album)
+                added = true
+                continue
+            }
+            if(!added) dateHolder.innerHTML += view.emptyWeek()
+        }
+    }
+    
+
+    // timestamps -> way to distribute into weeks. probably will have to make a new function
+}
+
+function timestampToWeek(str) {
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    const date = str.split(' ')[0]
+    const units = date.split('-')
+    month = Number(units[1]) - 2
+    if (month < 0) return Math.ceil(Number(units[2]) / 7)
+    else {
+        result = Number(units[2])
+        for (let i = 0; i < month; i++) {
+            result += daysInMonth[i]
+        }
+        return Math.floor(result / 7)
+    }
 }
 
 function makeData(arr){

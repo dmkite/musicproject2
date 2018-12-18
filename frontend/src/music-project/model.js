@@ -15,6 +15,7 @@ function getToken(body){
 }
 
 function getUserInfo(accessToken) {
+    console.log('====================', accessToken)
     return axios('https://api.spotify.com/v1/me', {
         method: 'get',
         headers: {

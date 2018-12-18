@@ -23,4 +23,4 @@ function addData(dataObj){
     </div>`
 }
 
-module.exports = {emptyWeek, addData}
+module.exports = {emptyWeek, activeWeek, addData}
