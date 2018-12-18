@@ -26,6 +26,12 @@ class AlbumsModel extends Model{
         })
         .returning('*')
     }
+
+    all(userId){
+        return knex('users_albums')
+        .innerJoin('albums', 'albums.id', 'users_albums.album_id')
+        .where('user_id', userId)
+    }
 }
 
 const model = new AlbumsModel('albums')

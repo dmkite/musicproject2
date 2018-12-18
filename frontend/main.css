@@ -185,3 +185,65 @@ textarea{
     resize:none;
     width:100%;
 }
+
+/*==========Data=========*/
+
+.calendar{
+    margin-bottom:50px;
+    height:100px;
+    position:relative;
+}
+
+.ratingAxis{
+    transform:rotate(-90deg);
+    
+    position:absolute;
+    height:15px;
+    top:42px;
+    left:-43px;
+    width: 100px;
+    border-bottom:1px solid black;
+    text-align:center;
+    line-height:15px;
+}
+
+.weeks{
+    position:absolute;
+    width:calc(100% - 15px);
+    height:15px;
+    bottom:-15px;
+    left:15px;
+    border-top:1px solid black;
+    z-index:99;
+    text-align:center;
+    line-height:15px;
+}
+
+.dates{
+    height:100px;
+    min-width:200px;
+    width: calc(100% - 15px);
+    position:absolute;
+    left:15px;
+    display:flex;
+    align-items:flex-end;
+}
+
+.details{
+    display:none;
+}
+
+.dataWeek{
+    width:1.9%;
+}
+
+.empty{
+    height:10px;
+    background-color:#aab;
+    border:1px solid white;
+    box-sizing:border-box;
+}
+
+.breakdown div{
+    white-space: pre;
+}
