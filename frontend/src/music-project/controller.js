@@ -4,6 +4,7 @@ const queueCtrl = require('./queue/controller')
 const currentCtrl = require('./current/controller')
 const hitsCtrl = require('./hits/controller')
 const dataCtrl = require('./data/controller')
+const loginSignup = require('../login-signup/controller')
 
 
 function init() {
@@ -33,6 +34,7 @@ function init() {
         .then(result => {
             localStorage.setItem('userId', result.data.id)
         })
+        .catch( () => loginSignup.signout())
     }
 }
 

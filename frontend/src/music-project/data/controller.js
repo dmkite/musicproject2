@@ -8,6 +8,7 @@ function init(){
 function calendar(){
     return model.all()
     .then(result => {
+        addDates(result.data)
         let data = makeData(result.data)
         document.querySelector('.glance').innerHTML = view.addData(data)
         return data.numberOfAlbums
@@ -24,11 +25,11 @@ function calendar(){
     // addDates(weeks)
 }
 
-function addDates(num){
-    const dates = document.querySelector('.dates')
-    for(let i = 0; i < num; i++){
-        dates.innerHTML += view.emptyWeek()
-    }
+function addDates(dates){
+    const dateBars = document.querySelector('.dates')
+    // for(let i = 0; i < num; i++){
+    //     dateBars.innerHTML += view.emptyWeek()
+    // }
 }
 
 function makeData(arr){
@@ -74,7 +75,7 @@ function editData(total){
         if(num === 0){
             color = '#333'
         }
-        else if (num < .5){
+        else if (num < 50){
             color = '#d09034'
         }
         else color = '#30d040'
