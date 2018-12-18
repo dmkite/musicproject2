@@ -6,39 +6,54 @@ const hitsCtrl = require('./hits/controller')
 const dataCtrl = require('./data/controller')
 const loginSignup = require('../login-signup/controller')
 
+/*
+access_token=BQAirB6jOzP6OuNr9JbFhsQLZrgk7z6H_4IjEiqKXLOjU9R3o9yQqcJbCIwx_WSm2sHQoE6BJRSo9qroH1atADY7FhIs9m3iCOMYbHUTwVphs0UrjEWVz6qHkacqJQNEznwPWyj_tC44Sy_VZOOGYb-xd8byI4J95GhFzbN6zggshYI2a0OYIklnhnCM
+&token_type=Bearer
+&expires_in=3600
+&state=9e85mdGsBSXFJhHd
+*/
 
 function init() {
-    if(!localStorage.getItem('access_token')){
-        const body = createBodyFromCode()    
-        return model.getToken(body)
-        .then(result => {
-            localStorage.setItem('access_token', result.data.access_token)
-            localStorage.setItem('refresh_token', result.data.refresh_token)
-            prepDashboard()
-            return getUserInfo(result.data.access_token)
-        })
-        .then(() => {
-            const token = `Bearer: ${localStorage.getItem('token')}`
-            return model.authenticate(token)
-        })
-        .then(result => {
-            localStorage.setItem('userId', result.data.id)
-        })
-    }
-    else {
-        getUserInfo()
-        prepDashboard()
-        const token = `Bearer: ${localStorage.getItem('token')}`
-        return model.authenticate(token)
-        .then(result => {
-            localStorage.setItem('userId', result.data.id)
-        })
-        .catch( () => loginSignup.signout())
-    }
+    // if(!localStorage.getItem('access_token')){
+    const body = createBodyFromURL()   
+    localStorage.setItem('access_token', body.access_token)
+    getUserInfo(body.access_token) 
+    prepDashboard()
+    const token = `Bearer: ${localStorage.getItem('token')}`
+    return model.authenticate(token)
+    .then(result => {
+        localStorage.setItem('userId', result.data.id)
+    })
+        // return model.getToken(body)
+        // .then(result => {
+        //     console.log(result)
+        //     // localStorage.setItem('access_token', result.data.access_token)
+        //     // localStorage.setItem('refresh_token', result.data.refresh_token)
+        //     // prepDashboard()
+        //     // return getUserInfo(result.data.access_token)
+        // })
+    //     .then(() => {
+    //         const token = `Bearer: ${localStorage.getItem('token')}`
+    //         return model.authenticate(token)
+    //     })
+    //     .then(result => {
+    //         localStorage.setItem('userId', result.data.id)
+    //     })
+    // }
+    // else {
+    //     getUserInfo()
+    //     prepDashboard()
+    //     const token = `Bearer: ${localStorage.getItem('token')}`
+    //     return model.authenticate(token)
+    //     .then(result => {
+    //         localStorage.setItem('userId', result.data.id)
+    //     })
+    //     .catch( () => loginSignup.signout())
+    // }
 }
 
-function createBodyFromCode(){
-    const [url, queryParam] = document.location.href.split('?')
+function createBodyFromURL(){
+    const [url, queryParam] = document.location.href.split('#')
     const splitQueries = queryParam.split('&')
     const body = {}
     splitQueries.forEach(item => {
@@ -51,14 +66,16 @@ function createBodyFromCode(){
 function getUserInfo(accessToken){
     return model.getUserInfo(accessToken)
     .then(result => {
-        personalize(result)
+        console.log(result)
+        personalize(result.data)
         })
     .catch(err => {
-        const refreshToken = localStorage.getItem('refresh_token')
-        return model.refreshToken(refreshToken)
-        .then(result => {
-            useNewToken(result)
-        })
+        console.log(err)
+        // const refreshToken = localStorage.getItem('refresh_token')
+        // return model.refreshToken(refreshToken)
+        // .then(result => {
+        //     useNewToken(result)
+        // })
     })
 }
 
