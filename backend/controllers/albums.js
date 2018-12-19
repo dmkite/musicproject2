@@ -2,7 +2,6 @@ const model = require('../models/albums')
 const songModel = require('../models/songs')
 
 function add(req, res, next){
-    const userId = req.params.userId
     const rating = req.body.rating
     delete req.body.rating
     return model.add(req.body)
@@ -13,6 +12,7 @@ function add(req, res, next){
     .then(([result]) =>{
         res.status(201).send(result)
     })
+    .catch(next)
 }
 
 function addSong(req, res, next){
@@ -21,14 +21,22 @@ function addSong(req, res, next){
     .then(result =>{
         res.status(201).send(result)
     })
+    .catch(next)
 }
 
 function all(req, res, next){
+    console.log('getting to the album model ===============================')
     const userId = req.params.userId
     return model.all(userId)
     .then(result => {
         res.status(200).send(result)
     })
+    .catch(next)
 }
 
+// function allAlbumsForUser(req, res, next){
+//     const userId = req.params.userId
+//     return model.allAlbumsForUser(userId)
+//     .then(result => console.log(result))
+// }
 module.exports = {add, addSong, all}

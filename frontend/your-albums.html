@@ -8,9 +8,24 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script defer src="bundle.js"></script>
 </head>
-<body>
+<body id="yourAlbums">
+    <section>
+        <form id="filter">
+            <select name="sort" id="sort">
+                <option value="lowToHigh">Rating: Low to high</option>
+                <option value="highToLow">Rating: High to low</option>
+                <option value="lowToHigh" selected>Sort By...</option>
+            </select>
+
+            <label for="oneStar"><input id="oneStar" type="radio" name="rating" value="1">1 star &amp; up</label>
+            <label for="twoStar"><input id="twoStar" type="radio" name="rating" value="2">2 star &amp; up</label>
+            <label for="threeStar"><input id="threeStar" type="radio" name="rating" value="3">3 star &amp; up</label>
+            <label for="fourStar"><input id="fourStar" type="radio" name="rating" value="4">4 star &amp; up</label>
+            <label for="fiveStar"><input id="fiveStar" type="radio" name="rating" value="5">5 star &amp; up</label>
+        </form>
+    </section>
     <main>
-        
+    
     </main>
 </body>
 </html>

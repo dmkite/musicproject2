@@ -11,7 +11,7 @@ class SongModel extends Model{
         .innerJoin('users_albums', 'users_albums.id', 'songs.users_albums_id')
         .innerJoin('albums', 'users_albums.album_id', 'albums.id')
         // .innerJoin('queue')
-        .select('user_id', 'songs.name as song', 'albums.name as album', 'spotify_song_id', 'img', 'href')
+        .select('user_id', 'songs.name as song', 'albums.name as album', 'spotify_song_id', 'img', 'href', 'album_id')
         .then(result => result)
     }
 }
