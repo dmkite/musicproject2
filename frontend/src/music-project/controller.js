@@ -14,6 +14,7 @@ access_token=BQAirB6jOzP6OuNr9JbFhsQLZrgk7z6H_4IjEiqKXLOjU9R3o9yQqcJbCIwx_WSm2sH
 */
 
 function init() {
+    document.querySelector('#signout').addEventListener('click', loginSignup.signout)
     // if(!localStorage.getItem('access_token')){
     const body = createBodyFromURL()   
     localStorage.setItem('access_token', body.access_token)
