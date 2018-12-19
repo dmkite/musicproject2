@@ -31,7 +31,7 @@ function displayQueue(albums){
     }
     if(!albums[0].is_current) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[0])
     else if (albums[1]) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
-    else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
+    else if(!document.querySelector('#upNext .emptyState')) upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
 }
 
 
@@ -49,7 +49,8 @@ function addToDbQueue(albumId) {
    
     return model.add(body)
     .then(result => {
-        if(result.data[0].is_current) return addToCurrent(result.data[0])
+        if(result.data[0].is_current) return addToLocation(result.data[0], '#current')
+        if(document.querySelector('#upNext .emptyState')) return addToLocation(result.data[0], '#upNext')
         let div = document.createElement('div')
         div.innerHTML = `<p class="alert">${result.data[0].album} added to queue</p>`
         document.querySelector('body').appendChild(div)
@@ -57,9 +58,9 @@ function addToDbQueue(albumId) {
     .catch(err => console.error(err))
 }
 
-function addToCurrent(album){
-    if (document.querySelector('#current .emptyState')) document.querySelector('#current .emptyState').remove()
-    document.querySelector('#current').innerHTML += view.albumTemplate(album)
+function addToLocation(album, location){
+    if (document.querySelector(`${location} .emptyState`)) document.querySelector(`${location} .emptyState`).remove()
+    document.querySelector(location).innerHTML += view.albumTemplate(album)
 }
 
 module.exports = {init, addToDbQueue}

@@ -33,7 +33,6 @@ function albumTemplate(album, tracks){
 }
 
 function tracksTable(track){
-    console.log(track)
     return `
         <tr data-id="${track.id}">
             <td>${track.track_number}</td>

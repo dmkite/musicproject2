@@ -7,7 +7,8 @@ function add(req, res, next){
     delete req.body.rating
     return model.add(req.body)
     .then(result => {
-        return model.connectUserToAlbum(req.params.userId, result.id, rating)
+        const albumId = result[0].id
+        return model.connectUserToAlbum(req.params.userId, albumId, rating)
     })
     .then(([result]) =>{
         res.status(201).send(result)

@@ -15,6 +15,16 @@ function isFilled() {
     document.querySelector('form').onsubmit = function (e) { login(e) }
 }
 
+function generateRandomString(length) {
+    let text = ''
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+    for (let i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text
+}
+
 function login(e) {
     e.preventDefault()
     const body = getBody()
@@ -23,12 +33,32 @@ function login(e) {
             localStorage.setItem('token', token.data.token)
             return
         })
-        .then(() => {
-            document.location.href = 'http://localhost:8888'
+        .then(() => {    
+            const client_id = 'f0c75fb80a7a43f2b207e62c4f609915'
+            const redirect_uri = 'http://127.0.0.1:8080/music-project.html'
+
+            const state = generateRandomString(16);
+
+            localStorage.setItem('spotify_auth_state', state);
+            const scope = 'user-read-private user-read-email playlist-modify-public';
+
+            let url = 'https://accounts.spotify.com/authorize';
+            url += '?response_type=token';
+            url += '&client_id=' + encodeURIComponent(client_id);
+            url += '&scope=' + encodeURIComponent(scope);
+            url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+            url += '&state=' + encodeURIComponent(state);
+
+            window.location = url;
+        
         })
         .catch(err => {
-            if (err.response.data) surfaceError(err.response.data.message)
+            if(err.response){
+                if (err.response.data) surfaceError(err.response.data.message)
+            }
+            console.log(err)
         })
+        
 }
 
 function getBody() {

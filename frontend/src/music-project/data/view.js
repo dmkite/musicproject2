@@ -1,13 +1,21 @@
-
 function emptyWeek(){
-    return `<div class="dataWeek empty">
-        <div class="details">You didn't listen to anything this week</div>
+    return `
+    <div class="dataWeek empty">
+        <div class="details noDisplay">
+            No data
+            <div class="triangleLeft"></div>
+        </div>
     </div>`
 }
 
 function activeWeek(album){
-    `<div class="dataWeek rating${album.rating}">
-        <div class="details">You listened to ${album.name}</div>
+    return `
+    <div class="dataWeek rating${album.rating}">
+        <div class="details noDisplay">
+            ${album.name} (${album.rating.split('_').join('.')})
+            <div class="triangleLeft"></div>
+        </div>
+        
     </div>`
 }
 
