@@ -28,33 +28,34 @@ function calendar(){
 
 function addDates(albums){
     const dateHolder = document.querySelector('.dates')
-    const albumWithWeek = albums.map(album => {
+
+    const indexedAlbumsByWeek = albums.reduce((acc, album) => {
         album.week = timestampToWeek(album.created_at)
-        return album
-
-    })
-
+        album.rating = album.rating.toString().split('.').join('_')
+        acc[album.week] = {name: album.name, rating:album.rating}
+        return acc
+    }, {})
     for(let i = 1; i <= 52; i++){
-        const added = false
-        for(let album of albumWithWeek){
-            if(album.week === i){
-                dateHolder.innerHTML += view.activeWeek(album)
-                added = true
-                continue
-            }
-            if(!added) dateHolder.innerHTML += view.emptyWeek()
-        }
+        if (indexedAlbumsByWeek[i]) dateHolder.innerHTML += view.activeWeek(indexedAlbumsByWeek[i])
+        else dateHolder.innerHTML += view.emptyWeek()
+    }
+    const dataWeeks = document.querySelectorAll('.dataWeek')
+    for(let week of dataWeeks){
+        week.addEventListener('mouseover', function (e) { display(e) })
+        week.addEventListener('mouseout', function (e) { display(e) })
     }
     
+}
 
-    // timestamps -> way to distribute into weeks. probably will have to make a new function
+function display(e){
+    e.currentTarget.children[0].classList.toggle('noDisplay')
 }
 
 function timestampToWeek(str) {
     const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    const date = str.split(' ')[0]
+    const date = str.split('T0')[0]
     const units = date.split('-')
-    month = Number(units[1]) - 2
+    const month = Number(units[1]) - 2
     if (month < 0) return Math.ceil(Number(units[2]) / 7)
     else {
         result = Number(units[2])
