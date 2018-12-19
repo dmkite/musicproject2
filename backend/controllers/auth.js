@@ -29,7 +29,7 @@ function authenticate(req, res, next) {
 }
 
 function authStatus(req, res, next) {
-    res.status(200).send({ id: req.claim.sub.id })
+    res.status(200).send({ userInfo: req.claim.sub })
 }
 
 function checkRequest(req, res, next) {
