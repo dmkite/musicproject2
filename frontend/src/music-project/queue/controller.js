@@ -1,18 +1,16 @@
 const model = require('./model')
 const view = require('./view')
 const currentCtrl = require('../current/controller')
+const {signout} = require('../../login-signup/controller')
 
 function init() {
     const userId = localStorage.getItem('userId')
     return model.all(`/users/${userId}/queues`)
     .then(result => {
-        // const upNext = document.querySelector('#upNext')
-        // if (result.data[0] && !result.data[0].is_current) upNext.innerHTML += view.albumTemplate(result.data[0])
-        //if(result.data[0] && !result.data[0].is_current) result.data[0].is_current = true
-        // else upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
         if(result.data.length > 0) return displayQueue(result.data)
     })
     .catch(err => {
+        if (err.response.status == 401) return signout()
         console.error(err)
     })
 }
