@@ -106,4 +106,9 @@ function signup(e) {
         })
 }
 
-module.exports = { init }
+function signout(){
+    localStorage.clear()
+    document.location.href = '/'
+}
+
+module.exports = { init, signout }

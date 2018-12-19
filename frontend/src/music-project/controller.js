@@ -3,6 +3,8 @@ const searchCtrl = require('./search/controller')
 const queueCtrl = require('./queue/controller')
 const currentCtrl = require('./current/controller')
 const hitsCtrl = require('./hits/controller')
+const dataCtrl = require('./data/controller')
+const loginSignup = require('../login-signup/controller')
 
 
 function init() {
@@ -13,7 +15,6 @@ function init() {
             localStorage.setItem('access_token', result.data.access_token)
             localStorage.setItem('refresh_token', result.data.refresh_token)
             prepDashboard()
-            
             return getUserInfo(result.data.access_token)
         })
         .then(() => {
@@ -32,6 +33,7 @@ function init() {
         .then(result => {
             localStorage.setItem('userId', result.data.id)
         })
+        .catch( () => loginSignup.signout())
     }
 }
 
@@ -69,6 +71,7 @@ function useNewToken(newToken){
 }
 
 function personalize(userObj) {
+    localStorage.setItem('spotifyId', userObj.id)
     document.querySelector('.welcome').textContent += `, ${userObj.display_name}!`
     if (userObj.images[0]) document.querySelector('header').innerHTML += `<div id="profPic" style="background-image: url('${userObj.images[0]}';")></div>`
 }
@@ -79,6 +82,7 @@ function prepDashboard(){
     document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
     queueCtrl.init()
     hitsCtrl.init()
+    dataCtrl.init()
 }
 module.exports = {init, getUserInfo}
 

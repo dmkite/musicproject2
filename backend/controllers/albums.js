@@ -15,13 +15,19 @@ function add(req, res, next){
 }
 
 function addSong(req, res, next){
-    console.log('hitting add song with ', req.body)
     const song = req.body
     return songModel.add(song)
     .then(result =>{
-        console.log('result after songModel', result)
         res.status(201).send(result)
     })
 }
 
-module.exports = {add, addSong}
+function all(req, res, next){
+    const userId = req.params.userId
+    return model.all(userId)
+    .then(result => {
+        res.status(200).send(result)
+    })
+}
+
+module.exports = {add, addSong, all}
