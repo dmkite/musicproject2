@@ -1,8 +1,6 @@
 const Model = require('./_Model')
 const knex = require('../db/knex')
 
-
-
 class AlbumsModel extends Model{
     constructor(table){
         super(table)
@@ -32,6 +30,7 @@ class AlbumsModel extends Model{
         .innerJoin('albums', 'albums.id', 'users_albums.album_id')
         .where('user_id', userId)
     }
+
 }
 
 const model = new AlbumsModel('albums')
