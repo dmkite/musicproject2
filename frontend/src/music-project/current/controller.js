@@ -88,12 +88,5 @@ function shiftQueue(albumId){
         window.location.reload()
     }
         )
-
-    //shift queue needs to:
-    //1. delete current album from queue
-    //2. get latest album and change is_current to true
-    //3. display current album
-    //4. display next up
-
 }
 module.exports = {init}
