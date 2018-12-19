@@ -1,8 +1,16 @@
 const model = require('./model')
 
 function init() {
+    if(localStorage.getItem('newSignup')) welcome()
     if (window.location.pathname === '/index.html' || window.location.pathname === '/') document.addEventListener('keyup', isFilled)
     else document.addEventListener('keyup', activateBtn)
+}
+
+function welcome(){
+    localStorage.removeItem('newSignup')
+    let div = document.createElement('div')
+    div.innerHTML = '<div class="alert">Thanks for making an account with The Music Project. Please log in.</div>'
+    document.querySelector('body').appendChild(div)
 }
 
 function isFilled() {
@@ -125,6 +133,7 @@ function signup(e) {
     const body = getBody()
     return model.signup(body)
         .then(() => {
+            localStorage.setItem('newSignup', true)
             document.location.href = '/index.html'
         })
         .catch(err => {
