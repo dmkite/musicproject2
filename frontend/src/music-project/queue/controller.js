@@ -53,7 +53,10 @@ function addToDbQueue(albumId) {
         div.innerHTML = `<p class="alert">${result.data[0].album} added to queue</p>`
         document.querySelector('body').appendChild(div)
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+        console.error(err)
+        if(err.response.status == 401) return signout()
+    })
 }
 
 function addToLocation(album, location){
