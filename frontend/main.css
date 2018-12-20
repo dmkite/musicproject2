@@ -409,8 +409,57 @@ textarea{
     box-sizing:border-box;
 }
 
-.breakdown div{
+.breakDown{
     white-space: pre;
+    display:flex;
+    margin-bottom:20px;
+}
+.breakDown div{
+    height:10px;
+}
+
+.breakDown .oneStar{
+    background-color: #70D6BC;
+}
+
+.breakDown .twoStar{
+    background-color:#38C7BD
+}
+
+.breakDown .threeStar{
+    background-color: #0E7FA6
+}
+
+.breakDown .fourStar{
+    background-color:#11487D
+}
+
+.breakDown .fiveStar{
+    background-color:#001747
+}
+
+.key{
+    display:flex;
+    justify-content: space-between
+}
+.key .oneStar{
+    border-top: 2px solid  #70D6BC;
+}
+
+.key .twoStar{
+    border-top: 2px solid #38C7BD
+}
+
+.key .threeStar{
+    border-top: 2px solid  #0E7FA6
+}
+
+.key .fourStar{
+    border-top: 2px solid #11487D
+}
+
+.key .fiveStar{
+    border-top: 2px solid #001747
 }
 
 .noDisplay{
@@ -442,6 +491,10 @@ textarea{
     position:absolute;
     left:-10px;
     top:0;
+}
+
+.oneStar{
+
 }
 
 /******************************************************************************
