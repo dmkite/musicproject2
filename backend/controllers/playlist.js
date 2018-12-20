@@ -5,8 +5,7 @@ function playlist(req, res, next){
     delete req.body.user_id
     return model.playlist(req.body, user_id)
     .then(result => {
-        // console.log(result)
-        // console.log(result.response.data.error)
+        
     })
     .catch(next)
 }

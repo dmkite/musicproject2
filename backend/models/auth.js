@@ -2,7 +2,7 @@ const knex = require('../db/knex')
 const bcrypt = require('bcrypt')
 const axios = require('axios')
 const clientId = 'f0c75fb80a7a43f2b207e62c4f609915'
-const clientSecret = '8ec87c8d02d64c0abb395e69c652db54'
+const clientSecret = require('../clientSecret')
 const base64  = require('js-base64').Base64
 
 function login(username, password) {

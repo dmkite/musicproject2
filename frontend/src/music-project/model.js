@@ -1,5 +1,6 @@
 const axios = require('axios')
 const baseURL = 'http://localhost:3000'
+const {signout} = require('../login-signup/controller')
 
 function getToken(body){
     return axios.post(`${baseURL}/auth/spotify`, {
@@ -10,7 +11,6 @@ function getToken(body){
     .then(result => result)
     .catch(err => {
         console.error(err)
-        console.log(err.response.data)
     })
 }
 

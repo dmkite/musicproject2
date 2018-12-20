@@ -39,7 +39,6 @@ function autocomplete(albums){
         return acc
     }, [])
     autocompleteHolder.innerHTML = autocompleteHTML.join('')
-    // if(document.querySelector('#musicSearch input').value === '') document.querySelector('.autocomplete').innerHTML = ''
     prepAlbumEntries()
 }
 
@@ -82,13 +81,7 @@ function addButtonListeners(){
 
 function addToQueue(e){
     const albumId = e.currentTarget.parentElement.getAttribute('data-id')
-    const album = document.querySelector('.autocomplete').innerHTML
     document.querySelector('#musicSearch input').value = ''
-    // if(document.querySelector('#upNext .emptyState')){
-    //     document.querySelector('#upNext .emptyState').remove()
-    //     document.querySelector('.autocomplete').innerHTML = ''
-    //     document.querySelector('#upNext').innerHTML += album
-    // }
     return queue.addToDbQueue(albumId)
 }
 
