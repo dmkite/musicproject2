@@ -126,15 +126,7 @@ function editData(total){
         let color
 
         if(num === 0) width = '5%'
-        else width = (num/total * 100).toString() + '%'
-        
-        if(num === 0){
-            color = '#333'
-        }
-        else if (num < 50){
-            color = '#d09034'
-        }
-        else color = '#30d040'
+        else width = (num/total * 80 + 5).toString() + '%'
 
         bar.setAttribute('style', `width:${width}; background-color:${color}; white-space:nowrap;`)
 
