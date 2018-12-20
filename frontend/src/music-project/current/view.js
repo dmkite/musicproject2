@@ -1,8 +1,9 @@
-function actionBlock(album){
+function actionBlock(album, time){
     return `
         <div class="actionBlock">
-            <p>You started listening to <i>${album.album}</i> on ${new Date(album.created_at)}</p>
-            <button class="archive" type="button">Archive</button>
+            <p>You listened to <i>${album.album}</i> for ${time} ${ time === 1 ? 'day' : 'days'}</p>
+            <button class="archive" type="button">${time >= 7 ? 'Archive' : 'Archive Early'}</button>
+            <button class="delete" type="button">Delete from queue</button>
         </div>
     `
 }
@@ -55,4 +56,11 @@ function ratingForm(trackForm){
     </form>`
 }
 
-module.exports = {actionBlock, trackFormField, ratingForm}
+function deleteTemplate(){
+    return `
+    <p>Are you sure you want to delete this album?</p>
+    <button class="cancel">cancel</button>
+    <button class="confirm">delete</button>`
+
+}
+module.exports = {actionBlock, trackFormField, ratingForm, deleteTemplate}

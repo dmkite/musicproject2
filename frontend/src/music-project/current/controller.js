@@ -7,15 +7,38 @@ const view = require('./view')
 
 function init(album){
     if(!album) return
+    const daysListenedTo = Math.ceil((new Date().getTime() - new Date(album.created_at).getTime() ) / 1000 / 60 / 60 / 24)
+    console.log(daysListenedTo)
     document.querySelector('#current').innerHTML += queueView.albumTemplate(album)
-    document.querySelector('#current').innerHTML += view.actionBlock(album)
+    document.querySelector('#current').innerHTML += view.actionBlock(album, daysListenedTo)
     document.querySelector('#current .emptyState').remove()
     document.querySelector('.archive').onclick = function(e){openRatingForm(e, album.id)}
-    
+    document.querySelector('#current .delete').onclick = function(e){confirmDelete(e, album.id)}
     // const current = document.querySelector('#current')
     // if (current.children.length > 1) current.innerHTML += view.actionBlock()
 
     //issue: the above code relies on a model.all call to get the 'you have been listening to x album since y time'
+}
+
+function confirmDelete(e, albumId){
+    let div = document.createElement('div')
+    div.innerHTML = view.deleteTemplate()
+    document.querySelector('#current').appendChild(div)
+    addDeleteListeners(albumId)
+}
+
+function addDeleteListeners(albumId){
+    const cancel = document.querySelector('#current .cancel')
+    const confirm = document.querySelector('#current .confirm')
+    cancel.addEventListener('click', function(){cancel.parentElement.remove()})
+    confirm.addEventListener('click', function(){
+        return queueModel.delete(albumId)
+        .then( () => {
+            confirm.parentElement.remove()
+            location.reload()
+        })
+        .catch(err => console.error(err))
+    })
 }
 
 function openRatingForm(e, albumId){
