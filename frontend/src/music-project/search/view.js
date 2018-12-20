@@ -38,7 +38,7 @@ function tracksTable(track){
             <td>${track.track_number}</td>
             <td>${track.name}</td>
             <td>${track.duration_ms}</td>
-        </tr>
-    `
+        </tr>`
 } 
+
 module.exports = {autocompleteTemplate, albumTemplate, tracksTable}

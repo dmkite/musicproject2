@@ -25,7 +25,6 @@ function addSong(req, res, next){
 }
 
 function all(req, res, next){
-    console.log('getting to the album model ===============================')
     const userId = req.params.userId
     return model.all(userId)
     .then(result => {
@@ -34,9 +33,4 @@ function all(req, res, next){
     .catch(next)
 }
 
-// function allAlbumsForUser(req, res, next){
-//     const userId = req.params.userId
-//     return model.allAlbumsForUser(userId)
-//     .then(result => console.log(result))
-// }
 module.exports = {add, addSong, all}

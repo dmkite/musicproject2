@@ -64,7 +64,7 @@ function login(e) {
             if(err.response){
                 if (err.response.data) surfaceError(err.response.data.message)
             }
-            console.log(err)
+            console.error(err)
         })
         
 }
@@ -86,10 +86,6 @@ function surfaceError(err) {
 
     warning.classList.remove('hidden')
 }
-
-///////////////////////////////////////////////////////////////////////////////
-//  Signup
-///////////////////////////////////////////////////////////////////////////////
 
 function activateBtn() {
     const submitBtn = document.querySelector('#submit')

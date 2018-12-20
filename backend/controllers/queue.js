@@ -7,7 +7,6 @@ function add(req, res, next){
         res.status(201).send(result)
     })
     .catch(err =>{
-        console.log(err)
         res.status(400).send(err)
     })
 }
@@ -33,7 +32,6 @@ function del(req, res, next){
     const albumId = req.params.albumId
     return model.del(albumId)
     .then(result =>{
-        console.log(result)
         res.status(200).send(result)
     })
     .catch(next)

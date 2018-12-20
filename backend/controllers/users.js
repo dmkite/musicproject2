@@ -22,11 +22,6 @@ function signup(req, res, next) {
         .catch(next)
 }
 
-function getUser(req, res, next){
-    return model.getUser(id)
-    .then(result => console.log(result))
-}
-
 function charIsMissing(password){
     if(password.length < 8) return 'Your password must be 8 characters or longer'
     

@@ -34,7 +34,7 @@ class CurrentModel extends Model{
             
 
         })
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
     }
 
 }

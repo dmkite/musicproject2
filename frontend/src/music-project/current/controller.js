@@ -72,7 +72,6 @@ function gatherSongs(){
             result.push(song)
         }
     })
-//result works
     return result
 
 }

@@ -62,6 +62,4 @@ function filter(e){
     render(result)
 }
 
-
-
 module.exports = {init}

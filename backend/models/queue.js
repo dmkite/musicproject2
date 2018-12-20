@@ -10,7 +10,6 @@ class QueueModel extends Model{
         return knex(this.table)
         .where({
             user_id: userId,
-            // is_current: false
         })
         .orderBy('created_at', 'asc')
     }
