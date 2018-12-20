@@ -11,7 +11,7 @@ function calendar(){
         addDates(result.data)
         let data = makeData(result.data)
         document.querySelector('.glance').innerHTML = view.addData(data)
-        
+
         return data.numberOfAlbums
     })
     .then(total => {
@@ -20,31 +20,46 @@ function calendar(){
     .catch(err => {
         console.error(err)
     })
-    // const date = new Date()
-    // let weeks = date.getMonth() * 4
-    // weeks += Math.floor(date.getDate() / 7)
-    // addDates(weeks)
 }
 
 function addDates(albums){
-    const dateHolder = document.querySelector('.dates')
-
     const indexedAlbumsByWeek = albums.reduce((acc, album) => {
-        album.week = timestampToWeek(album.created_at)
-        album.rating = album.rating.toString().split('.').join('_')
-        acc[album.week] = {name: album.name, rating:album.rating}
+        const {week, year} = timestampToWeek(album.created_at)
+        album.week = week
+        album.year = year
+        if (!acc[album.year]) acc[album.year] = {}
+        acc[album.year][album.week] = { name: album.name, rating: album.rating }
         return acc
     }, {})
+    let year = addRadioReturnYear(Object.keys(indexedAlbumsByWeek))
+
+    let dataWeeksHTML = []
     for(let i = 1; i <= 52; i++){
-        if (indexedAlbumsByWeek[i]) dateHolder.innerHTML += view.activeWeek(indexedAlbumsByWeek[i])
-        else dateHolder.innerHTML += view.emptyWeek()
+        if (indexedAlbumsByWeek[year][i]) dataWeeksHTML.push(view.activeWeek(indexedAlbumsByWeek[year][i]))
+        else dataWeeksHTML.push(view.emptyWeek())
     }
+    const dateHolder = document.querySelector('.dates')
+    dateHolder.innerHTML = dataWeeksHTML.join('')
+
     const dataWeeks = document.querySelectorAll('.dataWeek')
     for(let week of dataWeeks){
         week.addEventListener('mouseover', function (e) { display(e) })
         week.addEventListener('mouseout', function (e) { display(e) })
     }
-    
+}
+
+function addRadioReturnYear(arr){
+    const options = arr.map(year => `<label for="year"> <input type="radio" name="year" value="${year}">${year}</label>`)
+    document.querySelector('#dataVis').innerHTML += view.yearSelect(options)
+    const radios = document.querySelectorAll('#dataVis input[type="radio"]')
+    document.querySelector('#dataVis input[type="radio"]').checked = true
+    let year
+    for (let radio of radios) {
+        if (radio.checked) {
+            year = radio.value
+        }
+    }
+    return year
 }
 
 function display(e){
@@ -52,18 +67,20 @@ function display(e){
 }
 
 function timestampToWeek(str) {
-    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     const date = str.split('T0')[0]
     const units = date.split('-')
-    const month = Number(units[1]) - 2
-    if (month < 0) return Math.ceil(Number(units[2]) / 7)
-    else {
-        result = Number(units[2])
-        for (let i = 0; i < month; i++) {
-            result += daysInMonth[i]
-        }
-        return Math.floor(result / 7)
+    const year = units[0]
+    const month = Number(units[1])
+    result = Number(units[2])
+    for (let i = 0; i < month; i++) {
+        result += daysInMonth[i]
     }
+    return {
+        week: Math.floor(result / 7) + 1,
+        year
+    }
+
 }
 
 function makeData(arr){
@@ -76,6 +93,8 @@ function makeData(arr){
         fiveStar: 0,
     }
     arr.map(album => {
+        album.rating = album.rating.toString()
+        album.rating = Number(album.rating.split('_').join('.'))
         switch (Math.floor(album.rating)){
             case 1: 
                 result.oneStar++
@@ -89,8 +108,11 @@ function makeData(arr){
             case 4: 
                 result.fourStar++
                 break
-            default:
+            case 5:
                 result.fiveStar++
+                break
+            default:
+                console.log(album)
         }
     })
     return result

@@ -1,3 +1,10 @@
+function yearSelect(arr){
+    return `
+        <div id="selectYear">
+            ${arr.join('')}
+        </div>`
+}
+
 function emptyWeek(){
     return `
     <div class="dataWeek empty">
@@ -9,10 +16,11 @@ function emptyWeek(){
 }
 
 function activeWeek(album){
+    album.rating = album.rating.toString()
     return `
-    <div class="dataWeek rating${album.rating}">
+    <div class="dataWeek rating${album.rating.split('.').join('_')}">
         <div class="details noDisplay">
-            ${album.name} (${album.rating.split('_').join('.')})
+            ${album.name} (${album.rating})
             <div class="triangleLeft"></div>
         </div>
         
@@ -31,4 +39,4 @@ function addData(dataObj){
     </div>`
 }
 
-module.exports = {emptyWeek, activeWeek, addData}
+module.exports = {yearSelect, emptyWeek, activeWeek, addData}
