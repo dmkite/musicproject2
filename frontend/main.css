@@ -180,6 +180,22 @@ section{
     border-radius:50%;
 }
 
+.emptyState img{
+    width:100%;
+    max-width:512px;
+    margin:0 auto;
+    opacity:0.2;
+    margin-bottom: 20px;
+}
+
+.emptyState{
+    position:relative;
+}
+.emptyState p{
+    font: 300 18px/26px 'Dosis', sans;
+    position:absolute;
+    top:50px;
+}
 /******************************************************************************
 **  Autocomplete
 ******************************************************************************/
@@ -491,10 +507,6 @@ textarea{
     position:absolute;
     left:-10px;
     top:0;
-}
-
-.oneStar{
-
 }
 
 /******************************************************************************
