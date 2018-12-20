@@ -24,6 +24,7 @@ function ratingForm(trackForm){
     <form id="ratingForm">
         <label for="rating">Rating</label>
         <input id="rating" type="range" max="5" min="1" step="0.5" required list="tickmarks">
+        <p class="ratingLabel"><span>1</span><span>5</span></p>
         <datalist id="tickmarks">
             <option value="1" label="1">
             <option value="1.5">

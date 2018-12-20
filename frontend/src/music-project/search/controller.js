@@ -39,6 +39,7 @@ function autocomplete(albums){
         return acc
     }, [])
     autocompleteHolder.innerHTML = autocompleteHTML.join('')
+    // if(document.querySelector('#musicSearch input').value === '') document.querySelector('.autocomplete').innerHTML = ''
     prepAlbumEntries()
 }
 

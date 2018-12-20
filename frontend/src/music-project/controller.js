@@ -72,7 +72,7 @@ function getUserInfo(accessToken){
         personalize(result.data)
         })
     .catch(err => {
-        console.log(err)
+        loginSignup.signout()
         // const refreshToken = localStorage.getItem('refresh_token')
         // return model.refreshToken(refreshToken)
         // .then(result => {

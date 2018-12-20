@@ -1,7 +1,8 @@
 const model = require('../models/songs')
 
 function getSongs(req, res, next){
-    return model.getUserSongs()
+    const userId = req.params.userId
+    return model.getUserSongs(userId)
     .then(result => {
         res.status(200).send(result)
     })

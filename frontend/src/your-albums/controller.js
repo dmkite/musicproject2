@@ -31,7 +31,6 @@ function prepSorter(albumSongMerge){
     document.querySelector('#sort').addEventListener('change', function(e){sort(e, albumSongMerge)})
     const radios = document.querySelectorAll('input[type="radio"]')
     radios.forEach(radio => radio.addEventListener('change', function (e) { filter(e) }) )
- 
 }
 
 function sort(e, albums){
