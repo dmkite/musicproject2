@@ -731,3 +731,61 @@ h2 span{
         font-size:14px;
     }
 }
+
+
+/******************************************************************************
+**  Queue Page
+******************************************************************************/
+.queueItem{
+    border:1px solid #aeae99;
+    position:relative;
+    width:70%;
+    margin-left:15%;
+    margin-bottom:10px;
+    padding:10px;
+    background-color:white;
+}
+
+.queueItem img{
+    width:100%;
+}
+
+.queueUp, .queueDown{
+    position:Absolute;
+    height:30px;
+    width:30px;
+    background-color:white;
+    border:1px solid #aeae99;
+    border-right: none;
+    top:30%;
+    left:-31px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.queueDown{
+    top:60%;
+}
+
+.queueUp i, .queueDown i{
+    color: #aeae99;
+    font-size:20px;
+    display:block;
+    height:100%;
+    line-height:30px;
+    text-align:center;
+}
+
+.currentQueue{
+    border:2px solid #11487D
+}
+.currentQueue .queueUp, .currentQueue .queueDown{
+    border: 2px solid #11487D;
+    border-right: none;
+    left:-32px;
+}
+
+.currentQueue i{
+    color: #11487D
+}
+
