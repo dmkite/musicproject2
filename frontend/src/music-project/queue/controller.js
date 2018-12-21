@@ -27,9 +27,15 @@ function displayQueue(albums){
         albums[0].is_current = true
         return displayQueue(albums)
     }
-    if(!albums[0].is_current) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[0])
-    else if (albums[1]) document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
-    else if(!document.querySelector('#upNext .emptyState')) upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
+    if(!albums[0].is_current){
+        document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[0])
+        document.querySelector('#upNext .emptyState').remove()
+    }
+    else if (albums[1]){
+        document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
+        document.querySelector('#upNext .emptyState').remove()
+    }
+    // else if(!document.querySelector('#upNext .emptyState')) upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
 }
 
 
