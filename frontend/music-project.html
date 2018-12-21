@@ -8,25 +8,34 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script defer src="bundle.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
 </head>
 <body>
     <header>
-        <h1 class="welcome">Welcome</h1>
+        <p class="welcome">Welcome</p>
         <span id="signout">signout</span>
     </header>
     <main>
         <section id="current">
             <h2>Currently Listening To <a href="your-albums.html">see your albums</a></h2>
-            <p class="emptyState">You don't have an album for this week :( <br> Add an album to your queue</p>
+            <div class="emptyState">
+                <img src='img/record-player.png' alt="Icon of record player">
+                <p>You don't have an album for this week :( <br> Add an album to your <a href="music-project.html#addMusic">queue</a></p>
+            </div>
         </section>
         <section id="upNext">
-            <h2>Up Next</h2>
-            <p class="emptyState">Your queue is quite empty</p>
+            <h2>Up Next <a href="your-queue.html">see your queue</a></h2>
+            <div class="emptyState">
+                <img src='img/queue.png' alt="Icon of a queue">
+                <p>Your queue is quite empty</p>
+            </div>
         </section>
         <section id="addMusic">
             <h2>Add to your Queue</h2> 
             <form id="musicSearch">
                 <input type="text" placeholder="search...">
+                
                 <div class="autocomplete"></div>
             </form>
         </section>
