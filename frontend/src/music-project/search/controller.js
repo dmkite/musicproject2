@@ -38,7 +38,9 @@ function autocomplete(albums){
         acc.push(view.autocompleteTemplate(album))
         return acc
     }, [])
+    autocompleteHTML.push('<span class="minimize">-</span>')
     autocompleteHolder.innerHTML = autocompleteHTML.join('')
+    document.querySelector('.minimize').addEventListener('click', function(){autocompleteHolder.innerHTML = ''})
     prepAlbumEntries()
 }
 

@@ -1,5 +1,17 @@
+/* body{
+    width:100vw;
+    overflow:hidden;
+} */
+
+*{
+    padding:0;
+    margin:0;
+}
 .hidden{
     visibility: hidden;
+}
+body{
+    padding:10px;
 }
 
 /******************************************************************************
@@ -8,10 +20,11 @@
 #index{
     position:relative;
 }
+
 #signup, #login, .actions{
     border:1px solid #ccc;
     border-radius:5px;
-    width:50%;
+    width:70%;
     padding:20px;
     margin:20vh auto 0;
 }
@@ -165,13 +178,12 @@ margin-top:20px;
 ******************************************************************************/
 main{ 
     display:grid;
+    margin-top:60px;
 }
 
 section{
-    outline:1px solid black;
     padding:10px;
     border-radius:5px;
-    margin-bottom:20px;
 }
 
 #profPic{
@@ -180,6 +192,40 @@ section{
     border-radius:50%;
 }
 
+.userLetter{
+    height:30px;
+    width:30px;
+    line-height:30px;
+    text-align:center;
+    background-color:#ffffff90;
+    color:#001747;
+    font-weight:900;
+    font-size:24px;
+    border-radius:50%;
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+.welcome{
+    position:absolute;
+    height:30px;
+    line-height:30px;
+    right:60px;
+    margin:0;
+    top:22px;
+    padding:0;
+    color:white;
+}
+
+#signout{
+    color:white;
+    position:absolute;
+    top:22px;
+    height:30px;
+    line-height:30px;
+    left:20px;
+}
 .emptyState img{
     width:100%;
     max-width:512px;
@@ -199,8 +245,29 @@ section{
 /******************************************************************************
 **  Autocomplete
 ******************************************************************************/
+.minimize{
+    height:15px;
+    width:15px;
+    background-color:#ccc;
+    display:inline-block;
+    text-align:center;
+    border-radius:50%;
+    padding:5px;
+    line-height:15px;
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.minimize:hover{
+    transform:scale(1.1)
+}
+
 .autocomplete{
-    outline:1px solid black;
+    position:relative;
+    border:1px solid #aeae99;
+    border-top: none;
+    margin-top:-19px;
 }
 
 .entry{
@@ -208,7 +275,9 @@ section{
     margin-bottom:5px;
     border-bottom:1px solid #ccc;
     padding-bottom:5px;
+    min-height:64px;
 }
+
 .entry:hover{
     cursor:pointer;
     background-color:#efefef;
@@ -216,7 +285,10 @@ section{
 .entry img{
     margin-left:5px;
 }
-.content{height:64px;}
+.content{
+    height:64px;
+}
+
 .content h3{
     height:34x;
     margin:0;
@@ -224,11 +296,11 @@ section{
     font-size:18px;
 }
 .content p {
-
     margin:0;
     height:30px;
     padding-left:10px;
 }
+
 
 /******************************************************************************
 **  Search Album 
@@ -333,16 +405,30 @@ textarea{
 /******************************************************************************
 **  Data Vis
 ******************************************************************************/
+#selectYear{
+    display:flex;
+    align-content:center;
+}
+#dataVis input{
+    width:20px;
+    height:20px;
+    line-height:20px;
+    margin-top:-2px;
+}
 
+#dataVis label{
+    width:50px;
+    display:flex;
+    height:20px;
+}
 .calendar{
-    margin-bottom:50px;
+    margin:20px 0 50px;
     height:100px;
     position:relative;
 }
 
 .ratingAxis{
     transform:rotate(-90deg);
-    
     position:absolute;
     height:15px;
     top:42px;
@@ -351,6 +437,7 @@ textarea{
     border-bottom:1px solid black;
     text-align:center;
     line-height:15px;
+    font-size:10px;
 }
 
 .weeks{
@@ -363,6 +450,7 @@ textarea{
     z-index:99;
     text-align:center;
     line-height:15px;
+    font-size:10px;
 }
 
 .dates{
@@ -430,6 +518,7 @@ textarea{
     display:flex;
     margin-bottom:20px;
 }
+
 .breakDown div{
     height:10px;
 }
@@ -456,8 +545,10 @@ textarea{
 
 .key{
     display:flex;
-    justify-content: space-between
+    justify-content: space-between;
+    font-size:10px;
 }
+
 .key .oneStar{
     border-top: 2px solid  #70D6BC;
 }
@@ -594,4 +685,49 @@ h2 span{
     justify-content: space-between;
     position:relative;
     margin-top:-25px;
+}
+
+@media screen and (min-width: 650px){
+    main{
+        display:grid;
+        grid-gap:10px;
+        grid-template-areas:
+        'current current current upNext upNext'
+        'current current current addMusic addMusic'
+        'dataVis dataVis dataVis dataVis theHits'
+    }
+
+    section{
+        margin:0;
+        padding:10px;
+    }
+    #current{
+        grid-area: current;
+        
+    }
+    #upNext{
+        grid-area:upNext;
+    }
+
+    #addMusic{
+        grid-area:addMusic;
+    }
+
+    #dataVis{
+        grid-area:dataVis
+    }
+
+    #musicSearch{
+        position:relative;
+    }
+    .autocomplete{
+        position:absolute;
+        background-color:white;
+        z-index:99;
+        width:100%;
+    }
+
+    .autocomplete h3{
+        font-size:14px;
+    }
 }
