@@ -351,6 +351,10 @@ tr:nth-of-type(even){
     overflow-y: scroll;
 }
 
+#upNext img{
+    width:200px;
+}
+
 /******************************************************************************
 ** Current Album
 ******************************************************************************/
@@ -792,3 +796,8 @@ h2 span{
     color: #11487D
 }
 
+
+.queueDown:hover i , .queueUp:hover i{
+    cursor:pointer;
+    transform:scale(1.2)
+}

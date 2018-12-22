@@ -11,7 +11,7 @@ class QueueModel extends Model{
         .where({
             user_id: userId,
         })
-        .orderBy('created_at', 'asc')
+        .orderBy('place_in_queue', 'asc')
     }
 
     add(body){
