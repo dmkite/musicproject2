@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
         table.text('img').notNullable().defaultsTo('')
         table.text('spotify_album_id').notNullable().defaultsTo('').unique()
         table.boolean('is_current').notNullable().defaultsTo(false)
+        table.integer('place_in_queue').notNullable().defaultsTo(0)
         table.timestamps(true, true)
   })
   
