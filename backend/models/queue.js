@@ -67,7 +67,10 @@ class QueueModel extends Model{
 
     update(body){
         console.log(body, 'from inside model 0000000000000000000')
-        return 'works?'
+        return knex(this.table)
+        .where('id', body.id)
+        .update('place_in_queue', body.place_in_queue)
+        .returning('*')
     }
 }
 

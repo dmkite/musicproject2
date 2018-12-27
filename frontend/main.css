@@ -15,7 +15,7 @@ body{
     padding:10px;
 }
 main{
-    max-width:1024px;
+    max-width:800px;
     margin:0 auto;
 }
 
@@ -188,7 +188,7 @@ margin-top:20px;
 ******************************************************************************/
 main{ 
     display:grid;
-    margin-top:60px;
+    margin-top:10px;
 }
 
 section{
@@ -212,21 +212,21 @@ section{
     font-weight:900;
     font-size:24px;
     border-radius:50%;
-    position:absolute;
-    top:20px;
-    right:20px;
+    display: inline-block;
+    margin-left:10px;
 }
 
 header{
-    outline:1px solid white;
     position:relative;
     height:30px;
-    max-width:1024px;
-    margin:0 auto;
+    max-width:800px;
+    margin:70px auto 0;
     display:flex;
-    
-
+    justify-content: space-between;
+    flex-direction: row-reverse;
 }
+
+
 .welcome{
     height:30px;
     line-height:30px;
@@ -239,6 +239,12 @@ header{
     color:white;
     height:30px;
     line-height:30px;
+    font-size:10px;
+}
+
+#signout:hover{
+    text-decoration:underline;
+    cursor:pointer;
 }
 .emptyState img{
     width:100%;
@@ -252,7 +258,7 @@ header{
     position:relative;
 }
 .emptyState p{
-    font: 300 18px/26px 'Dosis', sans;
+    font: 300 18px/26px 'Raleway', sans;
     position:absolute;
     top:50px;
 }
@@ -405,7 +411,6 @@ h2 a {
 
 .hits{
     display:flex;
-    outline:1px dotted red;
     margin-bottom:10px;
 }
 
@@ -419,6 +424,8 @@ textarea{
     resize:none;
     width:100%;
 }
+
+
 
 /******************************************************************************
 **  Data Vis
@@ -655,9 +662,6 @@ body{
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center bottom;
-    
-    
-
 }
 
 main{
@@ -670,27 +674,40 @@ section{
     background-color:white;
     padding:20px;
     margin:20px;
+    border:1px solid #aeae99
 }
 
+button{
+    padding:5px;
+    color: #001747;
+    border:1px solid #001747;
+    background-color:white;
+    border-radius:5px;
+}
+
+button:hover{
+    background-color:#001747;
+    color:white;
+    cursor:pointer;
+}
+
+
+
 h2{
-    font-family:'Dosis', sans-serif;
+    font-family:'Raleway', sans-serif;
     font-weight:900;
     margin:0 0 20px;
     height:30px;
     line-height:30px;
+    color: #001747
 }
 
 h2 span{
     line-height:30px;
 }
 
-.queuedAlbum h3, .queuedAlbum p{
-    outline:1px dashed green;
-}
-
 .queuedAlbum img{
     width:100%;
-    outline:1px solid red;
 }
 
 .queuedAlbum h3{
@@ -705,11 +722,25 @@ h2 span{
     grid-area: action;
 }
 
+#ratingForm{
+    margin-top:20px;
+}
+
+label[for="rating"]{
+    margin-bottom: 20px;
+    outline:1px solid red;
+}
+
+label[for="songs"]{
+    margin: 20px auto 10px;
+}
+
 .ratingLabel{
     display:flex;
     justify-content: space-between;
     position:relative;
-    margin-top:-25px;
+    margin-top:-20px;
+    font-size:10px;
 }
 
 @media screen and (min-width: 650px){

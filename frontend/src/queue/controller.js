@@ -48,10 +48,9 @@ function moveUp(e){
     itemToMoveUp.setAttribute('data-place-in-queue', oldPlace - 1)
     
     items.forEach(item => newQueue.push(collectBody(item)))
-    console.log(newQueue)
     return model.update(newQueue[0])
     .then(result => {
-        console.log(result)
+        console.log('hitting result')
         return model.update(newQueue[0])
     })
     .then(result => console.log(result))

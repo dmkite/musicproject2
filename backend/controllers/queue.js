@@ -37,11 +37,11 @@ function del(req, res, next){
 }
 
 function update(req, res, next){
-    const userId = req.params.userId
-    console.log(req.body)
-    // return model.update(req.body)
-    // .then(result => console.log(result))
-    // .catch(next)
+    return model.update(req.body)
+    .then(result => {
+        res.status(200).send({data:result})
+    })
+    .catch(next)
 }
 
 module.exports ={add, all, current, del, update}

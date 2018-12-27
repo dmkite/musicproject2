@@ -20,7 +20,7 @@ function init() {
         const div = document.createElement('div')
         div.textContent = result.data.userInfo.f_name[0]
         div.classList.add('userLetter')
-        document.querySelector('body').appendChild(div)
+        document.querySelector('.welcome').appendChild(div)
     })
 }
 
