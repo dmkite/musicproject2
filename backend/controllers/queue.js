@@ -3,7 +3,6 @@ const model = require('../models/queue')
 function add(req, res, next){
     return model.add(req.body)
     .then(result => {
-        console.log(result, 'back in controller')
         if (!result) return next({ status: 400, message: `${req.body.album} is either in your queue or has already been listened to` })
         res.status(201).send(result)
     })
@@ -37,4 +36,12 @@ function del(req, res, next){
     .catch(next)
 }
 
-module.exports ={add, all, current, del}
+function update(req, res, next){
+    const userId = req.params.userId
+    console.log(req.body)
+    // return model.update(req.body)
+    // .then(result => console.log(result))
+    // .catch(next)
+}
+
+module.exports ={add, all, current, del, update}

@@ -64,6 +64,11 @@ class QueueModel extends Model{
         })
         .first()
     }
+
+    update(body){
+        console.log(body, 'from inside model 0000000000000000000')
+        return 'works?'
+    }
 }
 
 const model = new QueueModel('queues')

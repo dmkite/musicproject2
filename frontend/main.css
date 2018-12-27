@@ -6,6 +6,7 @@
 *{
     padding:0;
     margin:0;
+    font-family: 'Work Sans', sans-serif;
 }
 .hidden{
     visibility: hidden;
@@ -13,6 +14,11 @@
 body{
     padding:10px;
 }
+main{
+    max-width:1024px;
+    margin:0 auto;
+}
+
 
 /******************************************************************************
 **  Login Signup
@@ -35,6 +41,7 @@ body{
     color:white;
     text-align:center;
     top:15vh;
+    font: 500 48px/54px 'Alfa Slab One', cursive;
 }
 
 #login, .actions{
@@ -210,24 +217,28 @@ section{
     right:20px;
 }
 
+header{
+    outline:1px solid white;
+    position:relative;
+    height:30px;
+    max-width:1024px;
+    margin:0 auto;
+    display:flex;
+    
+
+}
 .welcome{
-    position:absolute;
     height:30px;
     line-height:30px;
-    right:60px;
     margin:0;
-    top:22px;
     padding:0;
     color:white;
 }
 
 #signout{
     color:white;
-    position:absolute;
-    top:22px;
     height:30px;
     line-height:30px;
-    left:20px;
 }
 .emptyState img{
     width:100%;
@@ -639,7 +650,14 @@ textarea{
 **  General Design
 ******************************************************************************/
 body{
-    background: linear-gradient(to bottom right, #068587, #034456)
+    background-image: url('img/background-image.png'), linear-gradient(to bottom right, #068587, #034456);
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center bottom;
+    
+    
+
 }
 
 main{
@@ -796,8 +814,16 @@ h2 span{
     color: #11487D
 }
 
-
 .queueDown:hover i , .queueUp:hover i{
     cursor:pointer;
     transform:scale(1.2)
+}
+
+#queue .omitted{
+    opacity: 0.5;
+}
+
+#queue .omitted:hover{
+    cursor:default;
+    transform:scale(1)
 }
