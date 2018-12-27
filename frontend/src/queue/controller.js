@@ -3,7 +3,6 @@ const view = require('./view')
 function init(){
     return model.all()
     .then(result => {
-        console.log(result)
        const queueHTML = result.data.map(album => view.queueTemplate(album))
        document.querySelector('#queue main').innerHTML = queueHTML.join('')
        addListeners()
@@ -16,11 +15,11 @@ function addListeners(){
     
 
     for(let upBtn of queueUpBtns){
-        upBtn.addEventListener('click', function(e){moveUp(e)})
+        upBtn.addEventListener('click', function(e){movePlace(e, 'up')})
     }
 
     for(let downBtn of queueDownBtns){
-        downBtn.addEventListener('click', function(e){moveDown(e)})
+        downBtn.addEventListener('click', function(e){movePlace(e, 'down')})
     }
 
     omitOptions()
@@ -38,35 +37,30 @@ function omitOptions(){
     }
 }
 
-function moveUp(e){
+function movePlace(e, direction){
     const items = document.querySelectorAll('.queueItem')
     const newQueue = []
     const itemToMoveUp = e.target.parentElement.parentElement
     const oldPlace = Number(itemToMoveUp.getAttribute('data-place-in-queue'))
-    console.log('this is oldPlace: ', oldPlace)
-    const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace - 1}"]`)
-    console.log('this is item to replace: ', itemToReplace)
-    itemToReplace.setAttribute('data-place-in-queue', oldPlace)
-    itemToMoveUp.setAttribute('data-place-in-queue', oldPlace - 1)
-    
+    if(direction === 'up'){
+        const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace - 1}"]`)
+        itemToReplace.setAttribute('data-place-in-queue', oldPlace)
+        itemToMoveUp.setAttribute('data-place-in-queue', oldPlace - 1)
+    }
+    else{
+        const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace + 1}"]`)
+        itemToReplace.setAttribute('data-place-in-queue', oldPlace)
+        itemToMoveUp.setAttribute('data-place-in-queue', oldPlace + 1)
+    }
     items.forEach(item => newQueue.push(collectBody(item)))
-    console.log(newQueue)
     // return model.update(newQueue[0])
     const promiseArray = newQueue.map(item => model.update(item))
     return Promise.all(promiseArray)
     .then(results => {
-        console.log(results)
         // return model.update(newQueue[0])
         document.querySelector('#queue main').innerHTML = ''
         return init()
     })
-    
-    
-}
-
-
-function moveDown(e){
-    console.log(e.target)
 }
 
 function collectBody(item){
