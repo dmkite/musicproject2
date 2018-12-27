@@ -45,6 +45,7 @@ function displayQueue(albums){
 function addToDbQueue(albumId) {
     const album = document.querySelector(`div[data-id="${albumId}"]`)
     const userId = localStorage.getItem('userId')
+    console.log(album)
     const body = {
         user_id: userId,
         album: album.children[1].children[0].textContent,

@@ -43,17 +43,24 @@ function moveUp(e){
     const newQueue = []
     const itemToMoveUp = e.target.parentElement.parentElement
     const oldPlace = Number(itemToMoveUp.getAttribute('data-place-in-queue'))
+    console.log('this is oldPlace: ', oldPlace)
     const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace - 1}"]`)
+    console.log('this is item to replace: ', itemToReplace)
     itemToReplace.setAttribute('data-place-in-queue', oldPlace)
     itemToMoveUp.setAttribute('data-place-in-queue', oldPlace - 1)
     
     items.forEach(item => newQueue.push(collectBody(item)))
-    return model.update(newQueue[0])
-    .then(result => {
-        console.log('hitting result')
-        return model.update(newQueue[0])
+    console.log(newQueue)
+    // return model.update(newQueue[0])
+    const promiseArray = newQueue.map(item => model.update(item))
+    return Promise.all(promiseArray)
+    .then(results => {
+        console.log(results)
+        // return model.update(newQueue[0])
+        document.querySelector('#queue main').innerHTML = ''
+        return init()
     })
-    .then(result => console.log(result))
+    
     
 }
 
