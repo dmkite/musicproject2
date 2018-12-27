@@ -52,7 +52,7 @@ class Model{
     }
 
     update(body){
-        console.log(body)
+        // console.log(body)
         // return axios(baseURL + this.url, {
         //     method: 'put',
         //     headers: {

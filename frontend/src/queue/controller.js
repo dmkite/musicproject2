@@ -3,7 +3,6 @@ const view = require('./view')
 function init(){
     return model.all()
     .then(result => {
-        console.log(result)
        const queueHTML = result.data.map(album => view.queueTemplate(album))
        document.querySelector('#queue main').innerHTML = queueHTML.join('')
        addListeners()
@@ -13,15 +12,17 @@ function init(){
 function addListeners(){
     const queueUpBtns = document.querySelectorAll('.queueUp i')
     const queueDownBtns = document.querySelectorAll('.queueDown i')
-    
+    const deleteBtns = document.querySelectorAll('.text button')
 
     for(let upBtn of queueUpBtns){
-        upBtn.addEventListener('click', function(e){moveUp(e)})
+        upBtn.addEventListener('click', function(e){movePlace(e, 'up')})
     }
 
     for(let downBtn of queueDownBtns){
-        downBtn.addEventListener('click', function(e){moveDown(e)})
+        downBtn.addEventListener('click', function(e){movePlace(e, 'down')})
     }
+
+    deleteBtns.forEach(item => item.addEventListener('click', function(e){del(e)}))
 
     omitOptions()
 }
@@ -38,28 +39,30 @@ function omitOptions(){
     }
 }
 
-function moveUp(e){
+function movePlace(e, direction){
     const items = document.querySelectorAll('.queueItem')
     const newQueue = []
     const itemToMoveUp = e.target.parentElement.parentElement
     const oldPlace = Number(itemToMoveUp.getAttribute('data-place-in-queue'))
-    const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace - 1}"]`)
-    itemToReplace.setAttribute('data-place-in-queue', oldPlace)
-    itemToMoveUp.setAttribute('data-place-in-queue', oldPlace - 1)
-    
+    if(direction === 'up'){
+        const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace - 1}"]`)
+        itemToReplace.setAttribute('data-place-in-queue', oldPlace)
+        itemToMoveUp.setAttribute('data-place-in-queue', oldPlace - 1)
+    }
+    else{
+        const itemToReplace = document.querySelector(`[data-place-in-queue="${oldPlace + 1}"]`)
+        itemToReplace.setAttribute('data-place-in-queue', oldPlace)
+        itemToMoveUp.setAttribute('data-place-in-queue', oldPlace + 1)
+    }
     items.forEach(item => newQueue.push(collectBody(item)))
-    return model.update(newQueue[0])
-    .then(result => {
-        console.log('hitting result')
-        return model.update(newQueue[0])
+    // return model.update(newQueue[0])
+    const promiseArray = newQueue.map(item => model.update(item))
+    return Promise.all(promiseArray)
+    .then(results => {
+        // return model.update(newQueue[0])
+        document.querySelector('#queue main').innerHTML = ''
+        return init()
     })
-    .then(result => console.log(result))
-    
-}
-
-
-function moveDown(e){
-    console.log(e.target)
 }
 
 function collectBody(item){
@@ -77,5 +80,18 @@ function collectBody(item){
     }
     return body
 }
+
+function del(e){
+    const albumId = e.target.parentElement.parentElement.getAttribute('data-id')
+    console.log(albumId)
+    return model.delete(albumId)
+    .then(result => {
+        console.log(result)
+        document.querySelector('main').innerHTML = ''
+        return init()
+    })
+    .catch(err => console.error(err))
+}
+
 
 module.exports = {init}

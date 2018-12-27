@@ -13,8 +13,10 @@ function albumTemplate(album, tracks){
     return `
     <div class="albumSelect" data-id="${album.id}">
         <img class="albumCover" src="${album.images[1].url}" alt="image of ${album.name}">
-        <h3>${album.name.length > 20 ? album.name.slice(0, 20) + '...' : album.name}</h3>
-        <p>${album.artists[0].name.length > 20 ? album.artists[0].name.slice(0, 20) + '...' : album.artists[0].name}</p>
+        <div class="text">
+            <h3>${album.name.length > 20 ? album.name.slice(0, 20) + '...' : album.name}</h3>
+            <p>${album.artists[0].name.length > 20 ? album.artists[0].name.slice(0, 20) + '...' : album.artists[0].name}</p>
+        </div>
         <table>
             <thead>
                 <tr>
