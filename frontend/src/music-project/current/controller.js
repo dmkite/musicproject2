@@ -6,10 +6,10 @@ const view = require('./view')
 // const {msToMins} = require('../search/controller')
 
 function init(album){
+    console.log('current init firing 88888888888888888888888888')
     if(!album) return
     const daysListenedTo = Math.ceil((new Date().getTime() - new Date(album.created_at).getTime() ) / 1000 / 60 / 60 / 24)
-    console.log(daysListenedTo)
-    document.querySelector('#current').innerHTML += queueView.albumTemplate(album)
+    document.querySelector('#current').innerHTML += queueView.albumTemplate(album, true)
     document.querySelector('#current').innerHTML += view.actionBlock(album, daysListenedTo)
     document.querySelector('#current .emptyState').remove()
     document.querySelector('.archive').onclick = function(e){openRatingForm(e, album.id)}
@@ -42,6 +42,7 @@ function addDeleteListeners(albumId){
 }
 
 function openRatingForm(e, albumId){
+    e.target.textContent = 'cancel'
     const spotifyAlbumId = document.querySelector('.queuedAlbum').getAttribute('data-id')
     return searchModel.getAlbum(spotifyAlbumId)
     .then(result => {
@@ -51,7 +52,16 @@ function openRatingForm(e, albumId){
         })
         document.querySelector('#current').innerHTML += view.ratingForm(trackForm)
         document.querySelector('#ratingForm').onsubmit = function(e){archive(e, albumId)}
+        document.querySelector('.archive').onclick = function (e) { removeRatingForm(e) }
     })
+}
+
+function removeRatingForm(e){
+    console.log('HITTING')
+    const albumId = document.querySelector('#current .queuedAlbum').getAttribute('data-id')
+    e.target.textContent = 'Archive'
+    document.querySelector('#ratingForm').remove()
+    e.target.onclick = function(e){openRatingForm(e, albumId)}
 }
 
 function msToMins(num){
@@ -106,7 +116,7 @@ function shiftQueue(albumId){
         return queueModel.all()
     })
     .then(result => {
-        result.data[0].is_current = true
+        // result.data[0].is_current = true
         window.location.reload()
     }
         )

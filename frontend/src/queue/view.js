@@ -1,6 +1,6 @@
-function queueTemplate(album){
+function queueTemplate(album, isCurrent = false){
     return `
-    <div class="queueItem ${album.is_current ? 'currentQueue' : ''}" data-id="${album.id}" data-place-in-queue="${album.place_in_queue}">
+    <div class="queueItem ${isCurrent ? 'currentQueue' : ''}" data-id="${album.id}" data-place-in-queue="${album.place_in_queue}">
         <img src="${album.img}" alt="${album.album} album cover">
         <div class="text">
             <h3>${album.album}</h3>
