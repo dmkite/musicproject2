@@ -12,7 +12,7 @@ function init(){
 function addListeners(){
     const queueUpBtns = document.querySelectorAll('.queueUp i')
     const queueDownBtns = document.querySelectorAll('.queueDown i')
-    
+    const deleteBtns = document.querySelectorAll('.text button')
 
     for(let upBtn of queueUpBtns){
         upBtn.addEventListener('click', function(e){movePlace(e, 'up')})
@@ -21,6 +21,8 @@ function addListeners(){
     for(let downBtn of queueDownBtns){
         downBtn.addEventListener('click', function(e){movePlace(e, 'down')})
     }
+
+    deleteBtns.forEach(item => item.addEventListener('click', function(e){del(e)}))
 
     omitOptions()
 }
@@ -78,5 +80,18 @@ function collectBody(item){
     }
     return body
 }
+
+function del(e){
+    const albumId = e.target.parentElement.parentElement.getAttribute('data-id')
+    console.log(albumId)
+    return model.delete(albumId)
+    .then(result => {
+        console.log(result)
+        document.querySelector('main').innerHTML = ''
+        return init()
+    })
+    .catch(err => console.error(err))
+}
+
 
 module.exports = {init}
