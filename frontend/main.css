@@ -357,10 +357,14 @@ tr:nth-of-type(even){
 
 #upNext h3, #upNext p{
     display:inline;
+    color: green;
+    outline:1px solid green;
 }
 
 #upNext p{
     margin-left:10px;
+    color:red; 
+    outline:1px solid red;
 }
 
 #upNext table{
@@ -720,6 +724,10 @@ h2 span{
 
 .actionBlock{
     grid-area: action;
+    margin: 20px 0;
+}
+.actionBlock p{
+    margin-bottom:20px;
 }
 
 #ratingForm{

@@ -42,6 +42,7 @@ function addDeleteListeners(albumId){
 }
 
 function openRatingForm(e, albumId){
+    e.target.textContent = 'cancel'
     const spotifyAlbumId = document.querySelector('.queuedAlbum').getAttribute('data-id')
     return searchModel.getAlbum(spotifyAlbumId)
     .then(result => {
@@ -51,7 +52,16 @@ function openRatingForm(e, albumId){
         })
         document.querySelector('#current').innerHTML += view.ratingForm(trackForm)
         document.querySelector('#ratingForm').onsubmit = function(e){archive(e, albumId)}
+        document.querySelector('.archive').onclick = function (e) { removeRatingForm(e) }
     })
+}
+
+function removeRatingForm(e){
+    console.log('HITTING')
+    const albumId = document.querySelector('#current .queuedAlbum').getAttribute('data-id')
+    e.target.textContent = 'Archive'
+    document.querySelector('#ratingForm').remove()
+    e.target.onclick = function(e){openRatingForm(e, albumId)}
 }
 
 function msToMins(num){

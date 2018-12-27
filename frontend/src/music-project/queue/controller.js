@@ -47,8 +47,8 @@ function addToDbQueue(albumId) {
     const userId = localStorage.getItem('userId')
     const body = {
         user_id: userId,
-        album: album.children[1].textContent,
-        artist: album.children[2].textContent,
+        album: album.children[1].children[0].textContent,
+        artist: album.children[1].children[1].textContent,
         img: album.children[0].getAttribute('src'),
         spotify_album_id: albumId
     }
