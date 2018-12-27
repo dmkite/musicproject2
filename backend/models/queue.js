@@ -11,7 +11,7 @@ class QueueModel extends Model{
         .where({
             user_id: userId,
         })
-        .orderBy('created_at', 'asc')
+        .orderBy('place_in_queue', 'asc')
     }
 
     add(body){
@@ -37,11 +37,23 @@ class QueueModel extends Model{
         .then(result => {
             if(!result) body.is_current = true
             else body.is_current = false
-            return knex(this.table)
-            .insert(body)
-            .returning('*')
+            return this.getLastPlaceInQueue(body.user_id)
+            .then(placeInQueue =>{
+                console.log(placeInQueue.max, 'this is place in queue')
+                body.place_in_queue = Number(placeInQueue.max) + 1
+                return knex(this.table)
+                    .insert(body)
+                    .returning('*')
+            })
+            
         })
 
+    }
+
+    getLastPlaceInQueue(userId){
+        return knex(this.table).max('place_in_queue')
+        .where('user_id', userId)
+        .first()
     }
 
     current(userId){
@@ -51,6 +63,14 @@ class QueueModel extends Model{
             is_current: true
         })
         .first()
+    }
+
+    update(body){
+        console.log(body, 'from inside model 0000000000000000000')
+        return knex(this.table)
+        .where('id', body.id)
+        .update('place_in_queue', body.place_in_queue)
+        .returning('*')
     }
 }
 

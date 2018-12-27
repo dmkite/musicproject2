@@ -18,6 +18,8 @@ class QueueModel extends Model{
         })
         .then(result => result)
     }
+
+    
 }
 
 const model = new QueueModel(`/users/${userId}/queue`)

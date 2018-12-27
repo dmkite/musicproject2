@@ -35,7 +35,6 @@ function displayQueue(albums){
         document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
         document.querySelector('#upNext .emptyState').remove()
     }
-    // else if(!document.querySelector('#upNext .emptyState')) upNext.innerHTML += '<p class="emptyState">Your queue is quite empty</p>'
 }
 
 
@@ -61,7 +60,9 @@ function addToDbQueue(albumId) {
     })
     .catch(err => {
         console.error(err)
-        if(err.response.status == 401) return signout()
+        if(err.response){
+            if(err.response.status == 401) return signout()
+        }
     })
 }
 

@@ -6,9 +6,7 @@ function add(req, res, next){
         if (!result) return next({ status: 400, message: `${req.body.album} is either in your queue or has already been listened to` })
         res.status(201).send(result)
     })
-    .catch(err =>{
-        res.status(400).send(err)
-    })
+    .catch(next)
 }
 
 function all(req, res, next){
@@ -17,6 +15,7 @@ function all(req, res, next){
     .then(result => {
         res.status(200).send(result)
     })
+    .catch(next)
 }
 
 function current(req, res, next){
@@ -37,4 +36,12 @@ function del(req, res, next){
     .catch(next)
 }
 
-module.exports ={add, all, current, del}
+function update(req, res, next){
+    return model.update(req.body)
+    .then(result => {
+        res.status(200).send({data:result})
+    })
+    .catch(next)
+}
+
+module.exports ={add, all, current, del, update}

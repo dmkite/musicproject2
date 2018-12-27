@@ -50,6 +50,30 @@ class Model{
         })
         .then(result => result)
     }
+
+    update(body){
+        console.log(body)
+        // return axios(baseURL + this.url, {
+        //     method: 'put',
+        //     headers: {
+        //         Authorization: `Bearer ${localStorage.getItem('token')}`
+        //     },
+        //     body: body
+        // })
+        // .then(result => result)
+
+
+        
+        let request = axios.create({
+    method: 'PATCH',
+    baseURL: `${baseURL + this.url}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    },
+  })
+    return request.patch(null, body);
+    }
 }
 
 module.exports = Model

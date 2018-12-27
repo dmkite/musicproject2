@@ -1,10 +1,11 @@
 function queueTemplate(album){
     return `
-    <div class="queueItem ${album.is_current ? 'currentQueue' : ''}">
-        <img src="${album.img}" alt="${album.name} album cover">
+    <div class="queueItem ${album.is_current ? 'currentQueue' : ''}" data-id="${album.id}" data-place-in-queue="${album.place_in_queue}">
+        <img src="${album.img}" alt="${album.album} album cover">
         <div class="text">
             <h3>${album.album}</h3>
             <p>${album.artist}</p>
+            <button type="button">delete</button>
         </div>
         <div class="queueUp">
             <i class="fas fa-arrow-circle-up"></i>
