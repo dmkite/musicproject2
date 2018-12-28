@@ -7,6 +7,7 @@
     padding:0;
     margin:0;
     font-family: 'Work Sans', sans-serif;
+    box-sizing: border-box;
 }
 .hidden{
     visibility: hidden;
@@ -325,9 +326,45 @@ header{
 /******************************************************************************
 **  Search Album 
 ******************************************************************************/
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.autocomplete{
+    max-height:400px;
+    overflow-y:scroll;
+}
+
+.albumSelect img{
+
+}
+
+.albumSelect{
+    padding:10px;
+}
 .albumSelect table{
     max-height:150px;
     overflow-y:scroll;
+    max-height:150px;
+    width:300px;
+    overflow-y: scroll;    
+    margin-bottom:20px;
+}
+
+.albumCover{
+    width:300px;
 }
 
 thead{
@@ -337,6 +374,7 @@ thead{
 tr:nth-of-type(even){
     background-color:#efefef;
 }
+
 
 /******************************************************************************
 **  Up Next
@@ -357,14 +395,13 @@ tr:nth-of-type(even){
 
 #upNext h3, #upNext p{
     display:inline;
-    color: green;
-    outline:1px solid green;
 }
 
 #upNext p{
     margin-left:10px;
-    color:red; 
-    outline:1px solid red;
+    position:absolute;
+    width:100%;
+    left:0;
 }
 
 #upNext table{
@@ -476,7 +513,7 @@ textarea{
     bottom:-15px;
     left:15px;
     border-top:1px solid black;
-    z-index:99;
+    z-index:9;
     text-align:center;
     line-height:15px;
     font-size:10px;
