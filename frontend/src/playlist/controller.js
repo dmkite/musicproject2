@@ -24,7 +24,8 @@ function generateBody(){
         public: false,
         collaborative: false,
         description: document.querySelector('#playlist textarea').value,
-        user_id: localStorage.getItem('spotifyId')
+        user_id: localStorage.getItem('spotifyId'),
+        access_token: localStorage.getItem('access_token')
     }
     return body
 }
