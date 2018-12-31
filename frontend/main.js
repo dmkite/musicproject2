@@ -17,3 +17,18 @@ const pageInitializer = {
 }
 
 pageInitializer[path]()
+
+
+// const model = require('./src/music-project/model')
+// const token = localStorage.getItem('token')
+// if (!token) console.log('uhoh')
+// return model.authenticate(token)
+//     .then(result => {
+//         localStorage.setItem('userId', result.data.userInfo.id)
+//         localStorage.setItem('spotify_playlist_id', result.data.userInfo.spotify_playlist_id)
+//         document.querySelector('.welcome').textContent += `, ${result.data.userInfo.f_name}`
+//         const div = document.createElement('div')
+//         div.textContent = result.data.userInfo.f_name[0]
+//         div.classList.add('userLetter')
+//         document.querySelector('.welcome').appendChild(div)
+//     })

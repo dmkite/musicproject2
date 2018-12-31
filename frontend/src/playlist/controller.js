@@ -4,9 +4,20 @@ const songModel = require('../music-project/hits/model')
 const {favSongTemplate} = require('../music-project/hits/view')
 
 function init(){
+    if(!!localStorage.getItem('spotify_playlist_id')) editPlaylistInit()
     document.querySelector('#playlistForm').onkeyup = checkVals
-    document.querySelector('#playlistForm').onsubmit = function (e) { makePlaylist(e) }
+    document.querySelector('#playlistForm').onsubmit = function (e) { playlistAction(e) }
     addSongsToSelect()
+}
+
+function editPlaylistInit(){
+    document.querySelector('#playlistForm button').textContent = 'edit'
+    const input = document.querySelector('#playlistForm input')
+    const textarea = document.querySelector('#playlistForm textarea')
+    const form = document.querySelector('#playlistForm')
+    form.innerHTML = `<h3>${input.value}</h3><p>${textarea.value}</p>` + form.innerHTML
+    document.querySelector('#playlistForm textarea').remove()
+    document.querySelector('#playlistForm input').remove()
 }
 
 function checkVals(){
@@ -16,12 +27,17 @@ function checkVals(){
     else button.removeAttribute('disabled')
 }
 
-function makePlaylist(e){
+function playlistAction(e){
     e.preventDefault()
+    let playlistExists = localStorage.getItem('spotify_playlist_id')
+    if(!playlistExists) return makePlaylist()
+    return updatePlaylist(playlistExists)
+}
+
+function makePlaylist(){
     const body = generateBody()
     model.add(body)
     .then(result =>{
-        console.log(result, '**************************')
         if (!result) throw Error
         localStorage.setItem('spotify_playlist_id', result.spotify_playlist_id)
         let playlistName = document.querySelector('#playlistForm input').value
@@ -55,16 +71,39 @@ function addSongsToSelect(){
         const songHTML = result.data.map(item => favSongTemplate(item))
         document.querySelector('.trackSelect').innerHTML = songHTML.join('')
         const hits = document.querySelectorAll('.hits')
-        hits.forEach(item => item.innerHTML += '<input type="checkbox" checked>')
+        hits.forEach(item => item.innerHTML += '<input type="checkbox" checked=true>')
     })
     .catch(err => console.error(err))
 }
 
 function gatherSongs(){
-    const checkedBoxes = Array.from(document.querySelectorAll('input[checked]'))
-    const spotifyURIs = checkedBoxes.map(box => `spotify:track:${box.parentElement.getAttribute('data-id')}`)
-    return spotifyURIs
+    const checkedBoxes = Array.from(document.querySelectorAll('.trackSelect input'))
+    
+    const spotifyURIs = checkedBoxes.reduce((acc, box) => {
+        if(box.checked === true) acc.push(`spotify:track:${box.parentElement.getAttribute('data-id')}`)
+        return acc
+    }, [])
+
+    return spotifyURIs    
 }
 
+function updatePlaylist(playlist_id){
+    let body = {uris: gatherSongs()}
+    body = JSON.stringify(body)
+    return model.replacePlaylist(body, playlist_id)
+    .then(result => {
+        console.log(result)
+        const playlistName = document.querySelector('h3').textContent
+        document.querySelector('main').textContent = `Playlist ${playlistName} updated`
+        if (result.response) {
+            if (result.response.status === 401) console.log(result.response.status)
+        }
+    })
+    .catch(err => {
+        if(err.response){
+            if(err.response.status === 401) return signout()
+        }
+    })
+}
 
 module.exports = {init}
