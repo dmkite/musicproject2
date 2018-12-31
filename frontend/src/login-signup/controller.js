@@ -50,7 +50,7 @@ function login(e) {
             const state = generateRandomString(16);
 
             localStorage.setItem('spotify_auth_state', state);
-            const scope = 'user-read-private user-read-email playlist-modify-public';
+            const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private playlist-read-private user-library-modify streaming user-read-recently-played user-top-read';
 
             let url = 'https://accounts.spotify.com/authorize';
             url += '?response_type=token';

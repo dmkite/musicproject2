@@ -34,6 +34,7 @@ main{
     width:70%;
     padding:20px;
     margin:20vh auto 0;
+    max-width:800px;
 }
 
 #index h1{
@@ -913,4 +914,49 @@ label[for="songs"]{
 #queue .omitted:hover{
     cursor:default;
     transform:scale(1)
+}
+
+/*****************************
+**  playlist
+*************************/
+
+#playlist main{
+    display:flex;
+    justify-content: space-between
+}
+
+#playlist textarea{
+    height:150px;
+    margin-bottom:20px;
+}
+#playlistForm{
+    width:40%;
+}
+.trackSelect{
+    width:60%;
+    padding-left:20px;
+}
+
+.trackSelect .hits{
+    justify-content: space-between;
+    height:35px;
+
+}
+.trackSelect img{
+    width:35px;
+    height:35px;
+}
+
+/* .trackSelect .hits a{
+    display:block;
+} */
+
+.trackSelect p{
+    width:70%;
+}
+.trackSelect .hits input{
+    height:20px;
+    margin-top:7.5px;
+    width:10%;
+
 }
