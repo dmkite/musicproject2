@@ -18,7 +18,6 @@ const pageInitializer = {
 
 pageInitializer[path]()
 
-
 // const model = require('./src/music-project/model')
 // const token = localStorage.getItem('token')
 // if (!token) console.log('uhoh')

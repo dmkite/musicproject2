@@ -4,6 +4,7 @@ const songModel = require('../music-project/hits/model')
 const {favSongTemplate} = require('../music-project/hits/view')
 
 function init(){
+    console.log('init firing')
     if(!!localStorage.getItem('spotify_playlist_id')) editPlaylistInit()
     document.querySelector('#playlistForm').onkeyup = checkVals
     document.querySelector('#playlistForm').onsubmit = function (e) { playlistAction(e) }

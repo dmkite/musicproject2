@@ -1,5 +1,7 @@
 const model = require('../music-project/queue/model')
 const view = require('./view')
+
+
 function init(){
     return model.all()
     .then(result => {
