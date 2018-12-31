@@ -9,6 +9,10 @@
     <script defer src="bundle.js"></script>
 </head>
 <body id="yourAlbums">
+    <header>
+        <p class="welcome">Welcome</p>
+        <span id="signout">signout</span>
+    </header>
     <section>
         <form id="filter">
             <select name="sort" id="sort">
@@ -25,7 +29,10 @@
         </form>
     </section>
     <main>
-    
+        <div class="emptyState">
+            <p>You haven't archived any albums as of yet. Check back after you do!</p>
+            <img src="img/record-player.png" alt="icon of record player">
+        </div>
     </main>
 </body>
 </html>

@@ -8,7 +8,6 @@ function init(){
     document.querySelector('#playlistForm').onkeyup = checkVals
     document.querySelector('#playlistForm').onsubmit = function (e) { playlistAction(e) }
     addSongsToSelect()
-    document.onclick = gatherSongs
 }
 
 function editPlaylistInit(){
@@ -17,8 +16,8 @@ function editPlaylistInit(){
     const textarea = document.querySelector('#playlistForm textarea')
     const form = document.querySelector('#playlistForm')
     form.innerHTML = `<h3>${input.value}</h3><p>${textarea.value}</p>` + form.innerHTML
-    input.remove()
-    textarea.remove()
+    document.querySelector('#playlistForm textarea').remove()
+    document.querySelector('#playlistForm input').remove()
 }
 
 function checkVals(){
@@ -72,17 +71,20 @@ function addSongsToSelect(){
         const songHTML = result.data.map(item => favSongTemplate(item))
         document.querySelector('.trackSelect').innerHTML = songHTML.join('')
         const hits = document.querySelectorAll('.hits')
-        hits.forEach(item => item.innerHTML += '<input type="checkbox" checked>')
+        hits.forEach(item => item.innerHTML += '<input type="checkbox" checked=true>')
     })
     .catch(err => console.error(err))
 }
 
 function gatherSongs(){
-    const checkedBoxes = Array.from(document.querySelectorAll('input[checked]'))
-    const spotifyURIs = checkedBoxes.map(box => `spotify:track:${box.parentElement.getAttribute('data-id')}`)
-    console.log(spotifyURIs)
-    return spotifyURIs
+    const checkedBoxes = Array.from(document.querySelectorAll('.trackSelect input'))
     
+    const spotifyURIs = checkedBoxes.reduce((acc, box) => {
+        if(box.checked === true) acc.push(`spotify:track:${box.parentElement.getAttribute('data-id')}`)
+        return acc
+    }, [])
+
+    return spotifyURIs    
 }
 
 function updatePlaylist(playlist_id){
@@ -90,10 +92,11 @@ function updatePlaylist(playlist_id){
     body = JSON.stringify(body)
     return model.replacePlaylist(body, playlist_id)
     .then(result => {
+        console.log(result)
+        const playlistName = document.querySelector('h3').textContent
+        document.querySelector('main').textContent = `Playlist ${playlistName} updated`
         if (result.response) {
             if (result.response.status === 401) console.log(result.response.status)
-            const playlistName = document.querySelector('h3').textContent
-            document.querySelector('main').textContent = `Playlist ${playlistName} created`
         }
     })
     .catch(err => {
