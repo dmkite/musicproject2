@@ -1,5 +1,24 @@
 const Model = require('../_Model')
+const axios = require('axios')
 
-const model = new Model(`/users/${localStorage.getItem('userId')}/playlist`)
+class PlaylistModel extends Model{
+    constructor(url){
+        super(url)
+    }
+
+    replacePlaylist(body, playlist_id){
+        return axios(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                // Authorization: `Basic ${base64.encode(auth)}` 
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`
+            },
+            data: body
+        })
+            .then(result => result)
+    }
+}
+const model = new PlaylistModel(`/users/${localStorage.getItem('userId')}/playlist`)
 
 module.exports = model
