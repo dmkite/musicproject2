@@ -947,9 +947,9 @@ label[for="songs"]{
     height:35px;
 }
 
-.trackSelect .hits a{
+/* .trackSelect .hits a{
     display:block;
-}
+} */
 
 .trackSelect p{
     width:70%;

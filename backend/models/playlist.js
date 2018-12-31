@@ -26,4 +26,17 @@ function playlist(body, user_id, access_token, userId) {
     .then(([result]) => result)
 }
 
-module.exports = {playlist}
+function populatePlaylist(body, access_token, playlist_id){
+    return axios(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,{
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            // Authorization: `Basic ${base64.encode(auth)}` 
+            Authorization: `Bearer ${access_token}`
+        },
+        data: body
+    })
+    .then(result => result)
+}
+
+module.exports = {playlist, populatePlaylist}

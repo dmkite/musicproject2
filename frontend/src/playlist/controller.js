@@ -6,7 +6,7 @@ const {favSongTemplate} = require('../music-project/hits/view')
 function init(){
     document.querySelector('#playlistForm').onkeyup = checkVals
     document.querySelector('#playlistForm').onsubmit = function (e) { makePlaylist(e) }
-    addSongs()
+    addSongsToSelect()
 }
 
 function checkVals(){
@@ -21,12 +21,12 @@ function makePlaylist(e){
     const body = generateBody()
     model.add(body)
     .then(result =>{
+        console.log(result, '**************************')
         if (!result) throw Error
         localStorage.setItem('spotify_playlist_id', result.spotify_playlist_id)
         let playlistName = document.querySelector('#playlistForm input').value
         document.querySelector('#playlistForm ').remove()
         document.querySelector('main').textContent = `Playlist ${playlistName} created`
-        
     })
     .catch(err => {
         console.log(err)
@@ -43,15 +43,15 @@ function generateBody(){
         description: document.querySelector('#playlistForm textarea').value,
         user_id: localStorage.getItem('spotifyId'),
         access_token: localStorage.getItem('access_token'),
-        userId: localStorage.getItem('userId')
+        userId: localStorage.getItem('userId'),
+        uris: gatherSongs()
     }
     return body
 }
 
-function addSongs(){
+function addSongsToSelect(){
     return songModel.all()
     .then(result => {
-        console.log(result)
         const songHTML = result.data.map(item => favSongTemplate(item))
         document.querySelector('.trackSelect').innerHTML = songHTML.join('')
         const hits = document.querySelectorAll('.hits')
@@ -59,5 +59,12 @@ function addSongs(){
     })
     .catch(err => console.error(err))
 }
+
+function gatherSongs(){
+    const checkedBoxes = Array.from(document.querySelectorAll('input[checked]'))
+    const spotifyURIs = checkedBoxes.map(box => `spotify:track:${box.parentElement.getAttribute('data-id')}`)
+    return spotifyURIs
+}
+
 
 module.exports = {init}

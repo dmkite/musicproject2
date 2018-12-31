@@ -2,7 +2,7 @@ function favSongTemplate(song){
     return  `
     <div class="hits" data-id="${song.spotify_song_id}">
         <img src="${song.img}" alt="${song.album} album cover">
-        <p><a href="${song.href}">${song.song}</a> | ${song.album}</p>
+        <p><a href="${song.href}">${song.song}</a>  <br>${song.album}</p>
     </div>`
 }
 
