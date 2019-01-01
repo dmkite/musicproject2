@@ -31,6 +31,7 @@ main{
     color:white;
     top:15vh;
     width:70%;
+    max-width:800px;
     margin:0 auto;
     display:flex;
 }
@@ -253,7 +254,7 @@ header{
 }
 .emptyState img{
     display:inline-block;
-    max-width:450px;
+    max-width:400px;
     margin:0 auto;
     opacity:0.2;
     margin-bottom: 20px;
@@ -994,6 +995,12 @@ label[for="songs"]{
 
     .autocomplete h3{
         font-size:14px;
+    }
+}
+
+@media Screen and (max-width: 750px){
+    .emptyState img{
+        max-width:80%;
     }
 }
 
