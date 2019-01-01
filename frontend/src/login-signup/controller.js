@@ -2,7 +2,7 @@ const model = require('./model')
 const landingPage = require('../landing-page/controller')
 
 function init() {
-    landingPage.init()
+    if(window.location.pathname === '/index.html' || window.location.pathname === '/') landingPage.init()
     if(localStorage.getItem('newSignup')) welcome()
     if (window.location.pathname === '/index.html' || window.location.pathname === '/') document.addEventListener('keyup', isFilled)
     else document.addEventListener('keyup', activateBtn)

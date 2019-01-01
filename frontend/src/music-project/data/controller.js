@@ -68,7 +68,8 @@ function display(e){
 
 function timestampToWeek(str) {
     const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    const date = str.split('T0')[0]
+    //Issue encountered with splitting condition. Originally split on T0, but in recent tests T1 was in timestamp
+    const date = str.split('T')[0]
     const units = date.split('-')
     const year = units[0]
     const month = Number(units[1])
