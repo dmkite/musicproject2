@@ -12,4 +12,11 @@ function albumTemplate(album){
     </div>`
 }
 
-module.exports = {albumTemplate}
+function emptyState(){
+    return `
+    <div class="emptyState">
+        <p>You haven't archived any albums as of yet. Check back after you do!</p>
+        <img src="img/album.png" alt="icon of record player">
+    </div>`
+}
+module.exports = {albumTemplate, emptyState}

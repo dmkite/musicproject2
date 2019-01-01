@@ -1,12 +1,15 @@
 const model = require('./model')
 const view = require('./view')
 const songModel = require('../music-project/hits/model')
+const prepHeader = require('../utils')
 let yourAlbums
 
 function init(){
+    prepHeader()
     let albums
     return model.all()
     .then(result => {
+        if(!result.data || !result.data[0]) document.querySelector('main').innerHTML = view.emptyState()
         albums = result.data
         return songModel.all()
     })
