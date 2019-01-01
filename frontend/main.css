@@ -4,17 +4,19 @@
     font-family: 'Work Sans', sans-serif;
     box-sizing: border-box;
 }
+
 .hidden{
     visibility: hidden;
 }
+
 body{
     padding:10px;
 }
+
 main{
     max-width:800px;
     margin:0 auto;
 }
-
 
 /******************************************************************************
 **  Login Signup
@@ -22,6 +24,7 @@ main{
 #index{
     position:relative;
 }
+
 .tagline{
     position:relative;
     z-index:999;
@@ -995,9 +998,36 @@ label[for="songs"]{
 }
 
 @media screen and (max-width: 500px){
+    .tagline h1{
+        font-size:28px;
+        height:70px;
+        line-height:35px;
+    }
+
+    .tagline img{
+        height:70px;
+        margin-bottom:0;
+    }
+
+    .tagline{
+        top:10vh;
+    }
+
+    #login{
+        top:-8vh;
+    }
+    
+    #index .actions{
+        top:-8vh;
+    }
+
     section{
-        margin: 0 auto 20px;
+        margin: 0 0 20px;
         width:100%;
+    }
+
+    .emptyState img{
+        width: 100%;
     }
 
     #filter {
