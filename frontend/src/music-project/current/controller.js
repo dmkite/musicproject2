@@ -3,10 +3,8 @@ const searchModel = require('../search/model')
 const queueView = require('../queue/view')
 const queueModel = require('../queue/model')
 const view = require('./view')
-// const {msToMins} = require('../search/controller')
 
 function init(album){
-    console.log('current init firing 88888888888888888888888888')
     if(!album) return
     const daysListenedTo = Math.ceil((new Date().getTime() - new Date(album.created_at).getTime() ) / 1000 / 60 / 60 / 24)
     document.querySelector('#current').innerHTML += queueView.albumTemplate(album, true)
@@ -14,10 +12,6 @@ function init(album){
     document.querySelector('#current .emptyState').remove()
     document.querySelector('.archive').onclick = function(e){openRatingForm(e, album.id)}
     document.querySelector('#current .delete').onclick = function(e){confirmDelete(e, album.id)}
-    // const current = document.querySelector('#current')
-    // if (current.children.length > 1) current.innerHTML += view.actionBlock()
-
-    //issue: the above code relies on a model.all call to get the 'you have been listening to x album since y time'
 }
 
 function confirmDelete(e, albumId){
@@ -57,7 +51,6 @@ function openRatingForm(e, albumId){
 }
 
 function removeRatingForm(e){
-    console.log('HITTING')
     const albumId = document.querySelector('#current .queuedAlbum').getAttribute('data-id')
     e.target.textContent = 'Archive'
     document.querySelector('#ratingForm').remove()
@@ -88,7 +81,7 @@ function archive(e, albumId){
         songs: gatherSongs()
     }
     return model.add(data)
-    .then(result => {
+    .then(() => {
         shiftQueue(albumId)
     })
 }
@@ -111,12 +104,11 @@ function gatherSongs(){
 
 function shiftQueue(albumId){
     return queueModel.delete(albumId)
-    .then(result => {
+    .then(() => {
         document.querySelector('#current').innerHTML = '<h2>Currently Listening To</h2>'
         return queueModel.all()
     })
-    .then(result => {
-        // result.data[0].is_current = true
+    .then(() => {
         window.location.reload()
     }
         )

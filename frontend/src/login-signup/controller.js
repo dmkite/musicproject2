@@ -40,6 +40,7 @@ function login(e) {
     const body = getBody()
     return model.login(body)
         .then(token => {
+            if(!token) return signout()
             localStorage.setItem('token', token.data.token)
             return
         })
@@ -144,7 +145,6 @@ function signup(e) {
 }
 
 function signout(){
-    // localStorage.clear()
     localStorage.removeItem('token')
     localStorage.removeItem('access_token')
     localStorage.removeItem('spotify_playlist_id')

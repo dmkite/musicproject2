@@ -58,11 +58,9 @@ function movePlace(e, direction){
         itemToMoveUp.setAttribute('data-place-in-queue', oldPlace + 1)
     }
     items.forEach(item => newQueue.push(collectBody(item)))
-    // return model.update(newQueue[0])
     const promiseArray = newQueue.map(item => model.update(item))
     return Promise.all(promiseArray)
-    .then(results => {
-        // return model.update(newQueue[0])
+    .then(() => {
         document.querySelector('#queue main').innerHTML = ''
         return init()
     })
@@ -71,25 +69,15 @@ function movePlace(e, direction){
 function collectBody(item){
     const body = {
         id: item.getAttribute('data-id'), 
-        // user_id: localStorage.getItem('userId'), 
-        // album: item.children[1].children[0].textContent, 
-        // artist: item.children[1].children[1].textContent, 
-        // img: item.children[0].getAttribute('src'), 
-        // spotfify_album_id: item.getAttribute('data-spotify-album-id'), 
-        // is_current: item.classList.contains('isCurrent') ? true : false, 
-        place_in_queue: item.getAttribute('data-place-in-queue')//, 
-        // created_at: item.getAttribute('data-created-at'), 
-        // updated_at: item.getAttribute('data-updated-at')
+        place_in_queue: item.getAttribute('data-place-in-queue')
     }
     return body
 }
 
 function del(e){
     const albumId = e.target.parentElement.parentElement.getAttribute('data-id')
-    console.log(albumId)
     return model.delete(albumId)
-    .then(result => {
-        console.log(result)
+    .then(() => {
         document.querySelector('main').innerHTML = ''
         return init()
     })

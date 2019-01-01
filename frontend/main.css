@@ -1,8 +1,3 @@
-/* body{
-    width:100vw;
-    overflow:hidden;
-} */
-
 *{
     padding:0;
     margin:0;
@@ -116,7 +111,6 @@ margin-top:20px;
   -ms-perspective: 900px;
   perspective: 900px;
   display:inline-block;
-  /* margin-bottom: calc((100% - 400px) / 3)  */
   margin-bottom:2px;
 }
 
@@ -124,7 +118,6 @@ margin-top:20px;
     width: 100%;
     height: 100%;
     position: absolute;
-    /* margin-bottom:0; */
     -o-transition: all 1s ease-in-out;
     -webkit-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
@@ -136,7 +129,6 @@ margin-top:20px;
 }
 
 .do-flip {
-    /* animation: flip 2s ease-in-out */
     -o-transform: rotateY(-180deg);
     -webkit-transform: rotateY(-180deg);
     -ms-transform: rotateY(-180deg);
@@ -190,7 +182,6 @@ margin-top:20px;
     position: absolute;
     top:-5vh;
     left:-5vw;
-    /* background-color:black; */
     background: radial-gradient(#00000090, #000000d0);
     z-index:99;
 }
@@ -238,7 +229,6 @@ header{
     flex-direction: row-reverse;
 }
 
-
 .welcome{
     height:30px;
     line-height:30px;
@@ -275,6 +265,7 @@ header{
     position:absolute;
     top:50px;
 }
+
 /******************************************************************************
 **  Autocomplete
 ******************************************************************************/
@@ -333,7 +324,6 @@ header{
     height:30px;
     padding-left:10px;
 }
-
 
 /******************************************************************************
 **  Search Album 
@@ -397,7 +387,6 @@ tr:nth-of-type(even){
     font-size:12px;
 }
 
-
 /******************************************************************************
 **  Up Next
 ******************************************************************************/
@@ -415,13 +404,7 @@ tr:nth-of-type(even){
     display:none;
 }
 
-#upNext h3, #upNext p{
-    /* display:inline; */
-}
-
 #upNext p{
-    /* margin-left:10px; */
-    /* position:absolute; */
     width:100%;
     left:0;
 }
@@ -456,11 +439,6 @@ tr:nth-of-type(even){
     text-decoration:none;
 }
 
-td:nth-of-type(2){
-
-    /* text-align:center; */
-}
-
 h2 a {
     font-size:12px;
     font-weight:normal;
@@ -488,8 +466,6 @@ textarea{
     width:100%;
 }
 
-
-
 /******************************************************************************
 **  Data Vis
 ******************************************************************************/
@@ -497,6 +473,7 @@ textarea{
     display:flex;
     align-content:center;
 }
+
 #dataVis input{
     width:20px;
     height:20px;
@@ -508,6 +485,15 @@ textarea{
     width:50px;
     display:flex;
     height:20px;
+}
+
+.total{
+    margin-bottom:10px;
+}
+
+.total span{
+    font-weight: bold;
+    color:#001747
 }
 .calendar{
     margin:20px 0 50px;
@@ -555,37 +541,46 @@ textarea{
     width:1.9%;
     border-left:1px solid white;
 }
+
 .dataWeek:hover{
     transform:scale(1.1)
 }
+
 .rating1{
     background-color:#ea4111;
     height:20px;
 }
+
 .rating1_5{
     background-color:#d04545;
     height:30px
 }
+
 .rating2{
     background-color:#ea5023;
     height:40px;
 }
+
 .rating2_5{
     background-color:#ae5023;
     height:50px;
 }
+
 .rating3{
     background-color:#308070;
     height:60px;
 }
+
 .rating3_5{
     background-color:#30aa70;
     height:70px;
 }
+
 .rating4{
     background-color:#30ca50;
     height:80px;
 }
+
 .rating4_5{
     background-color:#30eac0;
     height:90px;
@@ -711,6 +706,7 @@ textarea{
     margin:0;
     padding:0;
 }
+
 .songs li{
     padding:0;
     margin:0;
@@ -728,13 +724,12 @@ textarea{
     align-items:center;
 }
 #filter label{
-    /* margin:0 0 10px; */
     padding:0;
     height:20px;
 }
 
 #filter input{
-    display:inline;
+    display:inline-block;
     height:20px;
     width:20px;
     margin-right:5px;
@@ -778,8 +773,6 @@ button:hover{
     cursor:pointer;
 }
 
-
-
 h2{
     font-family:'Raleway', sans-serif;
     font-weight:900;
@@ -797,18 +790,6 @@ h2 span{
     width:100%;
 }
 
-/* .queuedAlbum h3{
-    grid-area: title;
-}
-
-.queuedAlbum p{
-    grid-area:artist;
-}
-
-.actionBlock{
-    grid-area: action;
-    margin: 20px 0;
-} */
 .actionBlock p{
     margin-bottom:20px;
 }
@@ -833,52 +814,6 @@ label[for="songs"]{
     font-size:10px;
 }
 
-@media screen and (min-width: 650px){
-    main{
-        display:grid;
-        grid-gap:10px;
-        grid-template-areas:
-        'current current current upNext upNext'
-        'current current current addMusic addMusic'
-        'dataVis dataVis dataVis dataVis theHits'
-    }
-
-    section{
-        margin:0;
-        padding:10px;
-    }
-    #current{
-        grid-area: current;
-        
-    }
-    #upNext{
-        grid-area:upNext;
-    }
-
-    #addMusic{
-        grid-area:addMusic;
-    }
-
-    #dataVis{
-        grid-area:dataVis
-    }
-
-    #musicSearch{
-        position:relative;
-    }
-    .autocomplete{
-        position:absolute;
-        background-color:white;
-        z-index:99;
-        width:100%;
-    }
-
-    .autocomplete h3{
-        font-size:14px;
-    }
-}
-
-
 /******************************************************************************
 **  Queue Page
 ******************************************************************************/
@@ -893,7 +828,6 @@ label[for="songs"]{
     border:1px solid #aeae99;
     position:relative;
     width:70%;
-    /* margin-left:15%; */
     margin-bottom:10px;
     padding:10px;
     background-color:white;
@@ -963,23 +897,23 @@ label[for="songs"]{
     transform:scale(1)
 }
 
-/*****************************
-**  playlist
-*************************/
-
+/******************************************************************************
+**  Playlist
+******************************************************************************/
 #playlist main{
     display:flex;
     justify-content: space-between
-
 }
 
 #playlist textarea{
     height:150px;
     margin-bottom:20px;
 }
+
 #playlistForm{
     width:40%;
 }
+
 .trackSelect{
     width:60%;
     padding-left:20px;
@@ -993,27 +927,111 @@ label[for="songs"]{
     border-bottom:1px solid #aeae99;
 }
 
-
 .trackSelect img{
     width:35px;
     height:35px;
 }
 
-/* .trackSelect .hits a{
-    display:block;
-} */
-
 .trackSelect p{
     width:70%;
 }
+
 .trackSelect .hits input{
     height:20px;
     margin-top:7.5px;
     width:10%;
-
 }
 
 #playlistForm h3, #playlistForm p{
     margin-bottom:20px;
 }
 
+/******************************************************************************
+**  Media Queries
+******************************************************************************/
+@media screen and (min-width: 650px){
+    main{
+        display:grid;
+        grid-gap:10px;
+        grid-template-areas:
+        'current current current upNext upNext'
+        'current current current addMusic addMusic'
+        'dataVis dataVis dataVis dataVis theHits'
+    }
+
+    section{
+        margin:0;
+        padding:10px;
+    }
+    #current{
+        grid-area: current;
+        
+    }
+    #upNext{
+        grid-area:upNext;
+    }
+
+    #addMusic{
+        grid-area:addMusic;
+    }
+
+    #dataVis{
+        grid-area:dataVis
+    }
+
+    #musicSearch{
+        position:relative;
+    }
+    .autocomplete{
+        position:absolute;
+        background-color:white;
+        z-index:99;
+        width:100%;
+    }
+
+    .autocomplete h3{
+        font-size:14px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    section{
+        margin: 0 auto 20px;
+        width:100%;
+    }
+
+    #filter {
+        display:block;
+    }
+
+    #filter label{
+        margin-top:10px;
+    }
+
+    #queue main{
+        display:block;
+    }
+    
+    .queueItem{
+        max-width:70%;
+        margin:0 auto 10px;
+    }
+    
+    .queueItem img{
+        max-width:100%;
+    }
+
+    #playlist main{
+        display:block;
+    }
+
+    #playlistForm{
+        width:100%;
+        border-bottom:1px solid #aeae99;
+    }
+
+    .trackSelect{
+        width:100%;
+        padding-top:10px;
+    }
+}

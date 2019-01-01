@@ -112,7 +112,7 @@ function makeData(arr){
                 result.fiveStar++
                 break
             default:
-                console.log(album)
+                return null
         }
     })
     return result
