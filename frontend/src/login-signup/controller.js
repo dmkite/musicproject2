@@ -144,7 +144,6 @@ function signup(e) {
 }
 
 function signout(){
-    // localStorage.clear()
     localStorage.removeItem('token')
     localStorage.removeItem('access_token')
     localStorage.removeItem('spotify_playlist_id')

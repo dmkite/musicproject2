@@ -16,24 +16,7 @@ function init() {
 }
 
 function displayQueue(albums){
-    console.log(albums, 'albums from displayQueue')
-    // let currentFound = false
-    
-    // for(let album of albums){
-    //     if (album.is_current) {
-            currentCtrl.init(albums[0])
-    //         currentFound = true
-    //     }
-    // }
-    // if(!currentFound){
-    //     albums[0].is_current = true
-    //     return displayQueue(albums)
-    // }
-    // if(!albums[0].is_current){
-    //     document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[0])
-    //     document.querySelector('#upNext .emptyState').remove()
-    // }
-    //else 
+    currentCtrl.init(albums[0])
     if (albums[1]){
         console.log('hitting if albums[1]')
         document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
@@ -45,7 +28,6 @@ function displayQueue(albums){
 function addToDbQueue(albumId) {
     const album = document.querySelector(`div[data-id="${albumId}"]`)
     const userId = localStorage.getItem('userId')
-    console.log(album)
     const body = {
         user_id: userId,
         album: album.children[1].children[0].textContent,
@@ -57,11 +39,8 @@ function addToDbQueue(albumId) {
    
     return model.add(body)
     .then(result => {
-        //*************************************Im skeptical about how the below code will work */
         if (document.querySelector('#current .emptyState')) return addToLocation(result.data[0], '#current')
         if (document.querySelector('#upNext .emptyState')) return addToLocation(result.data[0], '#upNext')
-        // if(result.data[0]) return addToLocation(result.data[0], '#current')
-        // if(document.querySelector('#upNext .emptyState')) return addToLocation(result.data[0], '#upNext')
         let div = document.createElement('div')
         div.innerHTML = `<p class="alert">${result.data[0].album} added to queue</p>`
         document.querySelector('body').appendChild(div)

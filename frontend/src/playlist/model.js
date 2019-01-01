@@ -11,7 +11,6 @@ class PlaylistModel extends Model{
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Basic ${base64.encode(auth)}` 
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`
             },
             data: body

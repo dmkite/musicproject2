@@ -46,10 +46,7 @@ function makePlaylist(){
         document.querySelector('#playlistForm ').remove()
         document.querySelector('main').textContent = `Playlist ${playlistName} created`
     })
-    .catch(err => {
-        console.log(err)
-        // return signout()
-    })
+    .catch(err => console.error(err))
     
 }
 
@@ -93,13 +90,9 @@ function updatePlaylist(playlist_id){
     let body = {uris: gatherSongs()}
     body = JSON.stringify(body)
     return model.replacePlaylist(body, playlist_id)
-    .then(result => {
-        console.log(result)
+    .then(() => {
         const playlistName = document.querySelector('h3').textContent
         document.querySelector('main').textContent = `Playlist ${playlistName} updated`
-        if (result.response) {
-            if (result.response.status === 401) console.log(result.response.status)
-        }
     })
     .catch(err => {
         if(err.response){
