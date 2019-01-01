@@ -11,7 +11,6 @@ function playlist(body, user_id, access_token, userId) {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            // Authorization: `Basic ${base64.encode(auth)}` 
             Authorization: `Bearer ${access_token}`
         },
         data: body
@@ -21,7 +20,6 @@ function playlist(body, user_id, access_token, userId) {
         .where('id', userId)
         .update('spotify_playlist_id', result.data.id)
         .returning('*')
-        // return result
     })
     .then(([result]) => result)
 }
@@ -31,7 +29,6 @@ function populatePlaylist(body, access_token, playlist_id){
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            // Authorization: `Basic ${base64.encode(auth)}` 
             Authorization: `Bearer ${access_token}`
         },
         data: body
