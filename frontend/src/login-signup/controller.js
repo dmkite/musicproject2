@@ -40,6 +40,7 @@ function login(e) {
     const body = getBody()
     return model.login(body)
         .then(token => {
+            if(!token) return signout()
             localStorage.setItem('token', token.data.token)
             return
         })

@@ -18,7 +18,6 @@ function init() {
 function displayQueue(albums){
     currentCtrl.init(albums[0])
     if (albums[1]){
-        console.log('hitting if albums[1]')
         document.querySelector('#upNext').innerHTML += view.albumTemplate(albums[1])
         document.querySelector('#upNext .emptyState').remove()
     }

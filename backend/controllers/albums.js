@@ -6,6 +6,7 @@ function add(req, res, next){
     delete req.body.rating
     return model.add(req.body)
     .then(result => {
+        if(!result || !result[0]) throw {status: 500, error: 'An error ocurred while adding this album'}
         const albumId = result[0].id
         return model.connectUserToAlbum(req.params.userId, albumId, rating)
     })

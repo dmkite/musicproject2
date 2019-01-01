@@ -15,9 +15,9 @@ function playlist(req, res, next){
     const body = JSON.stringify(req.body)
     return model.playlist(body, user_id, access_token, userId)
     .then(result => {
+        if(!result) throw {status: 500, error: 'An error ocurred while adding this playlist'}
         playlist_id = result.spotify_playlist_id
         const body = JSON.stringify(uris)
-        
         return model.populatePlaylist(body, access_token, playlist_id)
     })
     .then(() => {

@@ -81,7 +81,7 @@ function archive(e, albumId){
         songs: gatherSongs()
     }
     return model.add(data)
-    .then(result => {
+    .then(() => {
         shiftQueue(albumId)
     })
 }
