@@ -1,8 +1,9 @@
 const model = require('../music-project/queue/model')
 const view = require('./view')
-
+const prepHeader = require('../utils')
 
 function init(){
+    prepHeader()
     return model.all()
     .then(result => {
        const queueHTML = result.data.map(album => view.queueTemplate(album))

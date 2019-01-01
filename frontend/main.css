@@ -27,6 +27,25 @@ main{
 #index{
     position:relative;
 }
+.tagline{
+    position:relative;
+    z-index:999;
+    color:white;
+    top:15vh;
+    width:70%;
+    margin:0 auto;
+    display:flex;
+}
+
+.tagline img{
+    height:100px;
+    margin-right:20px;
+}
+
+.tagline h1{
+     font: 500 48px/54px 'Alfa Slab One', cursive;
+     height:100px;
+}
 
 #signup, #login, .actions{
     border:1px solid #ccc;
@@ -37,16 +56,7 @@ main{
     max-width:800px;
 }
 
-#index h1{
-    position:relative;
-    z-index:999;
-    color:white;
-    text-align:center;
-    top:15vh;
-    font: 500 48px/54px 'Alfa Slab One', cursive;
-}
-
-#login, .actions{
+#login, #signup, .actions{
     background-color:white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     z-index:999;
@@ -249,8 +259,8 @@ header{
     cursor:pointer;
 }
 .emptyState img{
-    width:100%;
-    max-width:512px;
+    display:inline-block;
+    max-width:450px;
     margin:0 auto;
     opacity:0.2;
     margin-bottom: 20px;
@@ -259,6 +269,7 @@ header{
 .emptyState{
     position:relative;
 }
+
 .emptyState p{
     font: 300 18px/26px 'Raleway', sans;
     position:absolute;
@@ -349,17 +360,18 @@ header{
 }
 
 .albumSelect img{
-
+    width:100%;
 }
 
 .albumSelect{
     padding:10px;
+
 }
 .albumSelect table{
     max-height:150px;
     overflow-y:scroll;
     max-height:150px;
-    width:300px;
+    width:100%;
     overflow-y: scroll;    
     margin-bottom:20px;
 }
@@ -374,6 +386,15 @@ thead{
 
 tr:nth-of-type(even){
     background-color:#efefef;
+}
+
+.albumSelect td:nth-of-type(1){
+    display:none;
+}
+.albumSelect td{
+    border-bottom: 1px solid #aeae99;
+    margin-bottom:10px;
+    font-size:12px;
 }
 
 
@@ -395,12 +416,12 @@ tr:nth-of-type(even){
 }
 
 #upNext h3, #upNext p{
-    display:inline;
+    /* display:inline; */
 }
 
 #upNext p{
-    margin-left:10px;
-    position:absolute;
+    /* margin-left:10px; */
+    /* position:absolute; */
     width:100%;
     left:0;
 }
@@ -411,7 +432,7 @@ tr:nth-of-type(even){
 }
 
 #upNext img{
-    width:200px;
+    width:300px;
 }
 
 /******************************************************************************
@@ -437,7 +458,7 @@ tr:nth-of-type(even){
 
 td:nth-of-type(2){
 
-    text-align:center;
+    /* text-align:center; */
 }
 
 h2 a {
@@ -697,7 +718,7 @@ textarea{
 
 #yourAlbums section{
     max-width:800px;
-    margin:0 auto;
+    margin:20px auto 0;
 }
 
 #filter{
@@ -776,7 +797,7 @@ h2 span{
     width:100%;
 }
 
-.queuedAlbum h3{
+/* .queuedAlbum h3{
     grid-area: title;
 }
 
@@ -787,7 +808,7 @@ h2 span{
 .actionBlock{
     grid-area: action;
     margin: 20px 0;
-}
+} */
 .actionBlock p{
     margin-bottom:20px;
 }
@@ -798,7 +819,6 @@ h2 span{
 
 label[for="rating"]{
     margin-bottom: 20px;
-    outline:1px solid red;
 }
 
 label[for="songs"]{
@@ -864,7 +884,6 @@ label[for="songs"]{
 ******************************************************************************/
 
 #queue main{
-    outline:3px solid red;
     display:flex; 
     justify-content: space-around;
     flex-wrap:wrap;
@@ -879,12 +898,16 @@ label[for="songs"]{
     padding:10px;
     background-color:white;
     max-width:175px;
+    border-radius:5px
 }
 
 .queueItem img{
     width:100%;
     max-width:175px;
     margin:0 auto;
+}
+.queueItem p{
+    margin:20px auto;
 }
 
 .queueUp, .queueDown{

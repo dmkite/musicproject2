@@ -2,9 +2,10 @@ const model = require('./model')
 const {signout} = require('../login-signup/controller')
 const songModel = require('../music-project/hits/model')
 const {favSongTemplate} = require('../music-project/hits/view')
+const prepHeader = require('../utils')
 
 function init(){
-    console.log('init firing')
+    prepHeader()
     if(!!localStorage.getItem('spotify_playlist_id')) editPlaylistInit()
     document.querySelector('#playlistForm').onkeyup = checkVals
     document.querySelector('#playlistForm').onsubmit = function (e) { playlistAction(e) }
