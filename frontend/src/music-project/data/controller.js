@@ -8,6 +8,7 @@ function init(){
 function calendar(){
     return model.all()
     .then(result => {
+        // console.log(result)})}
         addDates(result.data)
         let data = makeData(result.data)
         document.querySelector('.glance').innerHTML = view.addData(data)
@@ -23,16 +24,11 @@ function calendar(){
 }
 
 function addDates(albums){
-    const indexedAlbumsByWeek = albums.reduce((acc, album) => {
-        const {week, year} = timestampToWeek(album.created_at)
-        album.week = week
-        album.year = year
-        if (!acc[album.year]) acc[album.year] = {}
-        acc[album.year][album.week] = { name: album.name, rating: album.rating }
-        return acc
-    }, {})
-    let year = addRadioReturnYear(Object.keys(indexedAlbumsByWeek))
+    const indexedAlbumsByWeek = indexAlbums(albums)
 
+    let year = addRadioReturnYear(Object.keys(indexedAlbumsByWeek))
+    
+    if(!year) return
     let dataWeeksHTML = []
     for(let i = 1; i <= 52; i++){
         if (indexedAlbumsByWeek[year][i]) dataWeeksHTML.push(view.activeWeek(indexedAlbumsByWeek[year][i]))
@@ -48,19 +44,35 @@ function addDates(albums){
     }
 }
 
+function indexAlbums(arr){
+    const indexedAlbumsByWeek = arr.reduce((acc, album) => {
+        const { week, year } = timestampToWeek(album.created_at)
+        album.week = week
+        album.year = year
+        if (!acc[album.year]) acc[album.year] = {}
+        acc[album.year][album.week] = { name: album.name, rating: album.rating }
+        return acc
+    }, {})
+    return indexedAlbumsByWeek
+}
+
 function addRadioReturnYear(arr){
+    
     if(!document.querySelector('#dataVis input[type="radio"]')){
         const options = arr.map(year => `<label for="year"> <input type="radio" name="year" value="${year}">${year}</label>`)
         document.querySelector('#dataVis').innerHTML += view.yearSelect(options)
     }
+    
     const radios = document.querySelectorAll('#dataVis input[type="radio"]')
-    radios.forEach(radio => radio.addEventListener('click', init()))
+
+    radios.forEach(radio => radio.addEventListener('click', init))
     let year
     for (let radio of radios) {
         if (radio.checked) {
             year = radio.value
         }
     }
+    
     return year
 }
 

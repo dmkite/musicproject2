@@ -2,10 +2,15 @@ const model = require('./model')
 const landingPage = require('../landing-page/controller')
 
 function init() {
+    document.querySelectorAll('.actions a')[1].addEventListener('click', function(e) {continueAsGuest(e)})
     if(window.location.pathname === '/index.html' || window.location.pathname === '/') landingPage.init()
     if(localStorage.getItem('newSignup')) welcome()
     if (window.location.pathname === '/index.html' || window.location.pathname === '/') document.addEventListener('keyup', isFilled)
     else document.addEventListener('keyup', activateBtn)
+}
+
+function continueAsGuest(e){
+    return login(e, {username: 'guest', password: 'Password1!'})
 }
 
 function welcome(){
@@ -35,19 +40,18 @@ function generateRandomString(length) {
     return text
 }
 
-function login(e) {
-    e.preventDefault()
-    const body = getBody()
+function login(e, body) {
+    if(e.target.id === 'submit') e.preventDefault()
+    if(!body) body = getBody()
     return model.login(body)
         .then(token => {
-            if(!token) return signout()
+            if(!token) throw new Error('Something went wrong')
             localStorage.setItem('token', token.data.token)
             return
         })
-        .then(() => {    
+        .then(() => { 
             const client_id = 'f0c75fb80a7a43f2b207e62c4f609915'
             const redirect_uri = 'http://127.0.0.1:8080/music-project.html'
-
             const state = generateRandomString(16);
 
             localStorage.setItem('spotify_auth_state', state);

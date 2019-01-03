@@ -84,6 +84,7 @@ margin-top:20px;
     border-radius:5px;
     color: #dd2956;
     background-color: #dd295650;
+    z-index:99999;
 }
 
 #index{
@@ -489,6 +490,7 @@ textarea{
     width:50px;
     display:flex;
     height:20px;
+    margin-right:10px;
 }
 
 .total{
@@ -818,6 +820,18 @@ label[for="songs"]{
     font-size:10px;
 }
 
+.alert{
+    position:fixed;
+    top:10px;
+    right:10px;
+    font-size:10px;
+    width:120px;
+    border:1px solid #001747;
+    border-radius:5px;
+    padding:10px;
+    background-color:white;
+    color:#001747
+}
 /******************************************************************************
 **  Queue Page
 ******************************************************************************/
