@@ -2,7 +2,7 @@
 exports.seed = function(knex, Promise) {
       return knex('users').insert([
         {
-          id: 1, f_name: 'Dylan', l_name: 'Kite', username: 'kite.d92', password: '$2b$10$DGi0KOLFr0ftIf/3Zzocle4ehmdZTjoaxtbKHu7tnCA.zJt56PHSK'}
+          id: 2, f_name: 'Guest', l_name: 'Guest', username: 'guest', password: '$2b$10$WV/ewje4S7rB2x6ioAeSgOdHpmK.tqZfbWvOLiWBBI.rRbjGtVlEe', spotify_playlist_id: null}
 
       ])
         .then(() => {
