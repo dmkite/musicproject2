@@ -1,7 +1,7 @@
 
 exports.seed = function(knex, Promise) {
 
-      return knex('table_name').insert(
+      return knex('songs').insert(
         [ { id: '9',
             name: 'Jet Blue Jet',
             spotify_song_id: '6tC8TvioT5048CG8qbd8WL',
