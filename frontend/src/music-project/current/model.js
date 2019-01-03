@@ -1,6 +1,6 @@
 const Model = require('../../_Model')
 const axios = require('axios')
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://dmkite-music-project.herokuapp.com/'
 
 class CurrentModel extends Model{
     constructor(url){

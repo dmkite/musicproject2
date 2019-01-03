@@ -2,8 +2,10 @@ const model = require('./model')
 const landingPage = require('../landing-page/controller')
 
 function init() {
-    document.querySelectorAll('.actions a')[1].addEventListener('click', function(e) {continueAsGuest(e)})
-    if(window.location.pathname === '/index.html' || window.location.pathname === '/') landingPage.init()
+    if(window.location.pathname === '/index.html' || window.location.pathname === '/'){ 
+        landingPage.init()
+        document.querySelectorAll('.actions a')[1].addEventListener('click', function (e) { continueAsGuest(e) })
+    }
     if(localStorage.getItem('newSignup')) welcome()
     if (window.location.pathname === '/index.html' || window.location.pathname === '/') document.addEventListener('keyup', isFilled)
     else document.addEventListener('keyup', activateBtn)

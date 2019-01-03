@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 const port = process.env.PORT || 3000
 
-
+app.get('/', (req, res) => res.send('Checkout music-project.surge.sh'))
 app.use(cors())
 app.use(morgan('dev'))
 app.use(bodyParser.json())

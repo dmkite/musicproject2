@@ -1,7 +1,7 @@
 const Model = require('../../_Model')
 const axios = require('axios')
 const userId = localStorage.getItem('userId')
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://dmkite-music-project.herokuapp.com/'
 
 
 class QueueModel extends Model{

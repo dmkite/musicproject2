@@ -1,5 +1,5 @@
 const axios = require('axios')
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://dmkite-music-project.herokuapp.com/'
 const {signout} = require('../login-signup/controller')
 
 function getToken(body){
