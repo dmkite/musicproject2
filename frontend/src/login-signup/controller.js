@@ -43,7 +43,7 @@ function generateRandomString(length) {
 }
 
 function login(e, body) {
-    if(e.target.id === 'submit') e.preventDefault()
+    e.preventDefault()
     if(!body) body = getBody()
     return model.login(body)
         .then(token => {
@@ -53,7 +53,7 @@ function login(e, body) {
         })
         .then(() => { 
             const client_id = 'f0c75fb80a7a43f2b207e62c4f609915'
-            const redirect_uri = 'http://127.0.0.1:8080/music-project.html'
+            const redirect_uri = 'http://music-project.surge.sh/music-project.html'
             const state = generateRandomString(16);
 
             localStorage.setItem('spotify_auth_state', state);

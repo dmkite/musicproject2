@@ -6,7 +6,7 @@ function getToken(body){
     return axios.post(`${baseURL}/auth/spotify`, {
         grant_type: "authorization_code",
         code: body.code,
-        redirect_uri: `http://127.0.0.1:8080/music-project.html`
+        redirect_uri: `http://music-project.surge.sh/music-project.html`
     })
     .then(result => result)
     .catch(err => {
