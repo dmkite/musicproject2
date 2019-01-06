@@ -106,7 +106,7 @@ function shiftQueue(albumId){
     return queueModel.delete(albumId)
     .then(() => {
         document.querySelector('#current').innerHTML = '<h2>Currently Listening To</h2>'
-        return queueModel.all()
+        return queueModel.all(`/users/${localStorage.getItem('userId')}/queue`)
     })
     .then(() => {
         window.location.reload()

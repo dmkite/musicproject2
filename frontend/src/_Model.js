@@ -20,8 +20,8 @@ class Model{
         .catch(err => console.log(err))
     }
 
-    all(){
-        return axios(baseURL + this.url, {
+    all(url){
+        return axios(baseURL + url, {
             method: 'get',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

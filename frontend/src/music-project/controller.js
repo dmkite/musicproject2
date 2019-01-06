@@ -11,10 +11,10 @@ function init() {
     const body = createBodyFromURL()   
     localStorage.setItem('access_token', body.access_token)
     getUserInfo(body.access_token) 
-    prepDashboard()
     const token = `Bearer: ${localStorage.getItem('token')}`
     return model.authenticate(token)
     .then(result => {
+        console.log('hitting .then of authenticate')
         localStorage.setItem('userId', result.data.userInfo.id)
         localStorage.setItem('spotify_playlist_id', result.data.userInfo.spotify_playlist_id)
         localStorage.setItem('f_name', result.data.userInfo.f_name)
@@ -23,6 +23,10 @@ function init() {
         div.textContent = result.data.userInfo.f_name[0]
         div.classList.add('userLetter')
         document.querySelector('.welcome').appendChild(div)
+        return
+    })
+    .then(() => {
+        return prepDashboard()
     })
 }
 
@@ -43,7 +47,8 @@ function getUserInfo(accessToken){
         personalize(result.data)
         })
     .catch(err => {
-        loginSignup.signout()
+        // loginSignup.signout()
+        console.log('error at userGetInfo')
     })
 }
 
@@ -54,6 +59,7 @@ function personalize(userObj) {
 
 
 function prepDashboard(){
+    console.log('hitting prepDashboard')
     currentCtrl.init()
     document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
     queueCtrl.init()

@@ -6,7 +6,7 @@ function init(){
 }
 
 function calendar(){
-    return model.all()
+    return model.all(`/users/${localStorage.getItem('userId')}/albums`)
     .then(result => {
         // console.log(result)})}
         addDates(result.data)
