@@ -11,7 +11,7 @@ function init() {
         if(result.data.length > 0) return displayQueue(result.data)
     })
     .catch(err => {
-        if (err.response.status == 401) console.log('error at queue init') //return //signout()
+        if (err.response.status == 401) return signout()
         console.error(err)
     })
 }
@@ -48,7 +48,7 @@ function addToDbQueue(albumId) {
     .catch(err => {
         console.error(err)
         if(err.response){
-            if(err.response.status == 401) console.log('error at model.add')//return //signout()
+            if(err.response.status == 401) return signout()
         }
     })
 }

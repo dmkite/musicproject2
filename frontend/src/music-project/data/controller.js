@@ -6,9 +6,8 @@ function init(){
 }
 
 function calendar(){
-    return model.all(`/users/${localStorage.getItem('userId')}/albums`)
+    return model.all()
     .then(result => {
-        // console.log(result)})}
         addDates(result.data)
         let data = makeData(result.data)
         document.querySelector('.glance').innerHTML = view.addData(data)

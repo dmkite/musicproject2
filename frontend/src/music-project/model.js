@@ -1,12 +1,11 @@
 const axios = require('axios')
 const baseURL = 'http://dmkite-music-project.herokuapp.com'
-const {signout} = require('../login-signup/controller')
 
 function getToken(body){
     return axios.post(`${baseURL}/auth/spotify`, {
         grant_type: "authorization_code",
         code: body.code,
-        redirect_uri: window.location.hostname === 'localhost' ? 'http://localhost:8080/music-project.html' : `http://dmkitemusic-project5.surge.sh/music-project.html`
+        redirect_uri: window.location.hostname === 'localhost' ? 'http://localhost:8080/music-project.html' : `http://dmkitemusic-project6.surge.sh/music-project.html`
     })
     .then(result => result)
     .catch(err => {

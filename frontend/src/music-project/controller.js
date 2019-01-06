@@ -14,7 +14,6 @@ function init() {
     const token = `Bearer: ${localStorage.getItem('token')}`
     return model.authenticate(token)
     .then(result => {
-        console.log('hitting .then of authenticate')
         localStorage.setItem('userId', result.data.userInfo.id)
         localStorage.setItem('spotify_playlist_id', result.data.userInfo.spotify_playlist_id)
         localStorage.setItem('f_name', result.data.userInfo.f_name)
@@ -47,8 +46,7 @@ function getUserInfo(accessToken){
         personalize(result.data)
         })
     .catch(err => {
-        // loginSignup.signout()
-        console.log('error at userGetInfo')
+        loginSignup.signout()
     })
 }
 
@@ -59,7 +57,6 @@ function personalize(userObj) {
 
 
 function prepDashboard(){
-    console.log('hitting prepDashboard')
     currentCtrl.init()
     document.querySelector('#musicSearch input').addEventListener('keyup', searchCtrl.init)
     queueCtrl.init()

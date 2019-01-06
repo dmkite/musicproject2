@@ -19,6 +19,16 @@ class QueueModel extends Model{
         .then(result => result)
     }
 
+    all() {
+        return axios(baseURL + `/users/${localStorage.getItem('userId')}/queue`, {
+            method: 'get',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(result => result)
+    }
+
     
 }
 
