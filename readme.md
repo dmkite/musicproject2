@@ -23,8 +23,8 @@ This project has no official lisence. All code and icons are available for reuse
 Music Project started humbly in 2016 as a means of expanding musical horizons, tracking new music I listened to using a spreadsheet. In 2018 I built a [static webpage](http://dylankite.com/musicproject) to hold my progress. In a handful of months I took musicproject from a static webpage to a fullstack project making use of authentication and authorization, the Spotify API, a PostgreSQL database and more. Check it out at [http://dmkite-music-project.surge.sh/](http://dmkite-music-project.surge.sh/)
 
 ## Screenshots
-![logging in](../screenshots/login.gif)
-![adding content to queue](../screenshots/addToQueue.gif)
-![archiving albums](../screenshots/archiving.gif)
-![editing queue](../screenshots/queue.gif)
-![examining data vis](../screenshots/dataVis.gif)
+![logging in](screenshots/login.gif "Logging in to Music Project")
+![adding content to queue](screenshots/addToQueue.gif "Adding content to your queue")
+![archiving albums](screenshots/archiving.gif "Archiving albums")
+![editing queue](screenshots/queue.gif "Editing upcoming songs")
+![examining data vis](screenshots/dataVis.gif "Taking a look at past albums")
