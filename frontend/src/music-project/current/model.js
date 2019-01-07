@@ -17,7 +17,7 @@ class CurrentModel extends Model{
             data: body
         })
         .then(result => {
-
+            console.log(result, 'this is from CurrentModel')
             const promiseArray = songs.map(song => {
                 song.users_albums_id = result.data.id
                 return axios(baseURL + `/users/${localStorage.getItem('userId')}/albums/${result.data.album_id}/songs`, {

@@ -698,8 +698,11 @@ textarea{
     justify-content:space-between
 }
 .yourAlbum{
-    border:1px solid black;
+    border:1px solid #aeae99;
+    border-radius: 5px;
+    margin-bottom:2.5%;
     width:45%;
+    padding:10px;
 }
 
 .yourAlbum img{
@@ -709,19 +712,20 @@ textarea{
 .songs{
     list-style-type:none;
     list-style-position:outside;
-    margin:0;
+    margin:10px 0;
     padding:0;
 }
 
 .songs li{
     padding:0;
-    margin:0;
+    margin:5px 0;
 }
 
 #yourAlbums section{
     max-width:800px;
     margin:20px auto 0;
 }
+
 
 #filter{
     padding:20px;

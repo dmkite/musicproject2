@@ -18,7 +18,6 @@ class Model{
         .then(result => {
             return result
         })
-        .catch(err => console.log(err))
     }
 
     all(){

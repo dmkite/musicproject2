@@ -20,4 +20,11 @@ Dylan Kite - [dylankite.com](http://dylankite.com/)
 This project has no official lisence. All code and icons are available for reuse.
 
 ## Origin Story
-Music Project started humbly in 2015 as a means of expanding musical horizons
+Music Project started humbly in 2016 as a means of expanding musical horizons, tracking new music I listened to using a spreadsheet. In 2018 I built a [static webpage](http://dylankite.com/musicproject) to hold my progress. In a handful of months I took musicproject from a static webpage to a fullstack project making use of authentication and authorization, the Spotify API, a PostgreSQL database and more. Check it out at [http://dmkite-music-project.surge.sh/](http://dmkite-music-project.surge.sh/)
+
+## Screenshots
+![logging in](../screenshots/login.gif)
+![adding content to queue](../screenshots/addToQueue.gif)
+![archiving albums](../screenshots/archiving.gif)
+![editing queue](../screenshots/queue.gif)
+![examining data vis](../screenshots/dataVis.gif)

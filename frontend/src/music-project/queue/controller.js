@@ -5,7 +5,6 @@ const {signout} = require('../../login-signup/controller')
 
 function init() {
     const userId = localStorage.getItem('userId')
-    console.log(userId, 'from controller queue')
     return model.all(`/users/${userId}/queues`)
     .then(result => {
         if(result.data.length > 0) return displayQueue(result.data)

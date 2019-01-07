@@ -96,7 +96,7 @@ function updatePlaylist(playlist_id){
     })
     .catch(err => {
         if(err.response){
-            if(err.response.status === 401) console.log('error at update playlist')//return //signout()
+            if(err.response.status === 401) return signout()
         }
     })
 }
