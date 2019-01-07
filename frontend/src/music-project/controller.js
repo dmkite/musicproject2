@@ -11,7 +11,6 @@ function init() {
     const body = createBodyFromURL()   
     localStorage.setItem('access_token', body.access_token)
     getUserInfo(body.access_token) 
-    prepDashboard()
     const token = `Bearer: ${localStorage.getItem('token')}`
     return model.authenticate(token)
     .then(result => {
@@ -23,6 +22,10 @@ function init() {
         div.textContent = result.data.userInfo.f_name[0]
         div.classList.add('userLetter')
         document.querySelector('.welcome').appendChild(div)
+        return
+    })
+    .then(() => {
+        return prepDashboard()
     })
 }
 

@@ -1,7 +1,7 @@
 const Model = require('../../_Model')
 const axios = require('axios')
 const userId = localStorage.getItem('userId')
-const baseURL = 'http://dmkite-music-project.herokuapp.com/'
+const baseURL = 'http://dmkite-music-project.herokuapp.com'
 
 
 class QueueModel extends Model{
@@ -17,6 +17,16 @@ class QueueModel extends Model{
             }
         })
         .then(result => result)
+    }
+
+    all() {
+        return axios(baseURL + `/users/${localStorage.getItem('userId')}/queue`, {
+            method: 'get',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(result => result)
     }
 
     

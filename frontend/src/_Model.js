@@ -1,6 +1,7 @@
 const axios = require('axios')
 const baseURL = 'http://dmkite-music-project.herokuapp.com'
 
+
 class Model{
     constructor(url){
         this.url = url
@@ -17,10 +18,10 @@ class Model{
         .then(result => {
             return result
         })
-        .catch(err => console.log(err))
     }
 
     all(){
+
         return axios(baseURL + this.url, {
             method: 'get',
             headers: {

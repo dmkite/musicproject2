@@ -53,7 +53,9 @@ function login(e, body) {
         })
         .then(() => { 
             const client_id = 'f0c75fb80a7a43f2b207e62c4f609915'
-            const redirect_uri = 'http://music-project.surge.sh/music-project.html'
+            let redirect_uri
+            if (window.location.hostname === 'localhost') redirect_uri = 'http://localhost:8080/music-project.html'
+            else redirect_uri = 'http://dmkite-music-project.surge.sh/music-project.html'
             const state = generateRandomString(16);
 
             localStorage.setItem('spotify_auth_state', state);
@@ -79,6 +81,7 @@ function login(e, body) {
 }
 
 function getBody() {
+    signout
     const inputs = document.querySelectorAll('form input')
     const body = {}
     for (let input of inputs) {
